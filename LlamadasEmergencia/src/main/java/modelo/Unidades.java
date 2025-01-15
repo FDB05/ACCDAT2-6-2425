@@ -19,6 +19,8 @@ import jakarta.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -114,7 +116,46 @@ public class Unidades implements Serializable {
     }
     
     //--------------------------------------------------------------------------
-    //METODOS INSERTAR, BORRAR MODIFICAR Y LEER()
+    //METODOS INSERTAR, BORRAR MODIFICAR Y LEER(Nico)
     //--------------------------------------------------------------------------
     
+    public static void insertarUnidades(){
+        UnidadesJpaController unidadesJpaController=new UnidadesJpaController  (emfactory);
+
+Unidades d=new Unidades();
+
+
+
+        try {
+            UnidadesJpaController.create(d);
+        } catch (Exception ex) {
+            Logger.getLogger(LamadasEmergencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static void borrarUnidades(int id){
+        unidades=entitymanger.find(Unidades.class,id);
+        
+        entitymanger.getTransaction().begin();
+        entitymanger.remove(unidades);
+        entitymanger.getTransaction().commit();
+    }
+    
+    public static void ModificarUnidades(int id){
+        unidades=entitymanger.find(Unidades.class, id);
+    
+    
+    
+    entitymanger.getTransaction().begin();
+    unidades.setLoc("Daimiel");
+    entitymanger.getTransaction().commit();
+    }
+    
+    public static void LeerRecursosUnidades(int id){
+        unidades=entitymanger.find(Unidades.class, id);
+    if(unidades!=null){
+        System.out.println("Dept NAME:"+unidades.getDnombre()+" Dept No:"+departamentos.getDeptNo()+" Dept LOC:"+departamentos.getLoc());
+    }
+    else{System.out.println("NO EXISTE EL DEPARTAMENTO");}
+    }
 }
