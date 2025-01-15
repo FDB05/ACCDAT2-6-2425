@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="3.2" xmlns="https://jakarta.ee/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_2.xsd">
+  <persistence-unit name="com.mycompany_LlamadasEmergencia_jar_1.0-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>modelo.Movilizaciones</class>
+    <class>modelo.Unidades</class>
+    <class>modelo.Estado</class>
+    <class>modelo.Tipounidad</class>
+    <class>modelo.Llamadas</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521:FREE"/>
+      <property name="javax.persistence.jdbc.user" value="dam2jp"/>
+      <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver"/>
+      <property name="javax.persistence.jdbc.password" value="dam2jp"/>
+    </properties>
+  </persistence-unit>
+</persistence>
