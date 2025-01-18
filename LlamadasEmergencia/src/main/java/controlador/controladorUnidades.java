@@ -33,9 +33,11 @@ public class controladorUnidades {
 
         Unidades d=new Unidades();
         
-        //DUDA CON EL BIG DECIMAL
-        //unidades.setNumerounidad(BigDecimal(int)NumeroUnidad);
         
+        //SOLUCION BIG DECIMAL
+        BigDecimal bigDecimalValue = BigDecimal.valueOf(NumeroUnidad);        
+        unidades.setNumerounidad(bigDecimalValue);
+        //----------------------------------------------------------------------
         unidades.setDisponibilidad(Disponibilidad);
         unidades.setTipounidad(TipoUnidad);
         //Falta insertar en movilizaciones
@@ -62,7 +64,8 @@ public class controladorUnidades {
     
     entitymanager.getTransaction().begin();
     //DUDA CON EL BIG DECIMAL
-        //unidades.setNumerounidad(BigDecimal(int)NumeroUnidad);
+        BigDecimal bigDecimalValue = BigDecimal.valueOf(NumeroUnidad);        
+        unidades.setNumerounidad(bigDecimalValue);
         
         unidades.setDisponibilidad(Disponibilidad);
         unidades.setTipounidad(TipoUnidad);
@@ -75,7 +78,7 @@ public class controladorUnidades {
         
         //METERLO EN EL JFRAME
         if(unidades != null){
-            System.out.println("Dept NAME : "+ unidades.getDnombre());
+           //System.out.println("Dept NAME : "+ unidades.getDnombre());
         }else{
             System.out.println("NO existe el registro");
         }
