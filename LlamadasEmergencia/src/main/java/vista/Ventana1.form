@@ -220,12 +220,10 @@
                           <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="BotonEliminar" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="BotonInsertar" max="32767" attributes="0"/>
-                                  <Component id="BTNback1" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="BTNbuscar" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="BotonModificar" alignment="0" max="32767" attributes="0"/>
-                              </Group>
+                              <Component id="BotonInsertar" max="32767" attributes="0"/>
+                              <Component id="BTNback1" alignment="0" max="32767" attributes="0"/>
+                              <Component id="BTNbuscar" alignment="0" max="32767" attributes="0"/>
+                              <Component id="BotonModificar" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
