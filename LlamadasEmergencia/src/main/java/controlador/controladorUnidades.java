@@ -26,7 +26,7 @@ public class controladorUnidades {
     //METODOS INSERTAR, BORRAR MODIFICAR Y LEER(Nico)
     //--------------------------------------------------------------------------
     
-    public static void insertarUnidades(String NumeroUnidad , Tipounidad TipoUnidad, boolean Disponibilidad){
+    public static void insertarUnidades(String NumeroUnidad , Tipounidad TipoUnidad, String Disponibilidad){
         
        
         UnidadesJpaController unidadesJpaController=new UnidadesJpaController  (emfactory);
@@ -38,7 +38,12 @@ public class controladorUnidades {
         BigDecimal bigDecimalValue =new BigDecimal(NumeroUnidad);        
         unidades.setNumerounidad(bigDecimalValue);
         //----------------------------------------------------------------------
-        unidades.setDisponibilidad(Disponibilidad);
+        boolean disponibilidadR=false;
+        if("true".equals(Disponibilidad)){
+            disponibilidadR= true;
+        }
+                
+        unidades.setDisponibilidad(disponibilidadR);
         unidades.setTipounidad(TipoUnidad);
         //Falta insertar en movilizaciones
 
@@ -57,10 +62,13 @@ public class controladorUnidades {
         entitymanager.getTransaction().commit();
     }
     
-    public static void ModificarUnidades(String NumeroUnidad , Tipounidad TipoUnidad, boolean Disponibilidad){
+    public static void ModificarUnidades(String NumeroUnidad , Tipounidad TipoUnidad, String Disponibilidad){
         unidades=entitymanager.find(Unidades.class, NumeroUnidad );
         BigDecimal bigDecimal = new BigDecimal(NumeroUnidad);
-        
+        boolean disponibilidadR=false;
+        if("true".equals(Disponibilidad)){
+            disponibilidadR= true;
+        }
     
     
     entitymanager.getTransaction().begin();
@@ -69,7 +77,7 @@ public class controladorUnidades {
               
         unidades.setNumerounidad(bigDecimal);
         
-        unidades.setDisponibilidad(Disponibilidad);
+        unidades.setDisponibilidad(disponibilidadR);
         unidades.setTipounidad(TipoUnidad);
     entitymanager.getTransaction().commit();
     }
