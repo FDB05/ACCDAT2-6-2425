@@ -4,23 +4,34 @@
  */
 package vista;
 
+import controlador.ControladorMaestro;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import static modelo.ModeloMaestro.LeerDataEstado;
+import static modelo.ModeloMaestro.LeerDataTipoUnidad;
 
 /**
  *
  * @author Fernando A
  */
-public class Ventana1 extends javax.swing.JFrame {
+public class Ventana1 extends javax.swing.JFrame implements InterfazVista{
  
     DefaultTableModel model;
     /**
      * Creates new form Ventana1
      */
     public Ventana1() {
+        CBdisponibilidad.addItem("TRUE");
+        CBdisponibilidad.addItem("FALSE");
+        
+        
+        
         initComponents();
         Tllamadas.setVisible(false);
         Tunidad.setVisible(false);
-
+//        rellenaComboEstado();
+//        rellenaComboTipoUnidad();
+setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     }
 
     /**
@@ -51,7 +62,7 @@ public class Ventana1 extends javax.swing.JFrame {
         CBtipounidad = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         TFnumUnidad = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        CBdisponibilidad = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         BTNback1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -70,9 +81,7 @@ public class Ventana1 extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
         jMenuItem16 = new javax.swing.JMenuItem();
         jMenuItem17 = new javax.swing.JMenuItem();
-        jMenuItem18 = new javax.swing.JMenuItem();
         jMenuItem19 = new javax.swing.JMenuItem();
-        jMenuItem20 = new javax.swing.JMenuItem();
         MTsalir = new javax.swing.JMenu();
 
         Tllamadas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -225,7 +234,7 @@ public class Ventana1 extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        CBdisponibilidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel3.setText("Disponibilidad:");
 
@@ -251,7 +260,7 @@ public class Ventana1 extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(JFCunidadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(CBtipounidad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(CBdisponibilidad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(TFnumUnidad)))
                     .addGroup(JFCunidadesLayout.createSequentialGroup()
                         .addGap(36, 36, 36)
@@ -277,7 +286,7 @@ public class Ventana1 extends javax.swing.JFrame {
                             .addComponent(TFnumUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(29, 29, 29)
                         .addGroup(JFCunidadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CBdisponibilidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(34, 34, 34)
                         .addComponent(BTNbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -290,6 +299,7 @@ public class Ventana1 extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jMenu1.setText("CARGAR");
 
@@ -310,6 +320,11 @@ public class Ventana1 extends javax.swing.JFrame {
         jMenu1.add(MTCllamadas);
 
         MTCmovilizaciones.setText("Movilizaciones");
+        MTCmovilizaciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MTCmovilizacionesActionPerformed(evt);
+            }
+        });
         jMenu1.add(MTCmovilizaciones);
 
         jMenuBar1.add(jMenu1);
@@ -368,14 +383,8 @@ public class Ventana1 extends javax.swing.JFrame {
         jMenuItem17.setText("Llamadas");
         jMenu4.add(jMenuItem17);
 
-        jMenuItem18.setText("TipoUnidad");
-        jMenu4.add(jMenuItem18);
-
         jMenuItem19.setText("Movilizaciones");
         jMenu4.add(jMenuItem19);
-
-        jMenuItem20.setText("TipoEstado");
-        jMenu4.add(jMenuItem20);
 
         jMenuBar1.add(jMenu4);
 
@@ -400,11 +409,13 @@ public class Ventana1 extends javax.swing.JFrame {
 
     
     private void MTCunidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MTCunidadesActionPerformed
-                
+                this.setVisible(false);
+                JFCunidades.setVisible(true);
+                JFCunidades.setSize(3000, 3000);
     }//GEN-LAST:event_MTCunidadesActionPerformed
 
     private void MTIunidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MTIunidadesActionPerformed
-         
+                this.setVisible(false);
     }//GEN-LAST:event_MTIunidadesActionPerformed
 
     private void MTBunidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MTBunidadesActionPerformed
@@ -415,7 +426,9 @@ public class Ventana1 extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem16ActionPerformed
 
     private void MTCllamadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MTCllamadasActionPerformed
-          
+         this.setVisible(false);
+         JFCllamadas.setVisible(true);
+         JFCllamadas.setSize(3000,3000);
     }//GEN-LAST:event_MTCllamadasActionPerformed
 
     private void MTBllamadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MTBllamadasActionPerformed
@@ -423,7 +436,7 @@ public class Ventana1 extends javax.swing.JFrame {
     }//GEN-LAST:event_MTBllamadasActionPerformed
 
     private void BTNbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNbuscarActionPerformed
-        // TODO add your handling code here:
+      
     }//GEN-LAST:event_BTNbuscarActionPerformed
 
     private void TFnumUnidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFnumUnidadActionPerformed
@@ -431,7 +444,10 @@ public class Ventana1 extends javax.swing.JFrame {
     }//GEN-LAST:event_TFnumUnidadActionPerformed
 
     private void BTNback1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNback1ActionPerformed
-        // TODO add your handling code here:
+        this.setVisible(true);
+        JFCunidades.setVisible(false);
+        
+        
     }//GEN-LAST:event_BTNback1ActionPerformed
 
     private void TFnumTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFnumTelefonoActionPerformed
@@ -443,7 +459,8 @@ public class Ventana1 extends javax.swing.JFrame {
     }//GEN-LAST:event_BTNbuscar2ActionPerformed
 
     private void BTNback2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNback2ActionPerformed
-        // TODO add your handling code here:
+      this.setVisible(true);
+        JFCllamadas.setVisible(false);
     }//GEN-LAST:event_BTNback2ActionPerformed
 
     private void TFfechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFfechaActionPerformed
@@ -453,6 +470,25 @@ public class Ventana1 extends javax.swing.JFrame {
     private void CBestadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBestadoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_CBestadoActionPerformed
+
+    private void MTCmovilizacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MTCmovilizacionesActionPerformed
+        this.setVisible(false);
+        
+    }//GEN-LAST:event_MTCmovilizacionesActionPerformed
+
+    
+//    public void rellenaComboEstado(){
+//        List<Object[]> estados=LeerDataEstado();
+//        
+//        for(Object[] estado:estados){CBestado.addItem((String)estado[0]);}
+//    }
+//    
+//    private void rellenaComboTipoUnidad() {
+//        List<Object[]> tiposUnidad = LeerDataTipoUnidad();
+//        for (Object[] tipo : tiposUnidad) {
+//            CBtipounidad.addItem((String) tipo[0]); 
+//        }
+//    }
 
     
     /**
@@ -497,6 +533,7 @@ public class Ventana1 extends javax.swing.JFrame {
     private javax.swing.JButton BTNback2;
     private javax.swing.JButton BTNbuscar;
     private javax.swing.JButton BTNbuscar2;
+    private javax.swing.JComboBox<String> CBdisponibilidad;
     private javax.swing.JComboBox<String> CBestado;
     private javax.swing.JComboBox<String> CBtipounidad;
     private javax.swing.JFrame JFCllamadas;
@@ -516,7 +553,6 @@ public class Ventana1 extends javax.swing.JFrame {
     private javax.swing.JTextField TFnumUnidad;
     private javax.swing.JTable Tllamadas;
     private javax.swing.JTable Tunidad;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -530,10 +566,50 @@ public class Ventana1 extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem17;
-    private javax.swing.JMenuItem jMenuItem18;
     private javax.swing.JMenuItem jMenuItem19;
-    private javax.swing.JMenuItem jMenuItem20;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void arranca() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void setControlador(ControladorMaestro This) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public int getNtelefono() {
+     String tef = TFnumTelefono.getText(); 
+    int telefono;
+
+    try {
+        telefono = Integer.parseInt(tef);
+    } catch (NumberFormatException e) {
+        telefono = -1; 
+    }
+    return telefono;
+    }
+
+    @Override
+    public String getFecha() {
+     return TFfecha.getText();
+    }
+
+    @Override
+    public void setCBestado() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void setCBtipoUnidad() {
+       
+    }
+
+    @Override
+    public void setCBdisponibilidad() {
+      }
 }

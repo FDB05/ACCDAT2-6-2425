@@ -4,10 +4,26 @@
  */
 package vista;
 
+import controlador.ControladorMaestro;
+
 /**
  *
  * @author Fernando A
  */
 public interface InterfazVista {
+
+    public void arranca();
+
+    public void setControlador(ControladorMaestro This);
+    
+    public int getNtelefono();
+    
+    public String getFecha();
+    
+    public void setCBestado();
+    
+    public void setCBtipoUnidad();
+    
+    public void setCBdisponibilidad();
     
 }

@@ -10,6 +10,7 @@ import modelo.Unidades;
 
 import java.sql.Date;
 import java.util.List;
+import static modelo.ModeloMaestro.LeerDataEstado;
 import vista.InterfazVista;
 
 public class ControladorMaestro implements ActionListener {
@@ -24,8 +25,6 @@ public class ControladorMaestro implements ActionListener {
         
         this.vista.setControlador(this);
         this.vista.arranca();
-        
-        
     }
 
 
@@ -40,6 +39,9 @@ public class ControladorMaestro implements ActionListener {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
         
+    
+    
+   
     }
 
     
