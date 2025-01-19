@@ -26,16 +26,16 @@ public class controladorUnidades {
     //METODOS INSERTAR, BORRAR MODIFICAR Y LEER(Nico)
     //--------------------------------------------------------------------------
     
-    public static void insertarUnidades(int NumeroUnidad , Tipounidad TipoUnidad, boolean Disponibilidad){
+    public static void insertarUnidades(String NumeroUnidad , Tipounidad TipoUnidad, boolean Disponibilidad){
         
-        //NO HAY JPACONTROLLER
-        //UnidadesJpaController unidadesJpaController=new UnidadesJpaController  (emfactory);
+       
+        UnidadesJpaController unidadesJpaController=new UnidadesJpaController  (emfactory);
 
         Unidades d=new Unidades();
         
         
         //SOLUCION BIG DECIMAL
-        BigDecimal bigDecimalValue = BigDecimal.valueOf(NumeroUnidad);        
+        BigDecimal bigDecimalValue =new BigDecimal(NumeroUnidad);        
         unidades.setNumerounidad(bigDecimalValue);
         //----------------------------------------------------------------------
         unidades.setDisponibilidad(Disponibilidad);
@@ -49,7 +49,7 @@ public class controladorUnidades {
         }
     }
     
-    public static void borrarUnidades(int NumeroUnidad ){
+    public static void borrarUnidades(String NumeroUnidad ){
         unidades=entitymanager.find(Unidades.class,NumeroUnidad );
         
         entitymanager.getTransaction().begin();
@@ -57,22 +57,24 @@ public class controladorUnidades {
         entitymanager.getTransaction().commit();
     }
     
-    public static void ModificarUnidades(int NumeroUnidad , Tipounidad TipoUnidad, boolean Disponibilidad){
+    public static void ModificarUnidades(String NumeroUnidad , Tipounidad TipoUnidad, boolean Disponibilidad){
         unidades=entitymanager.find(Unidades.class, NumeroUnidad );
-    
+        BigDecimal bigDecimal = new BigDecimal(NumeroUnidad);
+        
     
     
     entitymanager.getTransaction().begin();
-    //DUDA CON EL BIG DECIMAL
-        BigDecimal bigDecimalValue = BigDecimal.valueOf(NumeroUnidad);        
-        unidades.setNumerounidad(bigDecimalValue);
+    
+    
+              
+        unidades.setNumerounidad(bigDecimal);
         
         unidades.setDisponibilidad(Disponibilidad);
         unidades.setTipounidad(TipoUnidad);
     entitymanager.getTransaction().commit();
     }
     
-    public static void LeerRecursosUnidades(int NumeroUnidad ){
+    public static void LeerRecursosUnidades(String NumeroUnidad ){
         
         unidades= entitymanager.find(Unidades.class, NumeroUnidad);
         
