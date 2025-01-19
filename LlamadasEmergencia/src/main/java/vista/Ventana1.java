@@ -490,7 +490,7 @@ public class Ventana1 extends javax.swing.JFrame {
 
     private void BotonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonEliminarActionPerformed
         String NumeroUnidad= TFnumUnidad.getText();
-        ControladorUnidades.borrarUnidades(NumeroUnidad);
+        controladorUnidades.borrarUnidades(NumeroUnidad);
         
         //Insertar metodo eliminarUnidad
     }//GEN-LAST:event_BotonEliminarActionPerformed
@@ -500,7 +500,7 @@ public class Ventana1 extends javax.swing.JFrame {
         Tipounidad TipoUnidad=(Tipounidad) CBtipounidad.getSelectedItem();
         boolean Disponibilidad= (boolean) jComboBox1.getSelectedItem();
         
-        ControladorUnidades.insertarUnidades(NumeroUnidad,TipoUnidad,Disponibilidad);
+        controladorUnidades.insertarUnidades(NumeroUnidad,TipoUnidad,Disponibilidad);
         
         //Insertar metodo insertarUnidades
     }//GEN-LAST:event_BotonInsertarActionPerformed
@@ -511,7 +511,7 @@ public class Ventana1 extends javax.swing.JFrame {
         boolean Disponibilidad= (boolean) jComboBox1.getSelectedItem();
         
         //Insertar metodo modificarUnidades
-        ControladorUnidades.ModificarUnidades(NumeroUnidad,TipoUnidad,Disponibilidad);
+        controladorUnidades.ModificarUnidades(NumeroUnidad,TipoUnidad,Disponibilidad);
     }//GEN-LAST:event_BotonModificarActionPerformed
 
     
