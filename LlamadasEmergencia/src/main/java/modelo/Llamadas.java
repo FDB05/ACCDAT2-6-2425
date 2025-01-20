@@ -49,7 +49,7 @@ public class Llamadas implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "FECHAHORA")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date fechahora;
     @Basic(optional = false)
     @NotNull

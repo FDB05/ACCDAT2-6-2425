@@ -4,6 +4,7 @@
  */
 package modelo;
 
+import controlador.UnidadesJpaController;
 import jakarta.persistence.Basic;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
