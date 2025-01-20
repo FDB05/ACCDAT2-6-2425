@@ -1,8 +1,0 @@
-com\fadb\proyectopav3\Departamentos.class
-com\fadb\proyectopav3\DepartamentosJpaController.class
-com\fadb\proyectopav3\exceptions\IllegalOrphanException.class
-com\fadb\proyectopav3\exceptions\PreexistingEntityException.class
-com\fadb\proyectopav3\Empleados.class
-com\fadb\proyectopav3\EmpleadosJpaController.class
-com\fadb\proyectopav3\exceptions\NonexistentEntityException.class
-com\fadb\proyectopav3\ProyectoPAv3.class

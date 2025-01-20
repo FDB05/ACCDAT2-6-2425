@@ -20,8 +20,6 @@ import jakarta.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -115,5 +113,14 @@ public class Unidades implements Serializable {
     public String toString() {
         return "com.mycompany.llamadasemergencia.Unidades[ numerounidad=" + numerounidad + " ]";
     }
+    
+    //--------------------------------------------------------------------------
+    //METODOS INSERTAR, BORRAR MODIFICAR Y LEER(LLAMADAS)
+    //--------------------------------------------------------------------------
+    
+        
+        
+        
+    
     
 }

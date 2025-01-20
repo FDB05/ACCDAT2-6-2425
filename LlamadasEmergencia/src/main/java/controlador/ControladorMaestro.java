@@ -3,6 +3,7 @@ package controlador;
 import jakarta.faces.event.AbortProcessingException;
 import jakarta.faces.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 
 
 import modelo.ModeloMaestro;
@@ -33,23 +34,23 @@ public class ControladorMaestro implements ActionListener {
             List<Object[]> query;
             String estado = vista.getCBestado();
             int numT = vista.getNtelefono();
-            String fecha = vista.getFecha();
-            modelo.convertirFecha(fecha);
+            String fechaN = vista.getFecha();
+            Date fecha=modelo.convertirFecha(fechaN);
 
-            if (fecha.isBlank() && estado.isBlank()) {
+            if (fechaN.isBlank() && estado.isBlank()) {
                 query = modelo.filtrarLlamadasPorNumeroTelefono(numT);
             } else if ((numT == -1) && estado.isBlank()) {
-                query = modelo.filtrarLlamadasPorFecha(fecha);
-            } else if ((numT == -1) && fecha.isBlank()) {
+                query = modelo.filtrarLlamadasPorFecha(fechaN);
+            } else if ((numT == -1) && fechaN.isBlank()) {
                 query = modelo.filtrarLlamadasPorEstado(estado);
             } else if (numT == -1) {
-                query = modelo.filtrarLlamadasPorEstadoFecha(estado, fecha);
+                query = modelo.filtrarLlamadasPorEstadoFecha(estado, fechaN);
             } else if (estado.isBlank()) {
-                query = modelo.filtrarLlamadasPorNumeroTelefonoFecha(numT, fecha);
-            } else if (fecha.isBlank()) {
+                query = modelo.filtrarLlamadasPorNumeroTelefonoFecha(numT, fechaN);
+            } else if (fechaN.isBlank()) {
                 query = modelo.filtrarLlamadasPorNumeroTelefonoYEstado(numT, estado);
             } else {
-                query = modelo.filtrarLlamadasPorNumeroTelefonoEstadoFecha(numT, estado, fecha);
+                query = modelo.filtrarLlamadasPorNumeroTelefonoEstadoFecha(numT, estado, fechaN);
             }
             
 
@@ -61,11 +62,10 @@ public class ControladorMaestro implements ActionListener {
             List<Object[]> query = null;
             int nUnidad = vista.getNunidad(); 
             String tUnidad = vista.getBtipoUnidad(); 
-            boolean estado = Boolean.parseBoolean(vista.getBdisponibilidad()); 
-            // Lógica para filtrar unidades
-            if (nUnidad != -1 && tUnidad != null && !tUnidad.isBlank() && estado) {
+            boolean estado = Boolean.parseBoolean(vista.getBdisponibilidad());
+            if (nUnidad != -1 && (tUnidad != null && !tUnidad.isBlank()) && estado) {
                 query = modelo.filtrarUnidadesPorNumeroUnidadTipoUnidadDisponibilidad(nUnidad, tUnidad, estado);
-            } else if (nUnidad != -1 && tUnidad != null && !tUnidad.isBlank()) {
+            } else if (nUnidad != -1 && (tUnidad != null && !tUnidad.isBlank())) {
                 query = modelo.filtrarUnidadesPorNumeroUnidadTipoUnidad(nUnidad, tUnidad);
             } else if (nUnidad != -1 && estado) {
                 query = modelo.filtrarUnidadesPorNumeroUnidadDisponibilidad(nUnidad, estado);
@@ -103,6 +103,7 @@ public class ControladorMaestro implements ActionListener {
        }
        
        case InterfazVista.ELIMINARUNALLAMADA->{
+           int numtef=vista.getNtelefono();
        
        }
        
