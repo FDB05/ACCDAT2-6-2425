@@ -139,7 +139,7 @@ public List<Object[]> filtrarUnidadesPorNumeroUnidad(int nUnidad) {
     public List<Object[]> filtrarUnidadesPorDisponibilidad(boolean estado) {
         inicializaFactoryController();
         TypedQuery<Object[]> query = em.createQuery(
-            "SELECT u.numerounidad, u.tipounidad, u.disponibilidad FROM Unidades u WHERE u.disponibilidad = :estado", 
+            "SELECT u.numerounidad, u.tipounidad, u.disponibilidad FROM Unidades u WHERE u.disponibilidad = :estado AND", 
             Object[].class);
         
         query.setParameter("estado", estado);
@@ -172,7 +172,7 @@ public List<Object[]> filtrarUnidadesPorNumeroUnidad(int nUnidad) {
         
         query.setParameter("numeroTelefono", BigDecimal.valueOf(numeroTelefono));
         query.setParameter("estadoId", estadoId);
-        query.setParameter("fecha", Date.valueOf(fecha)); // Asegúrate de que la fecha esté en el formato correcto
+        query.setParameter("fecha", Date.valueOf(fecha)); 
         
         List<Object[]> list = query.getResultList();
         cierraFactoryController();
@@ -200,7 +200,7 @@ public List<Object[]> filtrarUnidadesPorNumeroUnidad(int nUnidad) {
             Object[].class);
         
         query.setParameter("numeroTelefono", BigDecimal.valueOf(numeroTelefono));
-        query.setParameter("fecha", Date.valueOf(fecha)); // Asegúrate de que la fecha esté en el formato correcto
+        query.setParameter("fecha", Date.valueOf(fecha)); 
         
         List<Object[]> list = query.getResultList();
         cierraFactoryController();
@@ -214,7 +214,7 @@ public List<Object[]> filtrarLlamadasPorEstadoFecha(String estadoId, String fech
             Object[].class);
         
         query.setParameter("estadoId", estadoId);
-        query.setParameter("fecha", Date.valueOf(fecha)); // Asegúrate de que la fecha esté en el formato correcto
+        query.setParameter("fecha", Date.valueOf(fecha)); 
         
         List<Object[]> list = query.getResultList();
         cierraFactoryController();
@@ -253,7 +253,7 @@ public List<Object[]> filtrarLlamadasPorEstadoFecha(String estadoId, String fech
             "SELECT l.numeroTelf, l.estado, l.fechahora FROM Llamadas l WHERE l.fechahora = :fecha", 
             Object[].class);
         
-        query.setParameter("fecha", Date.valueOf(fecha)); // Asegúrate de que la fecha esté en el formato correcto
+        query.setParameter("fecha", Date.valueOf(fecha)); 
         
         List<Object[]> list = query.getResultList();
         cierraFactoryController();
@@ -284,8 +284,8 @@ public static List<Object[]> LeerDataTipoUnidad() {
         List<Object[]> list = query.getResultList();
         return list;
     } catch (Exception e) {
-        e.printStackTrace(); // Imprimir el error para depuración
-        return new ArrayList<>(); // Retornar una lista vacía en caso de error
+        e.printStackTrace(); 
+        return new ArrayList<>(); 
     } finally {
         cierraFactoryController();
     }
@@ -354,6 +354,29 @@ public void modicarUnidad(int numU,boolean estado,String tipoUnidad){
             Logger.getLogger(ModeloMaestro.class.getName()).log(Level.SEVERE, null, ex);
         }
 }
+public boolean insertaUnidad(int numu,boolean disponibilidad,String tipounidad) {
+    boolean existe=false;
+    inicializaFactoryController();
+    UnidadesJpaController unidadesJpaController = new UnidadesJpaController(emf);
+    
+    Unidades unidad = new Unidades();
+    unidad.setNumerounidad(BigDecimal.valueOf(numu)); 
+    unidad.setDisponibilidad(disponibilidad); 
+
+    TipounidadJpaController tipounidadJpaController = new TipounidadJpaController(emf);
+    Tipounidad tipoUnidad = tipounidadJpaController.findTipounidad(tipounidad);
+    unidad.setTipounidad(tipoUnidad);
+    
+    try {
+        unidadesJpaController.create(unidad);
+    } catch (Exception ex) {
+        Logger.getLogger(LlamadasEmergencia.class.getName()).log(Level.SEVERE, null, ex);
+        existe=true;
+    }finally{
+    cierraFactoryController();
+    }
+return existe;
+}
 
 
 
@@ -421,9 +444,34 @@ public void modificarLlamada(int numU,String fechahora,String ubicacion,String d
         } catch (Exception ex) {
             Logger.getLogger(ModeloMaestro.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
+    }
 
-    }    
+public boolean insertaLlamada(int numtef,String fecha,String ubicacion,String descripcion,String state) {
+    boolean existe=false;
+    inicializaFactoryController();
+    LlamadasJpaController llamadasJpaController = new LlamadasJpaController(emf);
+    Date date=(Date) convertirFecha(fecha);
+    Llamadas llamada = new Llamadas();
+    llamada.setNumerotelf(BigDecimal.valueOf(numtef)); 
+    llamada.setFechahora(date); 
+    llamada.setUbicacion(ubicacion); 
+    llamada.setDescripcion(descripcion); 
+    
+    // Si necesitas establecer el estado, primero debes obtenerlo
+    EstadoJpaController estadoJpaController = new EstadoJpaController(emf);
+    Estado estado = estadoJpaController.findEstado(state); 
+    llamada.setEstado(estado);
+    
+    try {
+        llamadasJpaController.create(llamada);
+    } catch (Exception ex) {
+        Logger.getLogger(LlamadasEmergencia.class.getName()).log(Level.SEVERE, null, ex);
+        existe=true;
+        }finally{
+    cierraFactoryController();
+    }
+    return existe;
+}
 //----------------------------------
 //CREACION DE DATOS PERSISTENTES
 //---------------------------------
@@ -434,12 +482,12 @@ public void inicializarDatos() {
         try {
             transaction.begin();
 
-            // Insertar datos en la tabla Estado si no existen
+           
             if (!datosExistentes("Estado")) {
                 insertarDatosEstado();
             }
 
-            // Insertar datos en la tabla TipoUnidad si no existen
+            
             if (!datosExistentes("TipoUnidad")) {
                 insertarDatosTipoUnidad();
             }
@@ -457,8 +505,8 @@ public void inicializarDatos() {
 
     private boolean datosExistentes(String nombreTabla) {
     Query query = em.createNativeQuery("SELECT COUNT(*) FROM " + nombreTabla);
-    BigDecimal count = (BigDecimal) query.getSingleResult(); // Cambia a BigDecimal
-    return count.compareTo(BigDecimal.ZERO) > 0; // Compara con BigDecimal.ZERO
+    BigDecimal count = (BigDecimal) query.getSingleResult(); 
+    return count.compareTo(BigDecimal.ZERO) > 0; 
 }
 
     private void insertarDatosEstado() {

@@ -155,59 +155,5 @@ public class Llamadas implements Serializable {
     //--------------------------------------------------------------------------
     //METODOS INSERTAR, BORRAR MODIFICAR Y LEER(JULIAN)
     //--------------------------------------------------------------------------
-    public static void insertarLlamada(int numeroTelf, Date fechaHora, String ubicacion, String estado, String descripcion) {
-        entitymanger.getTransaction().begin();
-        Llamadas llamada = new Llamadas();
-        llamada.setNumeroTelf(numeroTelf);
-        llamada.setFechaHora(fechaHora);
-        llamada.setUbicacion(ubicacion);
-        llamada.setEstado(estado);
-        llamada.setDescripcion(descripcion);
-        entitymanger.persist(llamada);
-        entitymanger.getTransaction().commit();
-        System.out.println("Llamada insertada correctamente.");
-    }
-
-    public static void borrarLlamada(int numeroTelf) {
-        entitymanger.getTransaction().begin();
-        Llamadas llamada = entitymanger.find(Llamadas.class, numeroTelf);
-        if (llamada != null) {
-            entitymanger.remove(llamada);
-            System.out.println("Llamada eliminada correctamente.");
-        } else {
-            System.out.println("No se encontró una llamada con ese número de teléfono.");
-        }
-        entitymanger.getTransaction().commit();
-    }
-
-    public static void modificarLlamada(int numeroTelf, String nuevaUbicacion, String nuevoEstado, String nuevaDescripcion) {
-        entitymanger.getTransaction().begin();
-        Llamadas llamada = entitymanger.find(Llamadas.class, numeroTelf);
-        if (llamada != null) {
-            llamada.setUbicacion(nuevaUbicacion);
-            llamada.setEstado(nuevoEstado);
-            llamada.setDescripcion(nuevaDescripcion);
-            System.out.println("Llamada actualizada correctamente.");
-        } else {
-            System.out.println("No se encontró una llamada con ese número de teléfono.");
-        }
-        entitymanger.getTransaction().commit();
-    }
-
-    public static void leerLlamadas() {
-        Query query = entitymanger.createQuery("SELECT l FROM Llamadas l");
-        List<Llamadas> llamadas = query.getResultList();
-        for (Llamadas llamada : llamadas) {
-            System.out.println("Número: " + llamada.getNumeroTelf());
-            System.out.println("Fecha y Hora: " + llamada.getFechaHora());
-            System.out.println("Ubicación: " + llamada.getUbicacion());
-            System.out.println("Estado: " + llamada.getEstado());
-            System.out.println("Descripción: " + llamada.getDescripcion());
-            System.out.println("----------------------------");
-        }
-    }
-
-    
-    
 }
 
