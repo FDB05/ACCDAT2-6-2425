@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 C:\Users\Fernando A\Documents\GRADO_2\AD\LlamadasEmergencia\src\main\java\controlador\ControladorMaestro.java
 C:\Users\Fernando A\Documents\GRADO_2\AD\LlamadasEmergencia\src\main\java\modelo\Movilizaciones.java
 C:\Users\Fernando A\Documents\GRADO_2\AD\LlamadasEmergencia\src\main\java\vista\Ventana1.java
@@ -17,24 +16,3 @@ C:\Users\Fernando A\Documents\GRADO_2\AD\LlamadasEmergencia\src\main\java\contro
 C:\Users\Fernando A\Documents\GRADO_2\AD\LlamadasEmergencia\src\main\java\controlador\exceptions\NonexistentEntityException.java
 C:\Users\Fernando A\Documents\GRADO_2\AD\LlamadasEmergencia\src\main\java\controlador\UnidadesJpaController.java
 C:\Users\Fernando A\Documents\GRADO_2\AD\LlamadasEmergencia\src\main\java\controlador\exceptions\IllegalOrphanException.java
-=======
-C:\grado superior\DAM 2\ACCDAT2-6-2425\LlamadasEmergencia\src\main\java\vista\Ventana1.java
-C:\grado superior\DAM 2\ACCDAT2-6-2425\LlamadasEmergencia\src\main\java\controlador\controlador.java
-C:\grado superior\DAM 2\ACCDAT2-6-2425\LlamadasEmergencia\src\main\java\controlador\LlamadasJpaController.java
-C:\grado superior\DAM 2\ACCDAT2-6-2425\LlamadasEmergencia\src\main\java\controlador\EstadoJpaController.java
-C:\grado superior\DAM 2\ACCDAT2-6-2425\LlamadasEmergencia\src\main\java\modelo\Movilizaciones.java
-C:\grado superior\DAM 2\ACCDAT2-6-2425\LlamadasEmergencia\src\main\java\controlador\exceptions\NonexistentEntityException.java
-C:\grado superior\DAM 2\ACCDAT2-6-2425\LlamadasEmergencia\src\main\java\vista\InterfazVista.java
-C:\grado superior\DAM 2\ACCDAT2-6-2425\LlamadasEmergencia\src\main\java\controlador\ControladorMaestro.java
-C:\grado superior\DAM 2\ACCDAT2-6-2425\LlamadasEmergencia\src\main\java\modelo\Tipounidad.java
-C:\grado superior\DAM 2\ACCDAT2-6-2425\LlamadasEmergencia\src\main\java\com\mycompany\llamadasemergencia\LlamadasEmergencia.java
-C:\grado superior\DAM 2\ACCDAT2-6-2425\LlamadasEmergencia\src\main\java\modelo\Estado.java
-C:\grado superior\DAM 2\ACCDAT2-6-2425\LlamadasEmergencia\src\main\java\modelo\Llamadas.java
-C:\grado superior\DAM 2\ACCDAT2-6-2425\LlamadasEmergencia\src\main\java\controlador\MovilizacionesJpaController.java
-C:\grado superior\DAM 2\ACCDAT2-6-2425\LlamadasEmergencia\src\main\java\controlador\UnidadesJpaController.java
-C:\grado superior\DAM 2\ACCDAT2-6-2425\LlamadasEmergencia\src\main\java\controlador\TipounidadJpaController.java
-C:\grado superior\DAM 2\ACCDAT2-6-2425\LlamadasEmergencia\src\main\java\modelo\Unidades.java
-C:\grado superior\DAM 2\ACCDAT2-6-2425\LlamadasEmergencia\src\main\java\modelo\ModeloMaestro.java
-C:\grado superior\DAM 2\ACCDAT2-6-2425\LlamadasEmergencia\src\main\java\controlador\exceptions\IllegalOrphanException.java
-C:\grado superior\DAM 2\ACCDAT2-6-2425\LlamadasEmergencia\src\main\java\controlador\exceptions\PreexistingEntityException.java
->>>>>>> 4ac28795f72e1eb873a585b5450c90b8589c188b

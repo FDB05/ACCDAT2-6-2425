@@ -4,6 +4,7 @@
  */
 package modelo;
 
+import controlador.UnidadesJpaController;
 import jakarta.persistence.Basic;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -114,7 +115,12 @@ public class Unidades implements Serializable {
     }
     
     //--------------------------------------------------------------------------
-    //METODOS INSERTAR, BORRAR MODIFICAR Y LEER()
+    //METODOS INSERTAR, BORRAR MODIFICAR Y LEER(LLAMADAS)
     //--------------------------------------------------------------------------
+    
+        
+        
+        
+    
     
 }
