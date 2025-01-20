@@ -59,7 +59,7 @@ public class ControladorMaestro implements ActionListener {
         
        case InterfazVista.FILTRARUNIDADES -> {
             List<Object[]> query = null;
-            int nUnidad = vista.getNtelefono(); 
+            int nUnidad = vista.getNunidad(); 
             String tUnidad = vista.getBtipoUnidad(); 
             boolean estado = Boolean.parseBoolean(vista.getBdisponibilidad()); 
             // Lógica para filtrar unidades
@@ -82,18 +82,34 @@ public class ControladorMaestro implements ActionListener {
             vista.cargarTablaUnidades(query); 
             break;
         }
+       case InterfazVista.INSERTARUNIDAD->{
+            int nUnidad = vista.getNunidad1(); 
+            String tUnidad = vista.getBtipoUnidad1(); 
+            boolean estado = Boolean.parseBoolean(vista.getBdisponibilidad1()); 
+            
+           boolean existe= modelo.insertaUnidad(nUnidad, estado, tUnidad);
+            vista.soltarPopApp(existe);
+       }
+       case InterfazVista.INSERTARLLAMADAS->{
+       String estado = vista.getCBestado1();
+            int numT = vista.getNtelefono1();
+            String fecha = vista.getFecha1();
+            String descripcion=vista.getDescripcion();
+            String ubicacion=vista.getUbicacion();
+            
+           boolean existe= modelo.insertaLlamada(numT, fecha, ubicacion, descripcion, estado);
+                        vista.soltarPopApp(existe);
+
+       }
+       
+       case InterfazVista.ELIMINARUNALLAMADA->{
+       
+       }
+       
+       
+       
           
           }
     
     }
 }
-
-
-
-  
-    
-   
-    
-
-    
-    

@@ -6,6 +6,7 @@ vista\Ventana1$25.class
 modelo\Llamadas.class
 vista\Ventana1$11.class
 vista\Ventana1$21.class
+vista\Ventana1$31.class
 controlador\exceptions\PreexistingEntityException.class
 controlador\EstadoJpaController.class
 controlador\exceptions\IllegalOrphanException.class
@@ -19,6 +20,7 @@ controlador\exceptions\NonexistentEntityException.class
 vista\Ventana1$12.class
 vista\Ventana1$19.class
 vista\Ventana1$2.class
+vista\Ventana1$32.class
 vista\Ventana1$5.class
 controlador\LlamadasJpaController.class
 vista\Ventana1$24.class
@@ -34,6 +36,7 @@ vista\Ventana1$30.class
 vista\Ventana1$20.class
 vista\Ventana1$10.class
 vista\Ventana1$4.class
+vista\Ventana1$33.class
 controlador\UnidadesJpaController.class
 vista\Ventana1$29.class
 vista\Ventana1$7.class

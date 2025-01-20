@@ -354,6 +354,29 @@ public void modicarUnidad(int numU,boolean estado,String tipoUnidad){
             Logger.getLogger(ModeloMaestro.class.getName()).log(Level.SEVERE, null, ex);
         }
 }
+public boolean insertaUnidad(int numu,boolean disponibilidad,String tipounidad) {
+    boolean existe=false;
+    inicializaFactoryController();
+    UnidadesJpaController unidadesJpaController = new UnidadesJpaController(emf);
+    
+    Unidades unidad = new Unidades();
+    unidad.setNumerounidad(BigDecimal.valueOf(numu)); 
+    unidad.setDisponibilidad(disponibilidad); 
+
+    TipounidadJpaController tipounidadJpaController = new TipounidadJpaController(emf);
+    Tipounidad tipoUnidad = tipounidadJpaController.findTipounidad(tipounidad);
+    unidad.setTipounidad(tipoUnidad);
+    
+    try {
+        unidadesJpaController.create(unidad);
+    } catch (Exception ex) {
+        Logger.getLogger(LlamadasEmergencia.class.getName()).log(Level.SEVERE, null, ex);
+        existe=true;
+    }finally{
+    cierraFactoryController();
+    }
+return existe;
+}
 
 
 
@@ -421,9 +444,34 @@ public void modificarLlamada(int numU,String fechahora,String ubicacion,String d
         } catch (Exception ex) {
             Logger.getLogger(ModeloMaestro.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
+    }
 
-    }    
+public boolean insertaLlamada(int numtef,String fecha,String ubicacion,String descripcion,String state) {
+    boolean existe=false;
+    inicializaFactoryController();
+    LlamadasJpaController llamadasJpaController = new LlamadasJpaController(emf);
+    Date date=(Date) convertirFecha(fecha);
+    Llamadas llamada = new Llamadas();
+    llamada.setNumerotelf(BigDecimal.valueOf(numtef)); 
+    llamada.setFechahora(date); 
+    llamada.setUbicacion(ubicacion); 
+    llamada.setDescripcion(descripcion); 
+    
+    // Si necesitas establecer el estado, primero debes obtenerlo
+    EstadoJpaController estadoJpaController = new EstadoJpaController(emf);
+    Estado estado = estadoJpaController.findEstado(state); 
+    llamada.setEstado(estado);
+    
+    try {
+        llamadasJpaController.create(llamada);
+    } catch (Exception ex) {
+        Logger.getLogger(LlamadasEmergencia.class.getName()).log(Level.SEVERE, null, ex);
+        existe=true;
+        }finally{
+    cierraFactoryController();
+    }
+    return existe;
+}
 //----------------------------------
 //CREACION DE DATOS PERSISTENTES
 //---------------------------------
@@ -434,12 +482,12 @@ public void inicializarDatos() {
         try {
             transaction.begin();
 
-            // Insertar datos en la tabla Estado si no existen
+           
             if (!datosExistentes("Estado")) {
                 insertarDatosEstado();
             }
 
-            // Insertar datos en la tabla TipoUnidad si no existen
+            
             if (!datosExistentes("TipoUnidad")) {
                 insertarDatosTipoUnidad();
             }
