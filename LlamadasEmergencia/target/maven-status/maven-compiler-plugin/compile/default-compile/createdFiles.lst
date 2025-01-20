@@ -8,6 +8,7 @@ vista\Ventana1$11.class
 vista\Ventana1$21.class
 vista\Ventana1$31.class
 controlador\exceptions\PreexistingEntityException.class
+vista\Ventana1$35.class
 controlador\EstadoJpaController.class
 controlador\exceptions\IllegalOrphanException.class
 modelo\Movilizaciones.class
@@ -47,5 +48,6 @@ vista\Ventana1$22.class
 vista\Ventana1$9.class
 controlador\MovilizacionesJpaController.class
 vista\Ventana1$17.class
+vista\Ventana1$34.class
 modelo\ModeloMaestro.class
 vista\Ventana1$3.class
