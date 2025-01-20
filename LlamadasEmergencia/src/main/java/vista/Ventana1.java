@@ -31,6 +31,7 @@ public class Ventana1 extends javax.swing.JFrame implements InterfazVista{
         BTNbuscar.setActionCommand(FILTRARUNIDADES);
         BTNaddLlamada.setActionCommand(INSERTARLLAMADAS);
         BTNaddUnidad.setActionCommand(INSERTARUNIDAD);
+        
          TFexito.setVisible(false);
          TFexito.setVisible(false);
         CBdisponibilidad.addItem("TRUE");
@@ -70,7 +71,7 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         TFfecha = new javax.swing.JTextField();
         BTNrefrescar = new javax.swing.JButton();
         BTNremoveTelefono = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        BTNMtelef = new javax.swing.JButton();
         JFCunidades = new javax.swing.JFrame();
         jScrollPane2 = new javax.swing.JScrollPane();
         Tunidad = new javax.swing.JTable();
@@ -186,10 +187,10 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         BTNremoveTelefono.setText("Eliminar");
 
-        jButton2.setText("Modificar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        BTNMtelef.setText("Modificar");
+        BTNMtelef.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                BTNMtelefActionPerformed(evt);
             }
         });
 
@@ -226,7 +227,7 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
                         .addContainerGap()
                         .addComponent(BTNremoveTelefono)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2)))
+                        .addComponent(BTNMtelef)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(26, Short.MAX_VALUE))
@@ -260,7 +261,7 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
                         .addGap(31, 31, 31)
                         .addGroup(JFCllamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(BTNremoveTelefono)
-                            .addComponent(jButton2))))
+                            .addComponent(BTNMtelef))))
                 .addContainerGap(45, Short.MAX_VALUE))
         );
 
@@ -874,9 +875,9 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         // TODO add your handling code here:
     }//GEN-LAST:event_MTMllamadasActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void BTNMtelefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNMtelefActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_BTNMtelefActionPerformed
 
     
     private void rellenaComboEstado(){
@@ -943,6 +944,7 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BTNMtelef;
     private javax.swing.JButton BTNaddLlamada;
     private javax.swing.JButton BTNaddUnidad;
     private javax.swing.JButton BTNback1;
@@ -987,7 +989,6 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     private javax.swing.JTable Tllamadas;
     private javax.swing.JTable Tunidad;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1110,7 +1111,7 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     
     @Override
     public void cargarTablaUnidades(List<Object[]> list) {
-        
+    
    modelo=(DefaultTableModel) Tunidad.getModel();
     for (int i = modelo.getRowCount() - 1; i >= 0; i--) {
             modelo.removeRow(i);
