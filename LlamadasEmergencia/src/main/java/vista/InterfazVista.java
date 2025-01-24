@@ -62,7 +62,8 @@ public interface InterfazVista {
     static final String ELIMINARUNAUNIDAD="Metodo para eliminar una llamada";
     static final String ELIMINARUNALLAMADA="Metodo para eliminar una llamdada";
     static final  String MODIFICARUNAUNIDAD="Metodo para modificar una unidad";
-    static final  String MODIFICARUNALLAMADA="Metodo para modificar una unidad";
+    static final  String MODIFICARUNALLAMADA="Metodo para modificar una LLamada";
+    
 
             
 

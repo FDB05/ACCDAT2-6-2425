@@ -71,11 +71,11 @@ emf.close();
  public List<Object[]> filtrarUnidadesPorNumeroUnidadTipoUnidadDisponibilidad(int nUnidad, String tUnidad, boolean estado) {
         inicializaFactoryController();
         TypedQuery<Object[]> query = em.createQuery(
-            "SELECT u.numerounidad, u.tipounidad, u.disponibilidad FROM Unidades u WHERE u.numerounidad LIKE numeroUnidad AND u.tipounidad.tipounidad = :tipoUnidad AND u.disponibilidad = :estado", 
+            "SELECT u.numerounidad, u.tipounidad, u.disponibilidad FROM Unidades u WHERE u.numerounidad LIKE :numeroUnidad AND u.tipounidad.tipounidad = :tipoUnidad AND u.disponibilidad = :estado", 
             Object[].class);
         
-        query.setParameter("numeroUnidad", "%"+BigDecimal.valueOf(nUnidad)+"%");
-        query.setParameter("tipoUnidad", leerTipoUnidad(tUnidad).getTipounidad());
+        query.setParameter("numeroUnidad",nUnidad);
+        query.setParameter("tipoUnidad", tUnidad);
         query.setParameter("estado", estado);
         
         List<Object[]> list = query.getResultList();
@@ -86,11 +86,11 @@ emf.close();
     public List<Object[]> filtrarUnidadesPorNumeroUnidadTipoUnidad(int nUnidad, String tUnidad) {
         inicializaFactoryController();
         TypedQuery<Object[]> query = em.createQuery(
-            "SELECT u.numerounidad, u.tipounidad, u.disponibilidad FROM Unidades u WHERE u.numerounidad LIKE numeroUnidad AND u.tipounidad.tipounidad = :tipoUnidad", 
+            "SELECT u.numerounidad, u.tipounidad, u.disponibilidad FROM Unidades u WHERE u.numerounidad LIKE :numeroUnidad AND u.tipounidad.tipounidad = :tipoUnidad", 
             Object[].class);
         
-        query.setParameter("numeroUnidad", "%"+BigDecimal.valueOf(nUnidad)+"%");
-        query.setParameter("tipoUnidad", leerTipoUnidad(tUnidad).getTipounidad());
+        query.setParameter("numeroUnidad", BigDecimal.valueOf(nUnidad));
+        query.setParameter("tipoUnidad", tUnidad);
         
         List<Object[]> list = query.getResultList();
         cierraFactoryController();
@@ -100,10 +100,10 @@ emf.close();
 public List<Object[]> filtrarUnidadesPorNumeroUnidadDisponibilidad(int nUnidad, boolean estado) {
         inicializaFactoryController();
         TypedQuery<Object[]> query = em.createQuery(
-            "SELECT u.numerounidad, u.tipounidad, u.disponibilidad FROM Unidades u WHERE u.numerounidad LIKE numeroUnidad AND u.disponibilidad = :estado", 
+            "SELECT u.numerounidad, u.tipounidad, u.disponibilidad FROM Unidades u WHERE u.numerounidad LIKE :numeroUnidad AND u.disponibilidad = :estado", 
             Object[].class);
         
-        query.setParameter("numeroUnidad", "%"+BigDecimal.valueOf(nUnidad)+"%");
+        query.setParameter("numeroUnidad", nUnidad);
         query.setParameter("estado", estado);
         
         List<Object[]> list = query.getResultList();
@@ -114,10 +114,10 @@ public List<Object[]> filtrarUnidadesPorNumeroUnidadDisponibilidad(int nUnidad, 
 public List<Object[]> filtrarUnidadesPorNumeroUnidad(int nUnidad) {
         inicializaFactoryController();
         TypedQuery<Object[]> query = em.createQuery(
-            "SELECT u.numerounidad, u.tipounidad, u.disponibilidad FROM Unidades u WHERE u.numerounidad LIKE numeroUnidad", 
+            "SELECT u.numerounidad, u.tipounidad, u.disponibilidad FROM Unidades u WHERE u.numerounidad LIKE :numeroUnidad", 
             Object[].class);
         
-        query.setParameter("numeroUnidad", "%"+BigDecimal.valueOf(nUnidad)+"%");
+        query.setParameter("numeroUnidad", nUnidad);
         
         List<Object[]> list = query.getResultList();
         
@@ -131,7 +131,7 @@ public List<Object[]> filtrarUnidadesPorNumeroUnidad(int nUnidad) {
             "SELECT u.numerounidad, u.tipounidad, u.disponibilidad FROM Unidades u WHERE u.tipounidad.tipounidad = :tipoUnidad", 
             Object[].class);
         
-        query.setParameter("tipoUnidad", leerTipoUnidad(tUnidad).getTipounidad());
+        query.setParameter("tipoUnidad", tUnidad);
         
         List<Object[]> list = query.getResultList();
         cierraFactoryController();
@@ -157,7 +157,7 @@ public List<Object[]> filtrarUnidadesPorNumeroUnidad(int nUnidad) {
             "SELECT u.numerounidad, u.tipounidad, u.disponibilidad FROM Unidades u WHERE u.tipounidad.tipounidad = :tipoUnidad AND u.disponibilidad = :estado", 
             Object[].class);
         
-        query.setParameter("tipoUnidad", leerTipoUnidad(tUnidad).getTipounidad());
+        query.setParameter("tipoUnidad", tUnidad);
         query.setParameter("estado", estado);
         
         List<Object[]> list = query.getResultList();
@@ -176,7 +176,7 @@ public List<Object[]> filtrarUnidadesPorNumeroUnidad(int nUnidad) {
             Object[].class);
         
         query.setParameter("numeroTelefono", "%"+BigDecimal.valueOf(numeroTelefono)+"%");
-        query.setParameter("estadoId", leerUnEstado(estadoId));
+        query.setParameter("estadoId", estadoId);
         query.setParameter("fecha", convertirFecha(fecha)); 
         
         List<Object[]> list = query.getResultList();
@@ -187,11 +187,11 @@ public List<Object[]> filtrarUnidadesPorNumeroUnidad(int nUnidad) {
     public List<Object[]> filtrarLlamadasPorNumeroTelefonoYEstado(int numeroTelefono, String estadoId) {
         inicializaFactoryController();
         TypedQuery<Object[]> query = em.createQuery(
-            "SELECT l.numeroTelf, l.estado,l.descripcion,l.ubicacion FROM Llamadas l WHERE l.numeroTelf LIKE numeroTelefono AND l.estado.tipoestado = :estadoId", 
+            "SELECT l.numeroTelf, l.estado,l.descripcion,l.ubicacion FROM Llamadas l WHERE l.numeroTelf LIKE :numeroTelefono AND l.estado.tipoestado = :estadoId", 
             Object[].class);
         
-        query.setParameter("numeroTelefono", "%"+BigDecimal.valueOf(numeroTelefono)+"%");
-        query.setParameter("estadoId", leerUnEstado(estadoId));
+        query.setParameter("numeroTelefono", numeroTelefono);
+        query.setParameter("estadoId", estadoId);
         
         List<Object[]> list = query.getResultList();
         cierraFactoryController();
@@ -201,11 +201,11 @@ public List<Object[]> filtrarUnidadesPorNumeroUnidad(int nUnidad) {
     public List<Object[]> filtrarLlamadasPorNumeroTelefonoFecha(int numeroTelefono, String fecha) {
         inicializaFactoryController();
         TypedQuery<Object[]> query = em.createQuery(
-            "SELECT l.numeroTelf, l.estado,l.descripcion,l.ubicacion FROM Llamadas l WHERE l.numeroTelf LIKE numeroTelefono AND l.fechahora LIKE fecha", 
+            "SELECT l.numeroTelf, l.estado,l.descripcion,l.ubicacion FROM Llamadas l WHERE l.numeroTelf LIKE :numeroTelefono AND l.fechahora LIKE :fecha", 
             Object[].class);
         
-        query.setParameter("numeroTelefono", "%"+BigDecimal.valueOf(numeroTelefono)+"%");
-        query.setParameter("fecha", "%"+convertirFecha(fecha)+"%"); 
+        query.setParameter("numeroTelefono", BigDecimal.valueOf(numeroTelefono));
+        query.setParameter("fecha",convertirFecha(fecha)); 
         
         List<Object[]> list = query.getResultList();
         cierraFactoryController();
@@ -219,7 +219,7 @@ public List<Object[]> filtrarLlamadasPorEstadoFecha(String estadoId, String fech
             Object[].class);
         
         query.setParameter("estadoId", estadoId);
-        query.setParameter("fecha", "%"+convertirFecha(fecha)+"%"); 
+        query.setParameter("fecha",convertirFecha(fecha)); 
         
         List<Object[]> list = query.getResultList();
         cierraFactoryController();
@@ -229,7 +229,7 @@ public List<Object[]> filtrarLlamadasPorEstadoFecha(String estadoId, String fech
     public List<Object[]> filtrarLlamadasPorNumeroTelefono(int numeroTelefono) {
         inicializaFactoryController();
         TypedQuery<Object[]> query = em.createQuery(
-            "SELECT l.numeroTelf, l.estado,l.descripcion,l.ubicacion FROM Llamadas l WHERE l.numeroTelf LIKE numeroTelefono", 
+            "SELECT l.numeroTelf, l.estado,l.descripcion,l.ubicacion FROM Llamadas l WHERE l.numeroTelf LIKE :numeroTelefono", 
             Object[].class);
         
         query.setParameter("numeroTelefono", "%"+BigDecimal.valueOf(numeroTelefono)+"%");
@@ -255,10 +255,10 @@ public List<Object[]> filtrarLlamadasPorEstadoFecha(String estadoId, String fech
     public List<Object[]> filtrarLlamadasPorFecha(String fecha) {
         inicializaFactoryController();
         TypedQuery<Object[]> query = em.createQuery(
-            "SELECT l.numeroTelf, l.estado,l.descripcion,l.ubicacion FROM Llamadas l WHERE l.fechahora LIKE fecha", 
+            "SELECT l.numeroTelf, l.estado,l.descripcion,l.ubicacion FROM Llamadas l WHERE l.fechahora LIKE :fecha", 
             Object[].class);
         
-        query.setParameter("fecha", "%"+Date.valueOf(fecha)+"%"); 
+        query.setParameter("fecha", convertirFecha(fecha)); 
         
         List<Object[]> list = query.getResultList();
         cierraFactoryController();
