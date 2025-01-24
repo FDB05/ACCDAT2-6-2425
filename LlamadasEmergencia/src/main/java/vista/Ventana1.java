@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import modelo.ModeloMaestro;
+import modelo.Unidades;
 
 /**
  *
@@ -118,12 +119,6 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         jMenu2 = new javax.swing.JMenu();
         MTIunidades = new javax.swing.JMenuItem();
         MTIllamadas = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        MTBunidades = new javax.swing.JMenuItem();
-        MTBllamadas = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
-        MTMunidades = new javax.swing.JMenuItem();
-        MTMllamadas = new javax.swing.JMenuItem();
 
         Tllamadas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tllamadas.setModel(new javax.swing.table.DefaultTableModel(
@@ -272,15 +267,7 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
             new String [] {
                 "NºUnidad", "TipoUnidad", "Disponibilidad"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         jScrollPane2.setViewportView(Tunidad);
 
         jLabel1.setText("TipoUnidad:");
@@ -426,67 +413,65 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
             JFIllamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(JFIllamadasLayout.createSequentialGroup()
                 .addGap(83, 83, 83)
-                .addGroup(JFIllamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(JFIllamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(JFIllamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(JFIllamadasLayout.createSequentialGroup()
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(TFnumTelefono1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(JFIllamadasLayout.createSequentialGroup()
-                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(CBestado1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JFIllamadasLayout.createSequentialGroup()
-                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(TFfecha1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(JFIllamadasLayout.createSequentialGroup()
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(JFIllamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(TFubicacion, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(TBdescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(JFIllamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(JFIllamadasLayout.createSequentialGroup()
-                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(89, 89, 89)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(JFIllamadasLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(BTNback3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(207, 207, 207)
-                .addComponent(BTNaddLlamada)
-                .addGap(32, 32, 32))
+                        .addComponent(BTNback3, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(64, 64, 64)
+                        .addComponent(BTNaddLlamada))
+                    .addGroup(JFIllamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(JFIllamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(JFIllamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(JFIllamadasLayout.createSequentialGroup()
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(TFnumTelefono1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(JFIllamadasLayout.createSequentialGroup()
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(CBestado1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JFIllamadasLayout.createSequentialGroup()
+                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(TFfecha1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(JFIllamadasLayout.createSequentialGroup()
+                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(JFIllamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(TFubicacion, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(TBdescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(JFIllamadasLayout.createSequentialGroup()
+                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(89, 89, 89))))
+                .addContainerGap(100, Short.MAX_VALUE))
         );
         JFIllamadasLayout.setVerticalGroup(
             JFIllamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(JFIllamadasLayout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addGroup(JFIllamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(BTNaddLlamada, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(JFIllamadasLayout.createSequentialGroup()
-                        .addGroup(JFIllamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(TFnumTelefono1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(22, 22, 22)
-                        .addGroup(JFIllamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
-                            .addComponent(CBestado1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(29, 29, 29)
-                        .addGroup(JFIllamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(TFfecha1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(24, 24, 24)
-                        .addGroup(JFIllamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(TBdescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(JFIllamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(TFubicacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(BTNback3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE)
+                .addGroup(JFIllamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(TFnumTelefono1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
+                .addGroup(JFIllamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(CBestado1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
+                .addGroup(JFIllamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TFfecha1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addGroup(JFIllamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TBdescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(JFIllamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TFubicacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(JFIllamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BTNback3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BTNaddLlamada, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14))
         );
 
         jLabel12.setText("Disponibilidad:");
@@ -544,36 +529,34 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
                     .addComponent(CBtipounidad1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(CBdisponibilidad1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(TFnumUnidad1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(242, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JFIunidadesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(BTNback4, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
-                .addGap(207, 207, 207)
-                .addComponent(BTNaddUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(116, 116, 116)
+                .addComponent(BTNback4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(62, 62, 62)
+                .addComponent(BTNaddUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         JFIunidadesLayout.setVerticalGroup(
             JFIunidadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JFIunidadesLayout.createSequentialGroup()
-                .addGroup(JFIunidadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(JFIunidadesLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(BTNaddUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, JFIunidadesLayout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addGroup(JFIunidadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel13)
-                            .addComponent(CBtipounidad1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(25, 25, 25)
-                        .addGroup(JFIunidadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel14)
-                            .addComponent(TFnumUnidad1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(29, 29, 29)
-                        .addGroup(JFIunidadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(CBdisponibilidad1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
-                        .addComponent(BTNback4, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(68, 68, 68))
+                .addGap(45, 45, 45)
+                .addGroup(JFIunidadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(CBtipounidad1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25)
+                .addGroup(JFIunidadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14)
+                    .addComponent(TFnumUnidad1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
+                .addGroup(JFIunidadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CBdisponibilidad1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40)
+                .addGroup(JFIunidadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BTNback4, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BTNaddUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(67, 67, 67))
         );
 
         jButton1.setText("jButton1");
@@ -673,46 +656,6 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jMenuBar1.add(jMenu2);
 
-        jMenu3.setText("BORRAR");
-
-        MTBunidades.setText("Unidades");
-        MTBunidades.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MTBunidadesActionPerformed(evt);
-            }
-        });
-        jMenu3.add(MTBunidades);
-
-        MTBllamadas.setText("Llamadas");
-        MTBllamadas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MTBllamadasActionPerformed(evt);
-            }
-        });
-        jMenu3.add(MTBllamadas);
-
-        jMenuBar1.add(jMenu3);
-
-        jMenu4.setText("MODIFICAR");
-
-        MTMunidades.setText("Unidades");
-        MTMunidades.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MTMunidadesActionPerformed(evt);
-            }
-        });
-        jMenu4.add(MTMunidades);
-
-        MTMllamadas.setText("Llamadas");
-        MTMllamadas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MTMllamadasActionPerformed(evt);
-            }
-        });
-        jMenu4.add(MTMllamadas);
-
-        jMenuBar1.add(jMenu4);
-
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -739,32 +682,21 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     private void MTCunidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MTCunidadesActionPerformed
                 this.setVisible(false);
                 JFCunidades.setVisible(true);
-                JFCunidades.setSize(3000, 3000);
+                JFCunidades.setSize(1000, 2000);
     }//GEN-LAST:event_MTCunidadesActionPerformed
 
     private void MTIunidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MTIunidadesActionPerformed
                 this.setVisible(false);
                 JFIunidades.setVisible(true);
-                JFIunidades.setSize(3000,3000);
+                JFIunidades.setSize(1000,2000);
 
     }//GEN-LAST:event_MTIunidadesActionPerformed
-
-    private void MTBunidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MTBunidadesActionPerformed
-    }//GEN-LAST:event_MTBunidadesActionPerformed
-
-    private void MTMunidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MTMunidadesActionPerformed
-         
-    }//GEN-LAST:event_MTMunidadesActionPerformed
 
     private void MTCllamadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MTCllamadasActionPerformed
          this.setVisible(false);
          JFCllamadas.setVisible(true);
-         JFCllamadas.setSize(3000,3000);
+         JFCllamadas.setSize(1000,2000);
     }//GEN-LAST:event_MTCllamadasActionPerformed
-
-    private void MTBllamadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MTBllamadasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_MTBllamadasActionPerformed
 
     private void BTNbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNbuscarActionPerformed
       
@@ -777,6 +709,7 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     private void BTNback1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNback1ActionPerformed
         this.setVisible(true);
         JFCunidades.setVisible(false);
+        
     }//GEN-LAST:event_BTNback1ActionPerformed
 
     private void TFnumTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFnumTelefonoActionPerformed
@@ -791,6 +724,7 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     private void BTNback2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNback2ActionPerformed
       this.setVisible(true);
         JFCllamadas.setVisible(false);
+        
     }//GEN-LAST:event_BTNback2ActionPerformed
 
     private void TFfechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFfechaActionPerformed
@@ -854,7 +788,7 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     private void MTIllamadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MTIllamadasActionPerformed
         this.setVisible(false);
         JFIllamadas.setVisible(true);
-        JFIllamadas.setSize(3000,3000);
+        JFIllamadas.setSize(1000,2000);
     }//GEN-LAST:event_MTIllamadasActionPerformed
 
     private void BTNconfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNconfirmActionPerformed
@@ -871,10 +805,6 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         // TODO add your handling code here:
     }//GEN-LAST:event_BTNexitActionPerformed
 
-    private void MTMllamadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MTMllamadasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_MTMllamadasActionPerformed
-
     private void BTNMtelefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNMtelefActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_BTNMtelefActionPerformed
@@ -884,7 +814,6 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
           CBestado.removeAllItems();
            CBestado.addItem("");
            CBestado1.removeAllItems();
-           CBestado1.addItem("");
         List<Object[]> estados=ModeloMaestro.LeerDataEstado();
         for(Object[] estado:estados){
             CBestado.addItem((String)estado[0]);
@@ -968,14 +897,10 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     private javax.swing.JFrame JFIllamadas;
     private javax.swing.JFrame JFIunidades;
     private javax.swing.JFrame JFpoopUp;
-    private javax.swing.JMenuItem MTBllamadas;
-    private javax.swing.JMenuItem MTBunidades;
     private javax.swing.JMenuItem MTCllamadas;
     private javax.swing.JMenuItem MTCunidades;
     private javax.swing.JMenuItem MTIllamadas;
     private javax.swing.JMenuItem MTIunidades;
-    private javax.swing.JMenuItem MTMllamadas;
-    private javax.swing.JMenuItem MTMunidades;
     private javax.swing.JTextField TBdescripcion;
     private javax.swing.JTextField TFexito;
     private javax.swing.JTextField TFfecha;
@@ -1005,8 +930,6 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1116,9 +1039,9 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     for (int i = modelo.getRowCount() - 1; i >= 0; i--) {
             modelo.removeRow(i);
         }
-    modelo.setRowCount(0);
+    
     for(Object[] e:list){
-    modelo.addRow(e);
+        modelo.addRow(e);
     }
     
     }
@@ -1172,7 +1095,7 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     @Override
     public void soltarPopApp(boolean existe) {
         JFpoopUp.setVisible(true);
-        JFpoopUp.setSize(3000,3000);
+        JFpoopUp.setSize(2000,1000);
         if (!existe) {TFsinExito.setVisible(false); TFexito.setVisible(true);}
         else{TFsinExito.setVisible(true); TFexito.setVisible(false);}
    

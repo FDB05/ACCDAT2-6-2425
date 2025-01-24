@@ -30,6 +30,7 @@ public class ControladorMaestro implements ActionListener {
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e) {
       switch (e.getActionCommand()) {
+          
         case InterfazVista.FILTRARLLAMADAS->{
             List<Object[]> query;
             String estado = vista.getCBestado();
@@ -63,11 +64,12 @@ public class ControladorMaestro implements ActionListener {
             int nUnidad = vista.getNunidad(); 
             String tUnidad = vista.getBtipoUnidad(); 
             boolean estado = Boolean.parseBoolean(vista.getBdisponibilidad());
-            if (nUnidad != -1 && (tUnidad != null && !tUnidad.isBlank()) && estado) {
+            String estadoVerifica=vista.getBdisponibilidad();
+            if (nUnidad != -1 && (tUnidad != null  || !tUnidad.isBlank()) && (!estadoVerifica.isBlank() || estadoVerifica!=null) ) {
                 query = modelo.filtrarUnidadesPorNumeroUnidadTipoUnidadDisponibilidad(nUnidad, tUnidad, estado);
             } else if (nUnidad != -1 && (tUnidad != null && !tUnidad.isBlank())) {
                 query = modelo.filtrarUnidadesPorNumeroUnidadTipoUnidad(nUnidad, tUnidad);
-            } else if (nUnidad != -1 && estado) {
+            } else if (nUnidad != -1 && (!estadoVerifica.isBlank() || estadoVerifica!=null)) {
                 query = modelo.filtrarUnidadesPorNumeroUnidadDisponibilidad(nUnidad, estado);
             } else if (nUnidad != -1) {
                 query = modelo.filtrarUnidadesPorNumeroUnidad(nUnidad);
@@ -75,7 +77,7 @@ public class ControladorMaestro implements ActionListener {
                 query = modelo.filtrarUnidadesPorTipoUnidad(tUnidad);
             } else if (estado) {
                 query = modelo.filtrarUnidadesPorDisponibilidad(estado);
-           } else if (tUnidad != null && !tUnidad.isBlank() && estado) {
+           } else if (tUnidad != null && !tUnidad.isBlank() && estadoVerifica.isBlank()) {
                 query = modelo.filtrarUnidadesPorTipoUnidadDisponibilidad(tUnidad, estado);
             } 
 
@@ -101,12 +103,31 @@ public class ControladorMaestro implements ActionListener {
                         vista.soltarPopApp(existe);
 
        }
-       
        case InterfazVista.ELIMINARUNALLAMADA->{
            int numtef=vista.getNtelefono();
-       
+           modelo.eliminarUnaUnidad(numtef);
+       }
+       case InterfazVista.ELIMINARUNAUNIDAD->{
+       int numUnida=vista.getNtelefono();
+       modelo.eliminarUnaUnidad(numUnida);
+       }
+       case InterfazVista.MODIFICARUNALLAMADA->{
+       String estado = vista.getCBestado1();
+            int numT = vista.getNtelefono1();
+            String fecha = vista.getFecha1();
+            String descripcion=vista.getDescripcion();
+            String ubicacion=vista.getUbicacion();
+            
+            modelo.modificarLlamada(numT, fecha, ubicacion, descripcion, estado);
        }
        
+       case InterfazVista.MODIFICARUNAUNIDAD->{
+        int nUnidad = vista.getNunidad1(); 
+            String tUnidad = vista.getBtipoUnidad1(); 
+            boolean estado = Boolean.parseBoolean(vista.getBdisponibilidad1()); 
+            
+            modelo.modicarUnidad(nUnidad, estado, tUnidad);
+       }
        
        
           
