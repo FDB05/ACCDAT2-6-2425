@@ -80,8 +80,19 @@ emf.close();
         
         List<Object[]> list = query.getResultList();
         cierraFactoryController();
-        return list;
+        return list != null ? list : new ArrayList<>();
     }
+ public List<Object[]> CargarAllUnidades() {
+    inicializaFactoryController();
+    TypedQuery<Object[]> query = em.createQuery(
+        "SELECT u.numerounidad, u.tipounidad, u.disponibilidad FROM Unidades u WHERE CAST(u.numerounidad AS string) LIKE :numeroUnidad AND u.tipounidad.tipounidad = :tipoUnidad AND u.disponibilidad = :estado", 
+        Object[].class);
+    
+    List<Object[]> list = query.getResultList();
+    cierraFactoryController();
+            return list != null ? list : new ArrayList<>();
+
+}
 
     public List<Object[]> filtrarUnidadesPorNumeroUnidadTipoUnidad(int nUnidad, String tUnidad) {
         inicializaFactoryController();
@@ -94,13 +105,13 @@ emf.close();
         
         List<Object[]> list = query.getResultList();
         cierraFactoryController();
-        return list;
+        return list != null ? list : new ArrayList<>();
     }
 
 public List<Object[]> filtrarUnidadesPorNumeroUnidadDisponibilidad(int nUnidad, boolean estado) {
         inicializaFactoryController();
         TypedQuery<Object[]> query = em.createQuery(
-            "SELECT u.numerounidad, u.tipounidad, u.disponibilidad FROM Unidades u WHERE u.numerounidad LIKE :numeroUnidad AND u.disponibilidad = :estado", 
+            "SELECT u.numerounidad, u.tipounidad, u.disponibilidad FROM Unidades u WHERE u.numerounidad =:numeroUnidad AND u.disponibilidad = :estado", 
             Object[].class);
         
         query.setParameter("numeroUnidad", nUnidad);
@@ -108,7 +119,8 @@ public List<Object[]> filtrarUnidadesPorNumeroUnidadDisponibilidad(int nUnidad, 
         
         List<Object[]> list = query.getResultList();
         cierraFactoryController();
-        return list;
+                return list != null ? list : new ArrayList<>();
+
 }
 
 public List<Object[]> filtrarUnidadesPorNumeroUnidad(int nUnidad) {
@@ -122,7 +134,8 @@ public List<Object[]> filtrarUnidadesPorNumeroUnidad(int nUnidad) {
         List<Object[]> list = query.getResultList();
         
         cierraFactoryController();
-        return list;
+                return list != null ? list : new ArrayList<>();
+
     }
 
     public List<Object[]> filtrarUnidadesPorTipoUnidad(String tUnidad) {
@@ -135,7 +148,8 @@ public List<Object[]> filtrarUnidadesPorNumeroUnidad(int nUnidad) {
         
         List<Object[]> list = query.getResultList();
         cierraFactoryController();
-        return list;
+                return list != null ? list : new ArrayList<>();
+
     }
 
     public List<Object[]> filtrarUnidadesPorDisponibilidad(boolean estado) {
@@ -148,7 +162,8 @@ public List<Object[]> filtrarUnidadesPorNumeroUnidad(int nUnidad) {
         
         List<Object[]> list = query.getResultList();
         cierraFactoryController();
-        return list;
+                return list != null ? list : new ArrayList<>();
+
     }
 
     public List<Object[]> filtrarUnidadesPorTipoUnidadDisponibilidad(String tUnidad, boolean estado) {
@@ -162,13 +177,26 @@ public List<Object[]> filtrarUnidadesPorNumeroUnidad(int nUnidad) {
         
         List<Object[]> list = query.getResultList();
         cierraFactoryController();
-        return list;
+                return list != null ? list : new ArrayList<>();
+
     }
     
     
     //----------------------------------
     //METODOS PARA FILTRAR LLAAMADAS
     //------------------------------------
+    
+    public List<Object[]> CargarAllLlamadas() {
+    inicializaFactoryController();
+    TypedQuery<Object[]> query = em.createQuery(
+        "SELECT l.numeroTelf, l.estado, l.descripcion, l.ubicacion FROM Llamadas l ", 
+        Object[].class);
+    
+    List<Object[]> list = query.getResultList();
+    cierraFactoryController();
+            return list != null ? list : new ArrayList<>();
+
+}
     public List<Object[]> filtrarLlamadasPorNumeroTelefonoEstadoFecha(int numeroTelefono, String estadoId, String fecha) {
         inicializaFactoryController();
         TypedQuery<Object[]> query = em.createQuery(
@@ -181,7 +209,8 @@ public List<Object[]> filtrarUnidadesPorNumeroUnidad(int nUnidad) {
         
         List<Object[]> list = query.getResultList();
         cierraFactoryController();
-        return list;
+                return list != null ? list : new ArrayList<>();
+
     }
 
     public List<Object[]> filtrarLlamadasPorNumeroTelefonoYEstado(int numeroTelefono, String estadoId) {
@@ -195,7 +224,8 @@ public List<Object[]> filtrarUnidadesPorNumeroUnidad(int nUnidad) {
         
         List<Object[]> list = query.getResultList();
         cierraFactoryController();
-        return list;
+                return list != null ? list : new ArrayList<>();
+
     }
 
     public List<Object[]> filtrarLlamadasPorNumeroTelefonoFecha(int numeroTelefono, String fecha) {
@@ -209,7 +239,8 @@ public List<Object[]> filtrarUnidadesPorNumeroUnidad(int nUnidad) {
         
         List<Object[]> list = query.getResultList();
         cierraFactoryController();
-        return list;
+                return list != null ? list : new ArrayList<>();
+
     }
 
 public List<Object[]> filtrarLlamadasPorEstadoFecha(String estadoId, String fecha) {
@@ -223,7 +254,8 @@ public List<Object[]> filtrarLlamadasPorEstadoFecha(String estadoId, String fech
         
         List<Object[]> list = query.getResultList();
         cierraFactoryController();
-        return list;
+                return list != null ? list : new ArrayList<>();
+
     }
 
     public List<Object[]> filtrarLlamadasPorNumeroTelefono(int numeroTelefono) {
@@ -236,7 +268,8 @@ public List<Object[]> filtrarLlamadasPorEstadoFecha(String estadoId, String fech
         
         List<Object[]> list = query.getResultList();
         cierraFactoryController();
-        return list;
+                return list != null ? list : new ArrayList<>();
+
     }
 
     public List<Object[]> filtrarLlamadasPorEstado(String estadoId) {
@@ -249,7 +282,8 @@ public List<Object[]> filtrarLlamadasPorEstadoFecha(String estadoId, String fech
         
         List<Object[]> list = query.getResultList();
         cierraFactoryController();
-        return list;
+                return list != null ? list : new ArrayList<>();
+
     }
 
     public List<Object[]> filtrarLlamadasPorFecha(String fecha) {
@@ -262,7 +296,8 @@ public List<Object[]> filtrarLlamadasPorEstadoFecha(String estadoId, String fech
         
         List<Object[]> list = query.getResultList();
         cierraFactoryController();
-        return list;
+                return list != null ? list : new ArrayList<>();
+
     }
 
 ///-------------------------
