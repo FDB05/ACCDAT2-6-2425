@@ -265,7 +265,7 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
                         .addGroup(JFCllamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(BTNDTelefono)
                             .addComponent(BTNMtelef))))
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         Tunidad.setModel(new javax.swing.table.DefaultTableModel(
@@ -417,6 +417,12 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         jLabel9.setText("Ubicacion:");
 
         jLabel10.setText("Fecha:");
+
+        TBdescripcion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TBdescripcionActionPerformed(evt);
+            }
+        });
 
         TFubicacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -782,7 +788,8 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     private void BTNback2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNback2ActionPerformed
       this.setVisible(true);
         JFCllamadas.setVisible(false);
-        
+        TFnumTelefono.setText("");
+        TFfecha.setText("");
     }//GEN-LAST:event_BTNback2ActionPerformed
 
     private void TFfechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFfechaActionPerformed
@@ -820,6 +827,11 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     private void BTNback3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNback3ActionPerformed
         this.setVisible(true);
         JFIllamadas.setVisible(false);
+        TFnumTelefono1.setText("");
+        TFfecha1.setText("");
+        TBdescripcion.setText("");
+        TFubicacion.setText("");
+        
     }//GEN-LAST:event_BTNback3ActionPerformed
 
     private void CBtipounidad1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBtipounidad1ActionPerformed
@@ -827,12 +839,13 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     }//GEN-LAST:event_CBtipounidad1ActionPerformed
 
     private void TFnumUnidad1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFnumUnidad1ActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_TFnumUnidad1ActionPerformed
 
     private void BTNback4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNback4ActionPerformed
         this.setVisible(true);
         JFIunidades.setVisible(false);
+        TFnumUnidad1.setText("");
     }//GEN-LAST:event_BTNback4ActionPerformed
 
     private void BTNaddUnidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNaddUnidadActionPerformed
@@ -866,13 +879,17 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     private void BTNMtelefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNMtelefActionPerformed
             JFCllamadas.setVisible(false);
             JFIllamadas.setVisible(true);
-            JFIunidades.setSize(1000,1000);        // TODO add your handling code here:
+            JFIunidades.setSize(1000,1000);   
+            String num=TFnumTelefono.getText();
+            TFnumTelefono1.setText(num);
     }//GEN-LAST:event_BTNMtelefActionPerformed
 
     private void BTNMunidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNMunidadActionPerformed
             JFCunidades.setVisible(false);
             JFIunidades.setVisible(true);
             JFIunidades.setSize(1000,1000);
+             String num=TFnumUnidad.getText();
+            TFnumUnidad1.setText(num);
             
     }//GEN-LAST:event_BTNMunidadActionPerformed
 
@@ -887,6 +904,10 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     private void BTNMunidad1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNMunidad1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_BTNMunidad1ActionPerformed
+
+    private void TBdescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TBdescripcionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TBdescripcionActionPerformed
 
     
     private void rellenaComboEstado(){

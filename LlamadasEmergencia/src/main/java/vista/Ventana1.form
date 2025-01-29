@@ -90,7 +90,7 @@
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace pref="45" max="32767" attributes="0"/>
+                  <EmptySpace pref="48" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -593,6 +593,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="TBdescripcion">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TBdescripcionActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="TFubicacion">
           <Events>
