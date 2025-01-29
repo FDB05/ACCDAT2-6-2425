@@ -297,7 +297,6 @@ public List<Object[]> filtrarLlamadasPorEstadoFecha(String estadoId, String fech
         List<Object[]> list = query.getResultList();
         cierraFactoryController();
                 return list != null ? list : new ArrayList<>();
-
     }
 
 ///-------------------------
@@ -354,53 +353,56 @@ public Unidades leerUnaUnidad(int numU){
     inicializaFactoryController();
         UnidadesJpaController unidadesJpaController = new UnidadesJpaController(emf);
         
-        Unidades unidad = unidadesJpaController.findUnidades(BigDecimal.valueOf(numU) );
+        Unidades unidad = unidadesJpaController.findUnidades(numU );
         
         cierraFactoryController();
         return unidad;
     }
 
-public void eliminarUnaUnidad(int numU){
-        try {
-            inicializaFactoryController();
-            UnidadesJpaController unidadesJpaController = new UnidadesJpaController(emf);
-            
-            unidadesJpaController.destroy( BigDecimal.valueOf(numU) );
-   cierraFactoryController();
-        } catch (IllegalOrphanException ex) {
-            Logger.getLogger(ModeloMaestro.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NonexistentEntityException ex) {
-            Logger.getLogger(ModeloMaestro.class.getName()).log(Level.SEVERE, null, ex);
-        }
-       
+public void eliminarUnidad(int numUnidad) {
+    try {
+        inicializaFactoryController();
+        UnidadesJpaController unidadesJpaController = new UnidadesJpaController(emf);
+        unidadesJpaController.destroy(numUnidad);
+    } catch (IllegalOrphanException ex) {
+        Logger.getLogger(ModeloMaestro.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (NonexistentEntityException ex) {
+        Logger.getLogger(ModeloMaestro.class.getName()).log(Level.SEVERE, null, ex);
+    } finally {
+        cierraFactoryController();
+    }
 }
 
-public void modicarUnidad(int numU,boolean estado,String tipoUnidad){
-        try {
-            inicializaFactoryController();
-            UnidadesJpaController unidadesJpaController = new UnidadesJpaController(emf);
-            
-            Unidades unidad = unidadesJpaController.findUnidades(BigDecimal.valueOf(numU) );
-            
+public void modificarUnidad(int numUnidad, boolean estado, String tipoUnidad) {
+    try {
+        inicializaFactoryController();
+        UnidadesJpaController unidadesJpaController = new UnidadesJpaController(emf);
+        
+        Unidades unidad = unidadesJpaController.findUnidades(numUnidad);
+        
+        if (unidad != null) {
             unidad.setDisponibilidad(estado);
-            unidad.setTipounidad(leerTipoUnidad(tipoUnidad));
-            
-            
+            unidad.setTipounidad(leerTipoUnidad(tipoUnidad)); 
             unidadesJpaController.edit(unidad);
-            cierraFactoryController();
-        } catch (NonexistentEntityException ex) {
-            Logger.getLogger(ModeloMaestro.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
-            Logger.getLogger(ModeloMaestro.class.getName()).log(Level.SEVERE, null, ex);
+        } else {
+            System.out.println("La unidad no existe.");
         }
+    } catch (NonexistentEntityException ex) {
+        Logger.getLogger(ModeloMaestro.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (Exception ex) {
+        Logger.getLogger(ModeloMaestro.class.getName()).log(Level.SEVERE, null, ex);
+    } finally {
+        cierraFactoryController();
+    }
 }
+
 public boolean insertaUnidad(int numu,boolean disponibilidad,String tipounidad) {
     boolean existe=false;
     inicializaFactoryController();
     UnidadesJpaController unidadesJpaController = new UnidadesJpaController(emf);
     
     Unidades unidad = new Unidades();
-    unidad.setNumerounidad(BigDecimal.valueOf(numu)); 
+    unidad.setNumerounidad(numu); 
     unidad.setDisponibilidad(disponibilidad); 
 
     TipounidadJpaController tipounidadJpaController = new TipounidadJpaController(emf);
@@ -435,19 +437,19 @@ public Llamadas leerUnallamada(int ntef){
         return llamada;
     }
 
-public void eliminarUnallamada(int numtef){
-        try {
-            inicializaFactoryController();
-             LlamadasJpaController llmadasJpaController = new LlamadasJpaController(emf);
-            
-            llmadasJpaController.destroy(BigDecimal.valueOf(numtef) );
-   cierraFactoryController();
-        } catch (IllegalOrphanException ex) {
-            Logger.getLogger(ModeloMaestro.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NonexistentEntityException ex) {
-            Logger.getLogger(ModeloMaestro.class.getName()).log(Level.SEVERE, null, ex);
-        }
-       
+public void eliminarLlamada(int numTelefono) {
+    try {
+        inicializaFactoryController();
+        LlamadasJpaController llamadasJpaController = new LlamadasJpaController(emf);
+        
+        llamadasJpaController.destroy(BigDecimal.valueOf(numTelefono));
+    } catch (IllegalOrphanException ex) {
+        Logger.getLogger(ModeloMaestro.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (NonexistentEntityException ex) {
+        Logger.getLogger(ModeloMaestro.class.getName()).log(Level.SEVERE, null, ex);
+    } finally {
+        cierraFactoryController();
+    }
 }
 
 
@@ -462,29 +464,31 @@ public Estado leerUnEstado(String estado){
     }
 
 
-public void modificarLlamada(int numU,String fechahora,String ubicacion,String descripcion,String estado){
-        try {
+public void modificarLlamada(int numTelefono, String fecha, String ubicacion, String descripcion, String estado) {
+    try {
+        inicializaFactoryController();
+        LlamadasJpaController llamadasJpaController = new LlamadasJpaController(emf);
+        Llamadas llamada = llamadasJpaController.findLlamadas(BigDecimal.valueOf(numTelefono));
+        
+        if (llamada != null) {
             
-            inicializaFactoryController();
-            LlamadasJpaController llamadasJpaController = new LlamadasJpaController(emf);
-            
-            Llamadas llamada = llamadasJpaController.findLlamadas(BigDecimal.valueOf(numU));
-            
-            llamada.setDescripcion(descripcion);
-            llamada.setEstado(leerUnEstado(estado));
-            
-            llamada.setFechahora(convertirFecha(fechahora));
+            llamada.setFechahora(convertirFecha(fecha));
             llamada.setUbicacion(ubicacion);
-            
-            
+            llamada.setDescripcion(descripcion);
+            llamada.setEstado(leerUnEstado(estado)); 
+
             llamadasJpaController.edit(llamada);
-            cierraFactoryController();
-        } catch (NonexistentEntityException ex) {
-            Logger.getLogger(ModeloMaestro.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
-            Logger.getLogger(ModeloMaestro.class.getName()).log(Level.SEVERE, null, ex);
+        } else {
+            System.out.println("La llamada no existe.");
         }
+    } catch (NonexistentEntityException ex) {
+        Logger.getLogger(ModeloMaestro.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (Exception ex) {
+        Logger.getLogger(ModeloMaestro.class.getName()).log(Level.SEVERE, null, ex);
+    } finally {
+        cierraFactoryController();
     }
+}
 
 public boolean insertaLlamada(int numtef,String fecha,String ubicacion,String descripcion,String state) {
     boolean existe=false;
@@ -587,4 +591,6 @@ public void inicializarDatos() {
         tipoUnidad3.setNombreunidad("Policia Nacional");
         em.persist(tipoUnidad3);
     }
+
+  
 }

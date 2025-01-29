@@ -47,14 +47,10 @@ public interface InterfazVista {
     
     public String getBdisponibilidad1();
     
-    
-
-    
     public void cargarTablaLLamadas(List<Object[]> list);
     
      public void cargarTablaUnidades(List<Object[]> list);
-    
-    
+     
     static final String FILTRARUNIDADES="Metodo para filtra el tipo de Unidades que quieres";
     static final String FILTRARLLAMADAS="Metodo para filtrar el tipo de unidades que equieres ";
     static final String INSERTARUNIDAD="Metodo para INSERTAR el tipo de unidades que equieres ";
@@ -63,9 +59,5 @@ public interface InterfazVista {
     static final String ELIMINARUNALLAMADA="Metodo para eliminar una llamdada";
     static final  String MODIFICARUNAUNIDAD="Metodo para modificar una unidad";
     static final  String MODIFICARUNALLAMADA="Metodo para modificar una LLamada";
-    
-
-            
-
-
+    static final String CONSEGUIRUNIDAD="Metodo para conseguri un numero de unidad para modificar";
 }

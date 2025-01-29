@@ -72,7 +72,7 @@ public class UnidadesJpaController implements Serializable {
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
-            if (findUnidades(unidades.getNumerounidad()) != null) {
+            if (findUnidades( unidades.getNumerounidad() )!= null) {
                 throw new PreexistingEntityException("Unidades " + unidades + " already exists.", ex);
             }
             throw ex;
@@ -140,7 +140,7 @@ public class UnidadesJpaController implements Serializable {
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                BigDecimal id = unidades.getNumerounidad();
+                int id = unidades.getNumerounidad();
                 if (findUnidades(id) == null) {
                     throw new NonexistentEntityException("The unidades with id " + id + " no longer exists.");
                 }
@@ -153,7 +153,7 @@ public class UnidadesJpaController implements Serializable {
         }
     }
 
-    public void destroy(BigDecimal id) throws IllegalOrphanException, NonexistentEntityException {
+    public void destroy(int id) throws IllegalOrphanException, NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -214,7 +214,7 @@ public class UnidadesJpaController implements Serializable {
         }
     }
 
-    public Unidades findUnidades(BigDecimal id) {
+    public Unidades findUnidades(int id) {
         EntityManager em = getEntityManager();
         try {
             return em.find(Unidades.class, id);
