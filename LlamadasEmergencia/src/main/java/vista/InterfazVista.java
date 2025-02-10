@@ -19,11 +19,11 @@ public interface InterfazVista {
 
     public void setControlador(ControladorMaestro This);
     
-    public int getNtelefono();
+  
     
     public int getNtelefono1();
     
-    public int getNunidad();
+  
     
     public String getFecha();
     

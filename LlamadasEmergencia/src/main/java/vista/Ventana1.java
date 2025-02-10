@@ -66,15 +66,12 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         JFCllamadas = new javax.swing.JFrame();
         jScrollPane3 = new javax.swing.JScrollPane();
         Tllamadas = new javax.swing.JTable();
-        jLabel4 = new javax.swing.JLabel();
         CBestado = new javax.swing.JComboBox<>();
-        TFnumTelefono = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         BTNbuscar2 = new javax.swing.JButton();
         BTNback2 = new javax.swing.JButton();
         TFfecha = new javax.swing.JTextField();
-        BTNrefrescar = new javax.swing.JButton();
         BTNDTelefono = new javax.swing.JButton();
         BTNMtelef = new javax.swing.JButton();
         JFCunidades = new javax.swing.JFrame();
@@ -83,8 +80,6 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         jLabel1 = new javax.swing.JLabel();
         BTNbuscar = new javax.swing.JButton();
         CBtipounidad = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
-        TFnumUnidad = new javax.swing.JTextField();
         CBdisponibilidad = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         BTNback1 = new javax.swing.JButton();
@@ -147,18 +142,10 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         });
         jScrollPane3.setViewportView(Tllamadas);
 
-        jLabel4.setText("NºTelefono:");
-
         CBestado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         CBestado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CBestadoActionPerformed(evt);
-            }
-        });
-
-        TFnumTelefono.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TFnumTelefonoActionPerformed(evt);
             }
         });
 
@@ -186,8 +173,6 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
             }
         });
 
-        BTNrefrescar.setText("REFRESCAR");
-
         BTNDTelefono.setText("Eliminar");
 
         BTNMtelef.setText("Modificar");
@@ -212,10 +197,6 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
                                     .addComponent(BTNback2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(BTNbuscar2)))
                             .addGroup(JFCllamadasLayout.createSequentialGroup()
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(TFnumTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(JFCllamadasLayout.createSequentialGroup()
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(CBestado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -223,9 +204,6 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(TFfecha, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(JFCllamadasLayout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(BTNrefrescar))
                     .addGroup(JFCllamadasLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(BTNDTelefono)
@@ -243,13 +221,7 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
                         .addContainerGap()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(JFCllamadasLayout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(BTNrefrescar)
-                        .addGap(29, 29, 29)
-                        .addGroup(JFCllamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(TFnumTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(22, 22, 22)
+                        .addGap(122, 122, 122)
                         .addGroup(JFCllamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(CBestado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -294,14 +266,6 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
             }
         });
 
-        jLabel2.setText("NºUnidad:");
-
-        TFnumUnidad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TFnumUnidadActionPerformed(evt);
-            }
-        });
-
         CBdisponibilidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel3.setText("Disponibilidad:");
@@ -339,13 +303,11 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
                                 .addContainerGap()
                                 .addGroup(JFCunidadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel3))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(JFCunidadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(CBtipounidad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(CBdisponibilidad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(TFnumUnidad)))
+                                    .addComponent(CBdisponibilidad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(JFCunidadesLayout.createSequentialGroup()
                                 .addGap(36, 36, 36)
                                 .addGroup(JFCunidadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -369,11 +331,7 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
                         .addGroup(JFCunidadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(CBtipounidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(25, 25, 25)
-                        .addGroup(JFCunidadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(TFnumUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(29, 29, 29)
+                        .addGap(76, 76, 76)
                         .addGroup(JFCunidadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(CBdisponibilidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -760,19 +718,11 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
       
     }//GEN-LAST:event_BTNbuscarActionPerformed
 
-    private void TFnumUnidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFnumUnidadActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TFnumUnidadActionPerformed
-
     private void BTNback1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNback1ActionPerformed
         this.setVisible(true);
         JFCunidades.setVisible(false);
         
     }//GEN-LAST:event_BTNback1ActionPerformed
-
-    private void TFnumTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFnumTelefonoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TFnumTelefonoActionPerformed
 
     private void BTNbuscar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNbuscar2ActionPerformed
       
@@ -968,7 +918,6 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     private javax.swing.JButton BTNbuscar2;
     private javax.swing.JButton BTNconfirm;
     private javax.swing.JButton BTNexit;
-    private javax.swing.JButton BTNrefrescar;
     private javax.swing.JComboBox<String> CBdisponibilidad;
     private javax.swing.JComboBox<String> CBdisponibilidad1;
     private javax.swing.JComboBox<String> CBestado;
@@ -988,9 +937,7 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     private javax.swing.JTextField TFexito;
     private javax.swing.JTextField TFfecha;
     private javax.swing.JTextField TFfecha1;
-    private javax.swing.JTextField TFnumTelefono;
     private javax.swing.JTextField TFnumTelefono1;
-    private javax.swing.JTextField TFnumUnidad;
     private javax.swing.JTextField TFnumUnidad1;
     private javax.swing.JTextField TFsinExito;
     private javax.swing.JTextField TFubicacion;
@@ -1003,9 +950,7 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -1040,20 +985,7 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
        
     }
 
-    @Override
-    public int getNtelefono() {
-     String tef = TFnumTelefono.getText(); 
-    int telefono;
     
-    try {
-        
-        telefono = Integer.parseInt(tef);
-        
-    } catch (NumberFormatException e) {
-        telefono = -1; 
-    }
-    return telefono;
-    }
     
     @Override
     public int getNtelefono1() {
@@ -1132,21 +1064,6 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         modelo.addRow(e);
     }
     
-    }
-
-    @Override
-    public int getNunidad() {
-    String numu = TFnumUnidad.getText(); 
-    int telefono;
-    
-    try {
-        
-        telefono = Integer.parseInt(numu);
-        
-    } catch (NumberFormatException e) {
-        telefono = -1; 
-    }
-    return telefono;
     }
 
     @Override

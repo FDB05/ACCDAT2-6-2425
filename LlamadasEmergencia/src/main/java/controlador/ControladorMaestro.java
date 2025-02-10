@@ -32,49 +32,31 @@ public class ControladorMaestro implements ActionListener {
       switch (e.getActionCommand()) {
           
         case InterfazVista.FILTRARLLAMADAS->{
-            List<Object[]> query;
+            List<Object[]> query = null;
             String estado = vista.getCBestado();
-            int numT = vista.getNtelefono();
+           
             String fechaN = vista.getFecha();
             Date fecha=modelo.convertirFecha(fechaN);
 
-            if (fechaN.isBlank() && estado.isBlank()) {
-                query = modelo.filtrarLlamadasPorNumeroTelefono(numT);
-            } else if ((numT == -1) && estado.isBlank()) {
+            if ( estado.isBlank()) {
                 query = modelo.filtrarLlamadasPorFecha(fechaN);
-            } else if ((numT == -1) && fechaN.isBlank()) {
-                query = modelo.filtrarLlamadasPorEstado(estado);
-            } else if (numT == -1) {
-                query = modelo.filtrarLlamadasPorEstadoFecha(estado, fechaN);
-            } else if (estado.isBlank()) {
-                query = modelo.filtrarLlamadasPorNumeroTelefonoFecha(numT, fechaN);
             } else if (fechaN.isBlank()) {
-                query = modelo.filtrarLlamadasPorNumeroTelefonoYEstado(numT, estado);
-            } else {
-                query = modelo.filtrarLlamadasPorNumeroTelefonoEstadoFecha(numT, estado, fechaN);
+                query = modelo.filtrarLlamadasPorEstado(estado);
+            } else if (!fechaN.isBlank() && !estado.isBlank()) {
+                query = modelo.filtrarLlamadasPorEstadoFecha(estado, fechaN);
             }
-            
-
-            vista.cargarTablaLLamadas(query); // Asegúrate de que este método esté bien implementado
+            vista.cargarTablaLLamadas(query);
             break;
     }
         
        case InterfazVista.FILTRARUNIDADES -> {
             List<Object[]> query = null;
-            int nUnidad = vista.getNunidad(); 
+           
             String tUnidad = vista.getBtipoUnidad(); 
             boolean estado = Boolean.parseBoolean(vista.getBdisponibilidad());
             String estadoVerifica=vista.getBdisponibilidad();
-            if (nUnidad != -1 && (tUnidad != null  || !tUnidad.isBlank()) && (!estadoVerifica.isBlank() || estadoVerifica!=null) ) {
-                query = modelo.filtrarUnidadesPorNumeroUnidadTipoUnidadDisponibilidad(nUnidad, tUnidad, estado);
-            } else if (nUnidad != -1 && (tUnidad != null && !tUnidad.isBlank())) {
-                query = modelo.filtrarUnidadesPorNumeroUnidadTipoUnidad(nUnidad, tUnidad);
-            } else if (nUnidad != -1 && (!estadoVerifica.isBlank() || estadoVerifica!=null)) {
-                query = modelo.filtrarUnidadesPorNumeroUnidadDisponibilidad(nUnidad, estado);
-            } else if (nUnidad != -1) {
-                query = modelo.filtrarUnidadesPorNumeroUnidad(nUnidad);
-            } else if (tUnidad != null && !tUnidad.isBlank()) {
-                query = modelo.filtrarUnidadesPorTipoUnidad(tUnidad);
+           if (tUnidad != null && !tUnidad.isBlank()) {
+                query = modelo.filtrarUnidadesPorTipo(tUnidad);
             } else if (estado) {
                 query = modelo.filtrarUnidadesPorDisponibilidad(estado);
            } else if (tUnidad != null && !tUnidad.isBlank() && estadoVerifica.isBlank()) {
@@ -104,11 +86,11 @@ public class ControladorMaestro implements ActionListener {
 
        }
        case InterfazVista.ELIMINARUNALLAMADA->{
-           int numtef=vista.getNtelefono();
+           int numtef=vista.getNtelefono1();
            modelo.eliminarLlamada(numtef);
        }
        case InterfazVista.ELIMINARUNAUNIDAD->{
-       int numUnida=vista.getNtelefono();
+       int numUnida=vista.getNtelefono1();
        modelo.eliminarUnidad(numUnida);
        }
        case InterfazVista.MODIFICARUNALLAMADA->{
