@@ -105,11 +105,11 @@ public class ControladorMaestro implements ActionListener {
        }
        case InterfazVista.ELIMINARUNALLAMADA->{
            int numtef=vista.getNtelefono();
-           modelo.eliminarUnaUnidad(numtef);
+           modelo.eliminarLlamada(numtef);
        }
        case InterfazVista.ELIMINARUNAUNIDAD->{
        int numUnida=vista.getNtelefono();
-       modelo.eliminarUnaUnidad(numUnida);
+       modelo.eliminarUnidad(numUnida);
        }
        case InterfazVista.MODIFICARUNALLAMADA->{
        String estado = vista.getCBestado1();
@@ -122,11 +122,12 @@ public class ControladorMaestro implements ActionListener {
        }
        
        case InterfazVista.MODIFICARUNAUNIDAD->{
-        int nUnidad = vista.getNunidad1(); 
+            int nUnidad = vista.getNunidad1(); 
             String tUnidad = vista.getBtipoUnidad1(); 
+            
             boolean estado = Boolean.parseBoolean(vista.getBdisponibilidad1()); 
             
-            modelo.modicarUnidad(nUnidad, estado, tUnidad);
+            modelo.modificarUnidad(nUnidad, estado, tUnidad);
        }
        
        

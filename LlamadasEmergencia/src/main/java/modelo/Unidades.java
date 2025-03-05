@@ -40,7 +40,7 @@ public class Unidades implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "NUMEROUNIDAD")
-    private BigDecimal numerounidad;
+    private Integer numerounidad;
     @Column(name = "DISPONIBILIDAD")
     private Boolean disponibilidad;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "numerounidad")
@@ -49,18 +49,17 @@ public class Unidades implements Serializable {
     @ManyToOne(optional = false)
     private Tipounidad tipounidad;
 
-    public Unidades() {
-    }
+    public Unidades() {}
 
-    public Unidades(BigDecimal numerounidad) {
+    public Unidades(int numerounidad) {
         this.numerounidad = numerounidad;
     }
 
-    public BigDecimal getNumerounidad() {
+    public int getNumerounidad() {
         return numerounidad;
     }
 
-    public void setNumerounidad(BigDecimal numerounidad) {
+    public void setNumerounidad(int numerounidad) {
         this.numerounidad = numerounidad;
     }
 

@@ -32,6 +32,10 @@ public class Ventana1 extends javax.swing.JFrame implements InterfazVista{
         BTNbuscar.setActionCommand(FILTRARUNIDADES);
         BTNaddLlamada.setActionCommand(INSERTARLLAMADAS);
         BTNaddUnidad.setActionCommand(INSERTARUNIDAD);
+        BTNDTelefono.setActionCommand(ELIMINARUNALLAMADA);
+        BTNMtelef.setActionCommand(MODIFICARUNALLAMADA);
+        BTNDunidad.setActionCommand(ELIMINARUNAUNIDAD);
+        BTNMunidad.setActionCommand(MODIFICARUNAUNIDAD);
         
          TFexito.setVisible(false);
          TFexito.setVisible(false);
@@ -71,7 +75,7 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         BTNback2 = new javax.swing.JButton();
         TFfecha = new javax.swing.JTextField();
         BTNrefrescar = new javax.swing.JButton();
-        BTNremoveTelefono = new javax.swing.JButton();
+        BTNDTelefono = new javax.swing.JButton();
         BTNMtelef = new javax.swing.JButton();
         JFCunidades = new javax.swing.JFrame();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -84,6 +88,8 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         CBdisponibilidad = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         BTNback1 = new javax.swing.JButton();
+        BTNDunidad = new javax.swing.JButton();
+        BTNMunidad = new javax.swing.JButton();
         JFIllamadas = new javax.swing.JFrame();
         TFfecha1 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -97,6 +103,7 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         jLabel11 = new javax.swing.JLabel();
         BTNaddLlamada = new javax.swing.JButton();
         BTNback3 = new javax.swing.JButton();
+        BTNMllamada1 = new javax.swing.JButton();
         JFIunidades = new javax.swing.JFrame();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -106,6 +113,7 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         CBdisponibilidad1 = new javax.swing.JComboBox<>();
         BTNback4 = new javax.swing.JButton();
         BTNaddUnidad = new javax.swing.JButton();
+        BTNMunidad1 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         JFpoopUp = new javax.swing.JFrame();
         BTNconfirm = new javax.swing.JButton();
@@ -180,7 +188,7 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         BTNrefrescar.setText("REFRESCAR");
 
-        BTNremoveTelefono.setText("Eliminar");
+        BTNDTelefono.setText("Eliminar");
 
         BTNMtelef.setText("Modificar");
         BTNMtelef.addActionListener(new java.awt.event.ActionListener() {
@@ -220,7 +228,7 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
                         .addComponent(BTNrefrescar))
                     .addGroup(JFCllamadasLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(BTNremoveTelefono)
+                        .addComponent(BTNDTelefono)
                         .addGap(18, 18, 18)
                         .addComponent(BTNMtelef)))
                 .addGap(18, 18, 18)
@@ -255,9 +263,9 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
                         .addComponent(BTNback2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(31, 31, 31)
                         .addGroup(JFCllamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(BTNremoveTelefono)
+                            .addComponent(BTNDTelefono)
                             .addComponent(BTNMtelef))))
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         Tunidad.setModel(new javax.swing.table.DefaultTableModel(
@@ -305,6 +313,20 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
             }
         });
 
+        BTNDunidad.setText("Eliminar");
+        BTNDunidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNDunidadActionPerformed(evt);
+            }
+        });
+
+        BTNMunidad.setText("Modificar");
+        BTNMunidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNMunidadActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout JFCunidadesLayout = new javax.swing.GroupLayout(JFCunidades.getContentPane());
         JFCunidades.getContentPane().setLayout(JFCunidadesLayout);
         JFCunidadesLayout.setHorizontalGroup(
@@ -312,22 +334,29 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
             .addGroup(JFCunidadesLayout.createSequentialGroup()
                 .addGroup(JFCunidadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(JFCunidadesLayout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(JFCunidadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(JFCunidadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(CBtipounidad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(CBdisponibilidad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(TFnumUnidad)))
-                    .addGroup(JFCunidadesLayout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addGroup(JFCunidadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(BTNback1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(BTNbuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(24, 24, 24)
+                            .addGroup(JFCunidadesLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(JFCunidadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(JFCunidadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(CBtipounidad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(CBdisponibilidad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(TFnumUnidad)))
+                            .addGroup(JFCunidadesLayout.createSequentialGroup()
+                                .addGap(36, 36, 36)
+                                .addGroup(JFCunidadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(BTNback1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(BTNbuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(24, 24, 24))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JFCunidadesLayout.createSequentialGroup()
+                        .addComponent(BTNDunidad)
+                        .addGap(18, 18, 18)
+                        .addComponent(BTNMunidad)
+                        .addGap(18, 18, 18)))
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -351,7 +380,11 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
                         .addGap(34, 34, 34)
                         .addComponent(BTNbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(39, 39, 39)
-                        .addComponent(BTNback1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(BTNback1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addGroup(JFCunidadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(BTNDunidad)
+                            .addComponent(BTNMunidad)))
                     .addGroup(JFCunidadesLayout.createSequentialGroup()
                         .addGap(17, 17, 17)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -385,6 +418,12 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel10.setText("Fecha:");
 
+        TBdescripcion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TBdescripcionActionPerformed(evt);
+            }
+        });
+
         TFubicacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TFubicacionActionPerformed(evt);
@@ -407,6 +446,13 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
             }
         });
 
+        BTNMllamada1.setText("Modificar");
+        BTNMllamada1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNMllamada1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout JFIllamadasLayout = new javax.swing.GroupLayout(JFIllamadas.getContentPane());
         JFIllamadas.getContentPane().setLayout(JFIllamadasLayout);
         JFIllamadasLayout.setHorizontalGroup(
@@ -418,36 +464,39 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
                         .addComponent(BTNback3, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(64, 64, 64)
                         .addComponent(BTNaddLlamada))
-                    .addGroup(JFIllamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(JFIllamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(JFIllamadasLayout.createSequentialGroup()
+                        .addGroup(JFIllamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(JFIllamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(JFIllamadasLayout.createSequentialGroup()
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(TFnumTelefono1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(JFIllamadasLayout.createSequentialGroup()
-                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(CBestado1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JFIllamadasLayout.createSequentialGroup()
-                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(TFfecha1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(JFIllamadasLayout.createSequentialGroup()
-                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(JFIllamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(TFubicacion, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(TBdescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGroup(JFIllamadasLayout.createSequentialGroup()
-                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(89, 89, 89))))
-                .addContainerGap(100, Short.MAX_VALUE))
+                                    .addGroup(JFIllamadasLayout.createSequentialGroup()
+                                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(TFnumTelefono1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(JFIllamadasLayout.createSequentialGroup()
+                                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(CBestado1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JFIllamadasLayout.createSequentialGroup()
+                                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(TFfecha1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(JFIllamadasLayout.createSequentialGroup()
+                                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(JFIllamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(TFubicacion, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(TBdescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(JFIllamadasLayout.createSequentialGroup()
+                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(89, 89, 89)))
+                        .addGap(39, 39, 39)
+                        .addComponent(BTNMllamada1)))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         JFIllamadasLayout.setVerticalGroup(
             JFIllamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(JFIllamadasLayout.createSequentialGroup()
-                .addContainerGap(33, Short.MAX_VALUE)
+                .addContainerGap(19, Short.MAX_VALUE)
                 .addGroup(JFIllamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(TFnumTelefono1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -466,7 +515,8 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(JFIllamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TFubicacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BTNMllamada1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(JFIllamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BTNback3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -514,10 +564,23 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
             }
         });
 
+        BTNMunidad1.setText("Modificar");
+        BTNMunidad1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNMunidad1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout JFIunidadesLayout = new javax.swing.GroupLayout(JFIunidades.getContentPane());
         JFIunidades.getContentPane().setLayout(JFIunidadesLayout);
         JFIunidadesLayout.setHorizontalGroup(
             JFIunidadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JFIunidadesLayout.createSequentialGroup()
+                .addGap(116, 116, 116)
+                .addComponent(BTNback4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(62, 62, 62)
+                .addComponent(BTNaddUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(JFIunidadesLayout.createSequentialGroup()
                 .addGap(164, 164, 164)
                 .addGroup(JFIunidadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -529,13 +592,9 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
                     .addComponent(CBtipounidad1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(CBdisponibilidad1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(TFnumUnidad1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(242, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JFIunidadesLayout.createSequentialGroup()
-                .addGap(116, 116, 116)
-                .addComponent(BTNback4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(62, 62, 62)
-                .addComponent(BTNaddUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                .addComponent(BTNMunidad1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40))
         );
         JFIunidadesLayout.setVerticalGroup(
             JFIunidadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -544,14 +603,19 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
                 .addGroup(JFIunidadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
                     .addComponent(CBtipounidad1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
-                .addGroup(JFIunidadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(TFnumUnidad1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
-                .addGroup(JFIunidadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CBdisponibilidad1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(JFIunidadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(JFIunidadesLayout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addGroup(JFIunidadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel14)
+                            .addComponent(TFnumUnidad1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(29, 29, 29)
+                        .addGroup(JFIunidadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(CBdisponibilidad1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(JFIunidadesLayout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(BTNMunidad1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(40, 40, 40)
                 .addGroup(JFIunidadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BTNback4, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -724,7 +788,8 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     private void BTNback2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNback2ActionPerformed
       this.setVisible(true);
         JFCllamadas.setVisible(false);
-        
+        TFnumTelefono.setText("");
+        TFfecha.setText("");
     }//GEN-LAST:event_BTNback2ActionPerformed
 
     private void TFfechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFfechaActionPerformed
@@ -762,6 +827,11 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     private void BTNback3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNback3ActionPerformed
         this.setVisible(true);
         JFIllamadas.setVisible(false);
+        TFnumTelefono1.setText("");
+        TFfecha1.setText("");
+        TBdescripcion.setText("");
+        TFubicacion.setText("");
+        
     }//GEN-LAST:event_BTNback3ActionPerformed
 
     private void CBtipounidad1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBtipounidad1ActionPerformed
@@ -769,12 +839,13 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     }//GEN-LAST:event_CBtipounidad1ActionPerformed
 
     private void TFnumUnidad1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFnumUnidad1ActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_TFnumUnidad1ActionPerformed
 
     private void BTNback4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNback4ActionPerformed
         this.setVisible(true);
         JFIunidades.setVisible(false);
+        TFnumUnidad1.setText("");
     }//GEN-LAST:event_BTNback4ActionPerformed
 
     private void BTNaddUnidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNaddUnidadActionPerformed
@@ -806,8 +877,37 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     }//GEN-LAST:event_BTNexitActionPerformed
 
     private void BTNMtelefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNMtelefActionPerformed
-        // TODO add your handling code here:
+            JFCllamadas.setVisible(false);
+            JFIllamadas.setVisible(true);
+            JFIunidades.setSize(1000,1000);   
+            String num=TFnumTelefono.getText();
+            TFnumTelefono1.setText(num);
     }//GEN-LAST:event_BTNMtelefActionPerformed
+
+    private void BTNMunidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNMunidadActionPerformed
+            JFCunidades.setVisible(false);
+            JFIunidades.setVisible(true);
+            JFIunidades.setSize(1000,1000);
+             String num=TFnumUnidad.getText();
+            TFnumUnidad1.setText(num);
+            
+    }//GEN-LAST:event_BTNMunidadActionPerformed
+
+    private void BTNDunidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNDunidadActionPerformed
+      
+    }//GEN-LAST:event_BTNDunidadActionPerformed
+
+    private void BTNMllamada1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNMllamada1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BTNMllamada1ActionPerformed
+
+    private void BTNMunidad1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNMunidad1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BTNMunidad1ActionPerformed
+
+    private void TBdescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TBdescripcionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TBdescripcionActionPerformed
 
     
     private void rellenaComboEstado(){
@@ -873,7 +973,12 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BTNDTelefono;
+    private javax.swing.JButton BTNDunidad;
+    private javax.swing.JButton BTNMllamada1;
     private javax.swing.JButton BTNMtelef;
+    private javax.swing.JButton BTNMunidad;
+    private javax.swing.JButton BTNMunidad1;
     private javax.swing.JButton BTNaddLlamada;
     private javax.swing.JButton BTNaddUnidad;
     private javax.swing.JButton BTNback1;
@@ -885,7 +990,6 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     private javax.swing.JButton BTNconfirm;
     private javax.swing.JButton BTNexit;
     private javax.swing.JButton BTNrefrescar;
-    private javax.swing.JButton BTNremoveTelefono;
     private javax.swing.JComboBox<String> CBdisponibilidad;
     private javax.swing.JComboBox<String> CBdisponibilidad1;
     private javax.swing.JComboBox<String> CBestado;
@@ -950,6 +1054,11 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
        BTNbuscar.addActionListener(This);
        BTNaddLlamada.addActionListener(This);
        BTNaddUnidad.addActionListener(This);
+       BTNMllamada1.addActionListener(This);
+       BTNMunidad1.addActionListener(This);
+       BTNDTelefono.addActionListener(This);
+       BTNDunidad.addActionListener(This);
+       
     }
 
     @Override
