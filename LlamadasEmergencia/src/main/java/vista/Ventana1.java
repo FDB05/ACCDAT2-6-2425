@@ -8,6 +8,7 @@ import controlador.ControladorMaestro;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.ModeloMaestro;
 import modelo.Unidades;
@@ -953,7 +954,7 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     }//GEN-LAST:event_TFtipounidadActionPerformed
 
     private void BTNañadirtipounidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNañadirtipounidadActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_BTNañadirtipounidadActionPerformed
 
     private void BTNback5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNback5ActionPerformed
@@ -966,6 +967,7 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     }//GEN-LAST:event_TBdescripcionActionPerformed
 
     
+
     private void rellenaComboEstado(){
           CBestado.removeAllItems();
            CBestado.addItem("");
@@ -1261,6 +1263,11 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
    
     }
     //JULIAN
+    
+    
+    
+    
+    
 
     public String getTipoUnidad() {
         return TFtipounidad.getText();  
