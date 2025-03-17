@@ -112,6 +112,46 @@ public class ControladorMaestro implements ActionListener {
             modelo.modificarUnidad(nUnidad, estado, tUnidad);
        }
        
+       //JULIAN
+       
+        case InterfazVista.INSERTARTIPO -> {
+            String tipo = vista.getTipoUnidad(); 
+            String nombre = vista.getNombreUnidad(); 
+            boolean existe = modelo.insertaTipoUnidad(tipo, nombre);
+            vista.soltarPopApp(existe); 
+        }
+        
+        case InterfazVista.MODIFICARTIPO -> {
+            String tipoMod = vista.getTipoUnidadMod(); 
+            String nombreMod = vista.getNombreUnidadMod(); 
+            modelo.modificarTipoUnidad(tipoMod, nombreMod);
+        }
+        
+        case InterfazVista.CARGARTIPO -> {
+            List<Object[]> listTipo = modelo.cargarTipoUnidad(); 
+            vista.cargarTablaTipoUnidad(listTipo); 
+        }
+        
+        case InterfazVista.INSERTARESTADO -> {
+            String tipoEstado = vista.getTipoEstado(); 
+            String nombreEstado = vista.getNombreEstado(); 
+            boolean existeEstado = modelo.insertaEstado(tipoEstado, nombreEstado);
+            vista.soltarPopApp(existeEstado); 
+        }
+
+        case InterfazVista.MODIFICARESTADO -> {
+            String tipoEstadoMod = vista.getTipoEstadoMod(); 
+            String nombreEstadoMod = vista.getNombreEstadoMod(); 
+            modelo.modificarEstado(tipoEstadoMod, nombreEstadoMod);
+        }
+
+        case InterfazVista.CARGARESTADO -> {
+            List<Object[]> listEstado = modelo.cargarEstado(); 
+            vista.cargarTablaEstado(listEstado); 
+        }
+       
+       
+       
        
           
           }

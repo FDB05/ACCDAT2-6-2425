@@ -475,6 +475,112 @@ public void inicializarDatos() {
         tipoUnidad3.setNombreunidad("Policia Nacional");
         em.persist(tipoUnidad3);
     }
+    
+    //JULIAN
+    
+    public boolean insertaTipoUnidad(String tipo, String nombre) {
+    boolean existe = false;
+    inicializaFactoryController();
+    TipounidadJpaController tipounidadJpaController = new TipounidadJpaController(emf);
+
+    Tipounidad tipoUnidad = new Tipounidad();
+    tipoUnidad.setTipounidad(tipo); 
+    tipoUnidad.setNombreunidad(nombre); 
+
+    try {
+        tipounidadJpaController.create(tipoUnidad);
+    } catch (Exception ex) {
+        Logger.getLogger(ModeloMaestro.class.getName()).log(Level.SEVERE, null, ex);
+        existe = true;
+    } finally {
+        cierraFactoryController();
+    }
+    return existe;
+}
+
+public void modificarTipoUnidad(String tipo, String nombre) {
+    inicializaFactoryController();
+    TipounidadJpaController tipounidadJpaController = new TipounidadJpaController(emf);
+
+    Tipounidad tipoUnidad = tipounidadJpaController.findTipounidad(tipo);
+
+    if (tipoUnidad != null) {
+        try {
+            tipoUnidad.setNombreunidad(nombre);
+            tipounidadJpaController.edit(tipoUnidad);
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(ModeloMaestro.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(ModeloMaestro.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    cierraFactoryController();
+}
+
+public List<Object[]> cargarTipoUnidad() {
+    inicializaFactoryController();
+    TypedQuery<Object[]> query = em.createQuery(
+        "SELECT t.tipounidad, t.nombreunidad FROM Tipounidad t", 
+        Object[].class);
+    
+    List<Object[]> list = query.getResultList();
+    cierraFactoryController();
+    return list;
+}
+
+public boolean insertaEstado(String tipo, String nombre) {
+    boolean existe = false;
+    inicializaFactoryController();
+    EstadoJpaController estadoJpaController = new EstadoJpaController(emf);
+
+    Estado estado = new Estado();
+    estado.setTipoestado(tipo);
+    estado.setNombreestado(nombre);
+
+    try {
+        estadoJpaController.create(estado);
+    } catch (Exception ex) {
+        Logger.getLogger(ModeloMaestro.class.getName()).log(Level.SEVERE, null, ex);
+        existe = true;
+    } finally {
+        cierraFactoryController();
+    }
+    return existe;
+}
+
+public void modificarEstado(String tipo, String nombre) {
+    inicializaFactoryController();
+    EstadoJpaController estadoJpaController = new EstadoJpaController(emf);
+
+    Estado estado = estadoJpaController.findEstado(tipo);
+
+    if (estado != null) {
+        try {
+            estado.setNombreestado(nombre);
+            estadoJpaController.edit(estado);
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(ModeloMaestro.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(ModeloMaestro.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    cierraFactoryController();
+}
+
+public List<Object[]> cargarEstado() {
+    inicializaFactoryController();
+    TypedQuery<Object[]> query = em.createQuery(
+        "SELECT e.tipoestado, e.nombreestado FROM Estado e", 
+        Object[].class);
+    
+    List<Object[]> list = query.getResultList();
+    cierraFactoryController();
+    return list;
+}
+
+
+    
+    
 
   
 }
