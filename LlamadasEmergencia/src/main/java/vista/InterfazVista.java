@@ -62,8 +62,10 @@ public interface InterfazVista {
     
     // Nuevos comandos para TipoUnidad y Estado
     static final String INSERTARTIPO = "Metodo para insertar un tipo de unidad";
+    static final String ELIMINARTIPO = "Metodo para eliminar un tipo de unidad";
     static final String MODIFICARTIPO = "Metodo para modificar un tipo de unidad";
     static final String CARGARTIPO = "Metodo para cargar todos los tipos de unidades";
+    
     
     static final String INSERTARESTADO = "Metodo para insertar un estado";
     static final String MODIFICARESTADO = "Metodo para modificar un estado";

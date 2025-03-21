@@ -31,6 +31,9 @@ public class Ventana1 extends javax.swing.JFrame implements InterfazVista{
         CBdisponibilidad1.removeAllItems();
         BTNbuscar2.setActionCommand(FILTRARLLAMADAS);
         BTNbuscar.setActionCommand(FILTRARUNIDADES);
+        BTNañadirtipounidad.setActionCommand(INSERTARTIPO);
+        BTNeliminartipounidad.setActionCommand(ELIMINARTIPO);
+        BTNleertipounidad.setActionCommand(CARGARTIPO);
         BTNaddLlamada.setActionCommand(INSERTARLLAMADAS);
         BTNaddUnidad.setActionCommand(INSERTARUNIDAD);
         BTNDTelefono.setActionCommand(ELIMINARUNALLAMADA);
@@ -122,12 +125,20 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         TFtipounidad = new javax.swing.JTextField();
         BTNañadirtipounidad = new javax.swing.JButton();
         BTNback5 = new javax.swing.JButton();
-        BTNMtipounidad = new javax.swing.JButton();
+        BTNeliminartipounidad = new javax.swing.JButton();
+        JFCtipounidad = new javax.swing.JFrame();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        Tablatipounidad = new javax.swing.JTable();
+        BTNleertipounidad = new javax.swing.JButton();
+        BTNback6 = new javax.swing.JButton();
+        BTNmodificartipounidad = new javax.swing.JButton();
+        jFrame1 = new javax.swing.JFrame();
         BTNexit = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         MTCunidades = new javax.swing.JMenuItem();
         MTCllamadas = new javax.swing.JMenuItem();
+        MTCtipounidad = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         MTIunidades = new javax.swing.JMenuItem();
         MTIllamadas = new javax.swing.JMenuItem();
@@ -668,7 +679,12 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
             }
         });
 
-        BTNMtipounidad.setText("Modificar");
+        BTNeliminartipounidad.setText("Eliminar");
+        BTNeliminartipounidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNeliminartipounidadActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout JFItipounidadLayout = new javax.swing.GroupLayout(JFItipounidad.getContentPane());
         JFItipounidad.getContentPane().setLayout(JFItipounidadLayout);
@@ -693,8 +709,8 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
                         .addGap(18, 18, 18)
                         .addComponent(BTNañadirtipounidad)
                         .addGap(18, 18, 18)
-                        .addComponent(BTNMtipounidad)))
-                .addContainerGap(255, Short.MAX_VALUE))
+                        .addComponent(BTNeliminartipounidad)))
+                .addContainerGap(263, Short.MAX_VALUE))
         );
         JFItipounidadLayout.setVerticalGroup(
             JFItipounidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -711,8 +727,71 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
                 .addGroup(JFItipounidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BTNañadirtipounidad)
                     .addComponent(BTNback5)
-                    .addComponent(BTNMtipounidad))
+                    .addComponent(BTNeliminartipounidad))
                 .addContainerGap(179, Short.MAX_VALUE))
+        );
+
+        Tablatipounidad.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(Tablatipounidad);
+
+        BTNleertipounidad.setText("Lectura");
+
+        BTNback6.setText("Volver");
+        BTNback6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNback6ActionPerformed(evt);
+            }
+        });
+
+        BTNmodificartipounidad.setText("Modificar");
+
+        javax.swing.GroupLayout JFCtipounidadLayout = new javax.swing.GroupLayout(JFCtipounidad.getContentPane());
+        JFCtipounidad.getContentPane().setLayout(JFCtipounidadLayout);
+        JFCtipounidadLayout.setHorizontalGroup(
+            JFCtipounidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JFCtipounidadLayout.createSequentialGroup()
+                .addContainerGap(81, Short.MAX_VALUE)
+                .addComponent(BTNback6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BTNleertipounidad)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BTNmodificartipounidad)
+                .addGap(27, 27, 27)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24))
+        );
+        JFCtipounidadLayout.setVerticalGroup(
+            JFCtipounidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JFCtipounidadLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addGroup(JFCtipounidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(JFCtipounidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(BTNleertipounidad)
+                        .addComponent(BTNback6)
+                        .addComponent(BTNmodificartipounidad))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(121, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
+        jFrame1.getContentPane().setLayout(jFrame1Layout);
+        jFrame1Layout.setHorizontalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jFrame1Layout.setVerticalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -742,6 +821,14 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
             }
         });
         jMenu1.add(MTCllamadas);
+
+        MTCtipounidad.setText("TipoUnidad");
+        MTCtipounidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MTCtipounidadActionPerformed(evt);
+            }
+        });
+        jMenu1.add(MTCtipounidad);
 
         jMenuBar1.add(jMenu1);
 
@@ -966,6 +1053,21 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         // TODO add your handling code here:
     }//GEN-LAST:event_TBdescripcionActionPerformed
 
+    private void BTNeliminartipounidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNeliminartipounidadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BTNeliminartipounidadActionPerformed
+
+    private void MTCtipounidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MTCtipounidadActionPerformed
+        this.setVisible(false);
+         JFCtipounidad.setVisible(true);
+         JFCtipounidad.setSize(1000,2000);
+    }//GEN-LAST:event_MTCtipounidadActionPerformed
+
+    private void BTNback6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNback6ActionPerformed
+         this.setVisible(true);
+        JFCtipounidad.setVisible(false);
+    }//GEN-LAST:event_BTNback6ActionPerformed
+
     
 
     private void rellenaComboEstado(){
@@ -1035,7 +1137,6 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     private javax.swing.JButton BTNDunidad;
     private javax.swing.JButton BTNMllamada1;
     private javax.swing.JButton BTNMtelef;
-    private javax.swing.JButton BTNMtipounidad;
     private javax.swing.JButton BTNMunidad;
     private javax.swing.JButton BTNMunidad1;
     private javax.swing.JButton BTNaddLlamada;
@@ -1046,10 +1147,14 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     private javax.swing.JButton BTNback3;
     private javax.swing.JButton BTNback4;
     private javax.swing.JButton BTNback5;
+    private javax.swing.JButton BTNback6;
     private javax.swing.JButton BTNbuscar;
     private javax.swing.JButton BTNbuscar2;
     private javax.swing.JButton BTNconfirm;
+    private javax.swing.JButton BTNeliminartipounidad;
     private javax.swing.JButton BTNexit;
+    private javax.swing.JButton BTNleertipounidad;
+    private javax.swing.JButton BTNmodificartipounidad;
     private javax.swing.JComboBox<String> CBdisponibilidad;
     private javax.swing.JComboBox<String> CBdisponibilidad1;
     private javax.swing.JComboBox<String> CBestado;
@@ -1057,12 +1162,14 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     private javax.swing.JComboBox<String> CBtipounidad;
     private javax.swing.JComboBox<String> CBtipounidad1;
     private javax.swing.JFrame JFCllamadas;
+    private javax.swing.JFrame JFCtipounidad;
     private javax.swing.JFrame JFCunidades;
     private javax.swing.JFrame JFIllamadas;
     private javax.swing.JFrame JFItipounidad;
     private javax.swing.JFrame JFIunidades;
     private javax.swing.JFrame JFpoopUp;
     private javax.swing.JMenuItem MTCllamadas;
+    private javax.swing.JMenuItem MTCtipounidad;
     private javax.swing.JMenuItem MTCunidades;
     private javax.swing.JMenuItem MTIllamadas;
     private javax.swing.JMenuItem MTIunidades;
@@ -1077,9 +1184,11 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     private javax.swing.JTextField TFsinExito;
     private javax.swing.JTextField TFtipounidad;
     private javax.swing.JTextField TFubicacion;
+    private javax.swing.JTable Tablatipounidad;
     private javax.swing.JTable Tllamadas;
     private javax.swing.JTable Tunidad;
     private javax.swing.JButton jButton1;
+    private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1097,6 +1206,7 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     // End of variables declaration//GEN-END:variables
@@ -1104,7 +1214,6 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     private javax.swing.JFrame JFtipoUnidad;
 
     private javax.swing.JTextField TFtipoUnidad;
-    private javax.swing.JTextField TFnombreUnidad;
     private javax.swing.JTextField TFtipoUnidadMod;
     private javax.swing.JTextField TFnombreUnidadMod;
 
@@ -1139,6 +1248,9 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
        BTNMunidad1.addActionListener(This);
        BTNDTelefono.addActionListener(This);
        BTNDunidad.addActionListener(This);
+       BTNañadirtipounidad.addActionListener(This);
+       BTNeliminartipounidad.addActionListener(This);
+       BTNleertipounidad.addActionListener(This);
        
     }
 
@@ -1272,9 +1384,9 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     public String getTipoUnidad() {
         return TFtipounidad.getText();  
     }
-
+    
     public String getNombreUnidad() {
-        return TFnombreUnidad.getText();  
+        return TFnombreunidad.getText();  
     }
 
     public String getTipoUnidadMod() {
@@ -1302,7 +1414,7 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     }
 
     public void cargarTablaTipoUnidad(List<Object[]> list) {
-        DefaultTableModel modelo = (DefaultTableModel) TtipoUnidad.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) Tablatipounidad.getModel();
         for (int i = modelo.getRowCount() - 1; i >= 0; i--) {
             modelo.removeRow(i);  
         }

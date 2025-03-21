@@ -120,6 +120,14 @@ public class ControladorMaestro implements ActionListener {
             boolean existe = modelo.insertaTipoUnidad(tipo, nombre);
             vista.soltarPopApp(existe); 
         }
+          case InterfazVista.ELIMINARTIPO -> {
+              String tipoUnidad = vista.getTipoUnidad(); 
+
+              // Llamar al modelo para eliminar la unidad
+              modelo.eliminarTipoUnidad(tipoUnidad);
+              vista.soltarPopApp(true); 
+}
+
         
         case InterfazVista.MODIFICARTIPO -> {
             String tipoMod = vista.getTipoUnidadMod(); 

@@ -497,6 +497,25 @@ public void inicializarDatos() {
     }
     return existe;
 }
+    public void eliminarTipoUnidad(String tipo) {
+    inicializaFactoryController();
+    TipounidadJpaController tipounidadJpaController = new TipounidadJpaController(emf);
+
+    Tipounidad tipoUnidad = tipounidadJpaController.findTipounidad(tipo);  // Buscar tipo de unidad
+
+    if (tipoUnidad != null) {
+        try {
+            tipounidadJpaController.destroy(tipo);  // Eliminar tipo de unidad
+        } catch (IllegalOrphanException ex) {
+            Logger.getLogger(ModeloMaestro.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(ModeloMaestro.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            cierraFactoryController();
+        }
+    }
+}
+
 
 public void modificarTipoUnidad(String tipo, String nombre) {
     inicializaFactoryController();
