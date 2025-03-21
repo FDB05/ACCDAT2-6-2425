@@ -114,55 +114,53 @@ public class ControladorMaestro implements ActionListener {
        
        //JULIAN
        
-        case InterfazVista.INSERTARTIPO -> {
-            String tipo = vista.getTipoUnidad(); 
-            String nombre = vista.getNombreUnidad(); 
-            boolean existe = modelo.insertaTipoUnidad(tipo, nombre);
-            vista.soltarPopApp(existe); 
-        }
-          case InterfazVista.ELIMINARTIPO -> {
-              String tipoUnidad = vista.getTipoUnidad(); 
+            case InterfazVista.INSERTARTIPO -> {
+                String tipo = vista.getTipoUnidad();
+                String nombre = vista.getNombreUnidad();
+                boolean existe = modelo.insertaTipoUnidad(tipo, nombre);
+                vista.soltarPopApp(existe);
+            }
+            case InterfazVista.ELIMINARTIPO -> {
+                String tipoUnidad = vista.getTipoUnidad();
 
-              // Llamar al modelo para eliminar la unidad
-              modelo.eliminarTipoUnidad(tipoUnidad);
-              vista.soltarPopApp(true); 
-}
+                // Llamar al modelo para eliminar la unidad
+                modelo.eliminarTipoUnidad(tipoUnidad);
+                vista.soltarPopApp(true);
+            }
 
-        
-        case InterfazVista.MODIFICARTIPO -> {
-            String tipoMod = vista.getTipoUnidadMod(); 
-            String nombreMod = vista.getNombreUnidadMod(); 
-            modelo.modificarTipoUnidad(tipoMod, nombreMod);
-        }
-        
-        case InterfazVista.CARGARTIPO -> {
-            List<Object[]> listTipo = modelo.cargarTipoUnidad(); 
-            vista.cargarTablaTipoUnidad(listTipo); 
-        }
-        
-        case InterfazVista.INSERTARESTADO -> {
-            String tipoEstado = vista.getTipoEstado(); 
-            String nombreEstado = vista.getNombreEstado(); 
-            boolean existeEstado = modelo.insertaEstado(tipoEstado, nombreEstado);
-            vista.soltarPopApp(existeEstado); 
+            case InterfazVista.MODIFICARTIPO -> {
+
+                String tipoUnidad = vista.getTipoUnidad();
+                String nombreUnidad = vista.getNombreUnidad();
+
+                modelo.modificarTipoUnidad(tipoUnidad, nombreUnidad);
+                vista.soltarPopApp(true);
+            }
+
+            case InterfazVista.CARGARTIPO -> {
+                List<Object[]> listTipo = modelo.cargarTipoUnidad();
+                vista.cargarTablaTipoUnidad(listTipo);
+            }
+
+            case InterfazVista.INSERTARESTADO -> {
+                String tipoEstado = vista.getTipoEstado();
+                String nombreEstado = vista.getNombreEstado();
+                boolean existeEstado = modelo.insertaEstado(tipoEstado, nombreEstado);
+                vista.soltarPopApp(existeEstado);
+            }
+
+            case InterfazVista.MODIFICARESTADO -> {
+                String tipoEstadoMod = vista.getTipoEstadoMod();
+                String nombreEstadoMod = vista.getNombreEstadoMod();
+                modelo.modificarEstado(tipoEstadoMod, nombreEstadoMod);
+            }
+
+            case InterfazVista.CARGARESTADO -> {
+                List<Object[]> listEstado = modelo.cargarEstado();
+                vista.cargarTablaEstado(listEstado);
+            }
+
         }
 
-        case InterfazVista.MODIFICARESTADO -> {
-            String tipoEstadoMod = vista.getTipoEstadoMod(); 
-            String nombreEstadoMod = vista.getNombreEstadoMod(); 
-            modelo.modificarEstado(tipoEstadoMod, nombreEstadoMod);
-        }
-
-        case InterfazVista.CARGARESTADO -> {
-            List<Object[]> listEstado = modelo.cargarEstado(); 
-            vista.cargarTablaEstado(listEstado); 
-        }
-       
-       
-       
-       
-          
-          }
-    
     }
 }

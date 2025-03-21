@@ -34,6 +34,7 @@ public class Ventana1 extends javax.swing.JFrame implements InterfazVista{
         BTNañadirtipounidad.setActionCommand(INSERTARTIPO);
         BTNeliminartipounidad.setActionCommand(ELIMINARTIPO);
         BTNleertipounidad.setActionCommand(CARGARTIPO);
+        BTNmodificartipounidad.setActionCommand(MODIFICARTIPO);
         BTNaddLlamada.setActionCommand(INSERTARLLAMADAS);
         BTNaddUnidad.setActionCommand(INSERTARUNIDAD);
         BTNDTelefono.setActionCommand(ELIMINARUNALLAMADA);
@@ -126,12 +127,12 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         BTNañadirtipounidad = new javax.swing.JButton();
         BTNback5 = new javax.swing.JButton();
         BTNeliminartipounidad = new javax.swing.JButton();
+        BTNmodificartipounidad = new javax.swing.JButton();
         JFCtipounidad = new javax.swing.JFrame();
         jScrollPane1 = new javax.swing.JScrollPane();
         Tablatipounidad = new javax.swing.JTable();
         BTNleertipounidad = new javax.swing.JButton();
         BTNback6 = new javax.swing.JButton();
-        BTNmodificartipounidad = new javax.swing.JButton();
         jFrame1 = new javax.swing.JFrame();
         BTNexit = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -143,6 +144,7 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         MTIunidades = new javax.swing.JMenuItem();
         MTIllamadas = new javax.swing.JMenuItem();
         MenuItemTipoUnidad = new javax.swing.JMenuItem();
+        MenuItemTipoUnidad1 = new javax.swing.JMenuItem();
 
         Tllamadas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tllamadas.setModel(new javax.swing.table.DefaultTableModel(
@@ -686,6 +688,13 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
             }
         });
 
+        BTNmodificartipounidad.setText("Modificar");
+        BTNmodificartipounidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNmodificartipounidadActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout JFItipounidadLayout = new javax.swing.GroupLayout(JFItipounidad.getContentPane());
         JFItipounidad.getContentPane().setLayout(JFItipounidadLayout);
         JFItipounidadLayout.setHorizontalGroup(
@@ -693,29 +702,31 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
             .addGroup(JFItipounidadLayout.createSequentialGroup()
                 .addGroup(JFItipounidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(JFItipounidadLayout.createSequentialGroup()
-                        .addGap(57, 57, 57)
-                        .addGroup(JFItipounidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(JFItipounidadLayout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(TFnombreunidad, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(JFItipounidadLayout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(32, 32, 32)
-                                .addComponent(TFtipounidad))))
-                    .addGroup(JFItipounidadLayout.createSequentialGroup()
                         .addGap(108, 108, 108)
                         .addComponent(BTNback5)
                         .addGap(18, 18, 18)
                         .addComponent(BTNañadirtipounidad)
                         .addGap(18, 18, 18)
-                        .addComponent(BTNeliminartipounidad)))
-                .addContainerGap(263, Short.MAX_VALUE))
+                        .addComponent(BTNeliminartipounidad)
+                        .addGap(18, 18, 18)
+                        .addComponent(BTNmodificartipounidad))
+                    .addGroup(JFItipounidadLayout.createSequentialGroup()
+                        .addGap(131, 131, 131)
+                        .addGroup(JFItipounidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(JFItipounidadLayout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(TFnombreunidad, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(JFItipounidadLayout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(32, 32, 32)
+                                .addComponent(TFtipounidad, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(337, Short.MAX_VALUE))
         );
         JFItipounidadLayout.setVerticalGroup(
             JFItipounidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(JFItipounidadLayout.createSequentialGroup()
-                .addGap(94, 94, 94)
+                .addGap(116, 116, 116)
                 .addGroup(JFItipounidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(TFnombreunidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -723,11 +734,12 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
                 .addGroup(JFItipounidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(TFtipounidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(75, 75, 75)
+                .addGap(53, 53, 53)
                 .addGroup(JFItipounidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BTNañadirtipounidad)
                     .addComponent(BTNback5)
-                    .addComponent(BTNeliminartipounidad))
+                    .addComponent(BTNeliminartipounidad)
+                    .addComponent(BTNmodificartipounidad))
                 .addContainerGap(179, Short.MAX_VALUE))
         );
 
@@ -753,8 +765,6 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
             }
         });
 
-        BTNmodificartipounidad.setText("Modificar");
-
         javax.swing.GroupLayout JFCtipounidadLayout = new javax.swing.GroupLayout(JFCtipounidad.getContentPane());
         JFCtipounidad.getContentPane().setLayout(JFCtipounidadLayout);
         JFCtipounidadLayout.setHorizontalGroup(
@@ -764,9 +774,7 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
                 .addComponent(BTNback6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BTNleertipounidad)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(BTNmodificartipounidad)
-                .addGap(27, 27, 27)
+                .addGap(118, 118, 118)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24))
         );
@@ -777,8 +785,7 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
                 .addGroup(JFCtipounidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(JFCtipounidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(BTNleertipounidad)
-                        .addComponent(BTNback6)
-                        .addComponent(BTNmodificartipounidad))
+                        .addComponent(BTNback6))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(121, Short.MAX_VALUE))
         );
@@ -857,6 +864,14 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
             }
         });
         jMenu2.add(MenuItemTipoUnidad);
+
+        MenuItemTipoUnidad1.setText("TipoUnidad");
+        MenuItemTipoUnidad1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuItemTipoUnidad1ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(MenuItemTipoUnidad1);
 
         jMenuBar1.add(jMenu2);
 
@@ -1068,6 +1083,14 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         JFCtipounidad.setVisible(false);
     }//GEN-LAST:event_BTNback6ActionPerformed
 
+    private void BTNmodificartipounidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNmodificartipounidadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BTNmodificartipounidadActionPerformed
+
+    private void MenuItemTipoUnidad1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemTipoUnidad1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MenuItemTipoUnidad1ActionPerformed
+
     
 
     private void rellenaComboEstado(){
@@ -1174,6 +1197,7 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     private javax.swing.JMenuItem MTIllamadas;
     private javax.swing.JMenuItem MTIunidades;
     private javax.swing.JMenuItem MenuItemTipoUnidad;
+    private javax.swing.JMenuItem MenuItemTipoUnidad1;
     private javax.swing.JTextField TBdescripcion;
     private javax.swing.JTextField TFexito;
     private javax.swing.JTextField TFfecha;
@@ -1251,6 +1275,7 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
        BTNañadirtipounidad.addActionListener(This);
        BTNeliminartipounidad.addActionListener(This);
        BTNleertipounidad.addActionListener(This);
+       BTNmodificartipounidad.addActionListener(This);
        
     }
 

@@ -521,12 +521,12 @@ public void modificarTipoUnidad(String tipo, String nombre) {
     inicializaFactoryController();
     TipounidadJpaController tipounidadJpaController = new TipounidadJpaController(emf);
 
-    Tipounidad tipoUnidad = tipounidadJpaController.findTipounidad(tipo);
+    Tipounidad tipoUnidad = tipounidadJpaController.findTipounidad(tipo);  // Buscar tipo de unidad
 
     if (tipoUnidad != null) {
+        tipoUnidad.setNombreunidad(nombre);  // Modificar el nombre de la unidad
         try {
-            tipoUnidad.setNombreunidad(nombre);
-            tipounidadJpaController.edit(tipoUnidad);
+            tipounidadJpaController.edit(tipoUnidad);  // Guardar los cambios
         } catch (NonexistentEntityException ex) {
             Logger.getLogger(ModeloMaestro.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
@@ -535,6 +535,7 @@ public void modificarTipoUnidad(String tipo, String nombre) {
     }
     cierraFactoryController();
 }
+
 
 public List<Object[]> cargarTipoUnidad() {
     inicializaFactoryController();
