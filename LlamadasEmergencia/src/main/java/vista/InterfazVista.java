@@ -70,4 +70,5 @@ public interface InterfazVista {
     static final String INSERTARESTADO = "Metodo para insertar un estado";
     static final String MODIFICARESTADO = "Metodo para modificar un estado";
     static final String CARGARESTADO = "Metodo para cargar todos los estados";
+    static final String ELIMINARESTADO ="Metodo para eliminar un estado";
 }

@@ -149,16 +149,28 @@ public class ControladorMaestro implements ActionListener {
                 vista.soltarPopApp(existeEstado);
             }
 
-            case InterfazVista.MODIFICARESTADO -> {
-                String tipoEstadoMod = vista.getTipoEstadoMod();
-                String nombreEstadoMod = vista.getNombreEstadoMod();
-                modelo.modificarEstado(tipoEstadoMod, nombreEstadoMod);
-            }
+          case InterfazVista.MODIFICARESTADO -> {
+              String tipoEstadoMod = vista.getTipoEstado();  // Obtener el tipo de estado desde la vista
+              String nombreEstadoMod = vista.getNombreEstado();  // Obtener el nombre del estado desde la vista
+              modelo.modificarEstado(tipoEstadoMod, nombreEstadoMod);  // Llamar al método de modificación
+          }
+
 
             case InterfazVista.CARGARESTADO -> {
                 List<Object[]> listEstado = modelo.cargarEstado();
                 vista.cargarTablaEstado(listEstado);
             }
+            
+           case InterfazVista.ELIMINARESTADO -> {
+              String tipoEstado = vista.getTipoEstado(); // Obtener el tipo de estado desde la vista
+
+              // Llamar al modelo para eliminar el estado
+              modelo.eliminarEstado(tipoEstado);
+              vista.soltarPopApp(true); // Mostrar mensaje de éxito (true indica que la eliminación fue exitosa)
+          }
+
+            
+            
 
         }
 

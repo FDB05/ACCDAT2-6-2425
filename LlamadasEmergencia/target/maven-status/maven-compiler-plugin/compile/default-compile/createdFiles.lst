@@ -1,4 +1,5 @@
 modelo\Estado.class
+vista\Ventana1$48.class
 vista\Ventana1$38.class
 vista\Ventana1$6.class
 vista\InterfazVista.class
@@ -8,6 +9,7 @@ modelo\Llamadas.class
 vista\Ventana1$11.class
 vista\Ventana1$21.class
 vista\Ventana1$41.class
+vista\Ventana1$45.class
 controlador\exceptions\PreexistingEntityException.class
 vista\Ventana1$35.class
 controlador\EstadoJpaController.class
@@ -24,14 +26,17 @@ vista\Ventana1$12.class
 vista\Ventana1$19.class
 vista\Ventana1$2.class
 vista\Ventana1$5.class
+vista\Ventana1$44.class
 controlador\LlamadasJpaController.class
 vista\Ventana1$24.class
 vista\Ventana1$27.class
+vista\Ventana1$47.class
 vista\Ventana1$8.class
 vista\Ventana1$1.class
 vista\Ventana1$13.class
 vista\Ventana1$23.class
 controlador\TipounidadJpaController.class
+vista\Ventana1$46.class
 vista\Ventana1$16.class
 vista\Ventana1$26.class
 vista\Ventana1$36.class
@@ -50,6 +55,8 @@ modelo\Unidades.class
 vista\Ventana1.class
 vista\Ventana1$14.class
 vista\Ventana1$22.class
+vista\Ventana1$49.class
+vista\Ventana1$50.class
 vista\Ventana1$9.class
 controlador\MovilizacionesJpaController.class
 vista\Ventana1$17.class

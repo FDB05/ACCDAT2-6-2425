@@ -597,6 +597,26 @@ public List<Object[]> cargarEstado() {
     cierraFactoryController();
     return list;
 }
+public void eliminarEstado(String tipoEstado) {
+    inicializaFactoryController(); // Inicializar el controlador para la base de datos
+    EstadoJpaController estadoJpaController = new EstadoJpaController(emf); // Crear el controlador de la entidad Estado
+
+    Estado estado = estadoJpaController.findEstado(tipoEstado); // Buscar el estado por su tipo
+
+    if (estado != null) { // Si el estado existe, lo eliminamos
+        try {
+            estadoJpaController.destroy(tipoEstado); // Eliminar el estado de la base de datos
+        } catch (IllegalOrphanException ex) {
+            Logger.getLogger(ModeloMaestro.class.getName()).log(Level.SEVERE, null, ex); // Capturar excepciones si las hay
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(ModeloMaestro.class.getName()).log(Level.SEVERE, null, ex); // Capturar excepciones si el estado no existe
+        } finally {
+            cierraFactoryController(); // Cerrar el controlador
+        }
+    }
+}
+
+
 
 
     

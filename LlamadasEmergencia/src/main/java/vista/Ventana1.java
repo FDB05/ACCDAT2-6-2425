@@ -41,6 +41,12 @@ public class Ventana1 extends javax.swing.JFrame implements InterfazVista{
         BTNMtelef.setActionCommand(MODIFICARUNALLAMADA);
         BTNDunidad.setActionCommand(ELIMINARUNAUNIDAD);
         BTNMunidad.setActionCommand(MODIFICARUNAUNIDAD);
+        BTNinsertarestado.setActionCommand(INSERTARESTADO);
+        BTNeliminarestado.setActionCommand(ELIMINARESTADO);
+        BTNmodificarestado.setActionCommand(MODIFICARESTADO);
+        BTNlecturaestado.setActionCommand(CARGARESTADO);
+       
+        
         
          TFexito.setVisible(false);
          TFexito.setVisible(false);
@@ -133,18 +139,32 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         Tablatipounidad = new javax.swing.JTable();
         BTNleertipounidad = new javax.swing.JButton();
         BTNback6 = new javax.swing.JButton();
-        jFrame1 = new javax.swing.JFrame();
+        JFIestado = new javax.swing.JFrame();
+        TFtipoestado = new javax.swing.JTextField();
+        TFnombreestado = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        BTNmodificarestado = new javax.swing.JButton();
+        BTNvolverestado = new javax.swing.JButton();
+        BTNeliminarestado = new javax.swing.JButton();
+        BTNinsertarestado = new javax.swing.JButton();
+        JFCestado = new javax.swing.JFrame();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        Testados = new javax.swing.JTable();
+        BTNlecturaestado = new javax.swing.JButton();
+        BTNback7 = new javax.swing.JButton();
         BTNexit = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         MTCunidades = new javax.swing.JMenuItem();
         MTCllamadas = new javax.swing.JMenuItem();
         MTCtipounidad = new javax.swing.JMenuItem();
+        MTCestado = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         MTIunidades = new javax.swing.JMenuItem();
         MTIllamadas = new javax.swing.JMenuItem();
         MenuItemTipoUnidad = new javax.swing.JMenuItem();
-        MenuItemTipoUnidad1 = new javax.swing.JMenuItem();
+        MenuItemEstado = new javax.swing.JMenuItem();
 
         Tllamadas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Tllamadas.setModel(new javax.swing.table.DefaultTableModel(
@@ -745,13 +765,13 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         Tablatipounidad.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Tipo unidad", "Nombre unidad"
             }
         ));
         jScrollPane1.setViewportView(Tablatipounidad);
@@ -790,15 +810,138 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
                 .addContainerGap(121, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
-        jFrame1.getContentPane().setLayout(jFrame1Layout);
-        jFrame1Layout.setHorizontalGroup(
-            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        TFtipoestado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TFtipoestadoActionPerformed(evt);
+            }
+        });
+
+        TFnombreestado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TFnombreestadoActionPerformed(evt);
+            }
+        });
+
+        jLabel15.setText("Tipo estado:");
+
+        jLabel16.setText("Nombre estado:");
+
+        BTNmodificarestado.setText("Modificar");
+        BTNmodificarestado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNmodificarestadoActionPerformed(evt);
+            }
+        });
+
+        BTNvolverestado.setText("Volver");
+        BTNvolverestado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNvolverestadoActionPerformed(evt);
+            }
+        });
+
+        BTNeliminarestado.setText("Eliminar");
+        BTNeliminarestado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNeliminarestadoActionPerformed(evt);
+            }
+        });
+
+        BTNinsertarestado.setText("Insertar");
+
+        javax.swing.GroupLayout JFIestadoLayout = new javax.swing.GroupLayout(JFIestado.getContentPane());
+        JFIestado.getContentPane().setLayout(JFIestadoLayout);
+        JFIestadoLayout.setHorizontalGroup(
+            JFIestadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JFIestadoLayout.createSequentialGroup()
+                .addGroup(JFIestadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(JFIestadoLayout.createSequentialGroup()
+                        .addGap(125, 125, 125)
+                        .addGroup(JFIestadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel16)
+                            .addComponent(jLabel15)))
+                    .addGroup(JFIestadoLayout.createSequentialGroup()
+                        .addGap(59, 59, 59)
+                        .addComponent(BTNvolverestado)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(BTNinsertarestado)))
+                .addGroup(JFIestadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(JFIestadoLayout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addGroup(JFIestadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(TFtipoestado, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
+                            .addComponent(TFnombreestado)))
+                    .addGroup(JFIestadoLayout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(BTNeliminarestado)
+                        .addGap(9, 9, 9)
+                        .addComponent(BTNmodificarestado)))
+                .addContainerGap(352, Short.MAX_VALUE))
         );
-        jFrame1Layout.setVerticalGroup(
-            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+        JFIestadoLayout.setVerticalGroup(
+            JFIestadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JFIestadoLayout.createSequentialGroup()
+                .addGap(78, 78, 78)
+                .addGroup(JFIestadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TFtipoestado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15))
+                .addGap(18, 18, 18)
+                .addGroup(JFIestadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TFnombreestado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel16))
+                .addGap(84, 84, 84)
+                .addGroup(JFIestadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BTNmodificarestado)
+                    .addComponent(BTNvolverestado)
+                    .addComponent(BTNeliminarestado)
+                    .addComponent(BTNinsertarestado))
+                .addContainerGap(196, Short.MAX_VALUE))
+        );
+
+        Testados.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Tipo estado", "Nombre estado"
+            }
+        ));
+        jScrollPane4.setViewportView(Testados);
+
+        BTNlecturaestado.setText("Lectura");
+
+        BTNback7.setText("Volver");
+        BTNback7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNback7ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout JFCestadoLayout = new javax.swing.GroupLayout(JFCestado.getContentPane());
+        JFCestado.getContentPane().setLayout(JFCestadoLayout);
+        JFCestadoLayout.setHorizontalGroup(
+            JFCestadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JFCestadoLayout.createSequentialGroup()
+                .addGap(83, 83, 83)
+                .addComponent(BTNlecturaestado)
+                .addGap(18, 18, 18)
+                .addComponent(BTNback7)
+                .addGap(28, 28, 28)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(44, Short.MAX_VALUE))
+        );
+        JFCestadoLayout.setVerticalGroup(
+            JFCestadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JFCestadoLayout.createSequentialGroup()
+                .addGroup(JFCestadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(JFCestadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(BTNlecturaestado)
+                        .addComponent(BTNback7))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 220, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -837,6 +980,14 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         });
         jMenu1.add(MTCtipounidad);
 
+        MTCestado.setText("Estado");
+        MTCestado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MTCestadoActionPerformed(evt);
+            }
+        });
+        jMenu1.add(MTCestado);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("INSERTAR");
@@ -865,13 +1016,13 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         });
         jMenu2.add(MenuItemTipoUnidad);
 
-        MenuItemTipoUnidad1.setText("TipoUnidad");
-        MenuItemTipoUnidad1.addActionListener(new java.awt.event.ActionListener() {
+        MenuItemEstado.setText("Estado");
+        MenuItemEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MenuItemTipoUnidad1ActionPerformed(evt);
+                MenuItemEstadoActionPerformed(evt);
             }
         });
-        jMenu2.add(MenuItemTipoUnidad1);
+        jMenu2.add(MenuItemEstado);
 
         jMenuBar1.add(jMenu2);
 
@@ -1087,9 +1238,43 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         // TODO add your handling code here:
     }//GEN-LAST:event_BTNmodificartipounidadActionPerformed
 
-    private void MenuItemTipoUnidad1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemTipoUnidad1ActionPerformed
+    private void MenuItemEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemEstadoActionPerformed
+        this.setVisible(false);
+        JFIestado.setVisible(true);
+        JFIestado.setSize(1000,2000);
+    }//GEN-LAST:event_MenuItemEstadoActionPerformed
+
+    private void TFtipoestadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFtipoestadoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_MenuItemTipoUnidad1ActionPerformed
+    }//GEN-LAST:event_TFtipoestadoActionPerformed
+
+    private void TFnombreestadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFnombreestadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TFnombreestadoActionPerformed
+
+    private void BTNvolverestadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNvolverestadoActionPerformed
+        this.setVisible(true);
+        JFIestado.setVisible(false);
+    }//GEN-LAST:event_BTNvolverestadoActionPerformed
+
+    private void BTNmodificarestadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNmodificarestadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BTNmodificarestadoActionPerformed
+
+    private void BTNeliminarestadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNeliminarestadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BTNeliminarestadoActionPerformed
+
+    private void MTCestadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MTCestadoActionPerformed
+         this.setVisible(false);
+        JFCestado.setVisible(true);
+        JFCestado.setSize(1000,2000);
+    }//GEN-LAST:event_MTCestadoActionPerformed
+
+    private void BTNback7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNback7ActionPerformed
+        this.setVisible(true);
+        JFCestado.setVisible(false);
+    }//GEN-LAST:event_BTNback7ActionPerformed
 
     
 
@@ -1171,54 +1356,67 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     private javax.swing.JButton BTNback4;
     private javax.swing.JButton BTNback5;
     private javax.swing.JButton BTNback6;
+    private javax.swing.JButton BTNback7;
     private javax.swing.JButton BTNbuscar;
     private javax.swing.JButton BTNbuscar2;
     private javax.swing.JButton BTNconfirm;
+    private javax.swing.JButton BTNeliminarestado;
     private javax.swing.JButton BTNeliminartipounidad;
     private javax.swing.JButton BTNexit;
+    private javax.swing.JButton BTNinsertarestado;
+    private javax.swing.JButton BTNlecturaestado;
     private javax.swing.JButton BTNleertipounidad;
+    private javax.swing.JButton BTNmodificarestado;
     private javax.swing.JButton BTNmodificartipounidad;
+    private javax.swing.JButton BTNvolverestado;
     private javax.swing.JComboBox<String> CBdisponibilidad;
     private javax.swing.JComboBox<String> CBdisponibilidad1;
     private javax.swing.JComboBox<String> CBestado;
     private javax.swing.JComboBox<String> CBestado1;
     private javax.swing.JComboBox<String> CBtipounidad;
     private javax.swing.JComboBox<String> CBtipounidad1;
+    private javax.swing.JFrame JFCestado;
     private javax.swing.JFrame JFCllamadas;
     private javax.swing.JFrame JFCtipounidad;
     private javax.swing.JFrame JFCunidades;
+    private javax.swing.JFrame JFIestado;
     private javax.swing.JFrame JFIllamadas;
     private javax.swing.JFrame JFItipounidad;
     private javax.swing.JFrame JFIunidades;
     private javax.swing.JFrame JFpoopUp;
+    private javax.swing.JMenuItem MTCestado;
     private javax.swing.JMenuItem MTCllamadas;
     private javax.swing.JMenuItem MTCtipounidad;
     private javax.swing.JMenuItem MTCunidades;
     private javax.swing.JMenuItem MTIllamadas;
     private javax.swing.JMenuItem MTIunidades;
+    private javax.swing.JMenuItem MenuItemEstado;
     private javax.swing.JMenuItem MenuItemTipoUnidad;
-    private javax.swing.JMenuItem MenuItemTipoUnidad1;
     private javax.swing.JTextField TBdescripcion;
     private javax.swing.JTextField TFexito;
     private javax.swing.JTextField TFfecha;
     private javax.swing.JTextField TFfecha1;
+    private javax.swing.JTextField TFnombreestado;
     private javax.swing.JTextField TFnombreunidad;
     private javax.swing.JTextField TFnumTelefono1;
     private javax.swing.JTextField TFnumUnidad1;
     private javax.swing.JTextField TFsinExito;
+    private javax.swing.JTextField TFtipoestado;
     private javax.swing.JTextField TFtipounidad;
     private javax.swing.JTextField TFubicacion;
     private javax.swing.JTable Tablatipounidad;
+    private javax.swing.JTable Testados;
     private javax.swing.JTable Tllamadas;
     private javax.swing.JTable Tunidad;
     private javax.swing.JButton jButton1;
-    private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1233,6 +1431,7 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     // End of variables declaration//GEN-END:variables
     //JULIAN
     private javax.swing.JFrame JFtipoUnidad;
@@ -1276,6 +1475,10 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
        BTNeliminartipounidad.addActionListener(This);
        BTNleertipounidad.addActionListener(This);
        BTNmodificartipounidad.addActionListener(This);
+       BTNinsertarestado.addActionListener(This);
+       BTNeliminarestado.addActionListener(This);
+       BTNmodificarestado.addActionListener(This);
+       BTNlecturaestado.addActionListener(This);
        
     }
 
@@ -1423,11 +1626,11 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     }
 
     public String getTipoEstado() {
-        return TFtipoEstado.getText();  
+        return TFtipoestado.getText();  
     }
 
     public String getNombreEstado() {
-        return TFnombreEstado.getText(); 
+        return TFnombreestado.getText(); 
     }
 
     public String getTipoEstadoMod() {
@@ -1449,7 +1652,8 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     }
 
     public void cargarTablaEstado(List<Object[]> list) {
-        DefaultTableModel modelo = (DefaultTableModel) Testado.getModel();
+        
+        DefaultTableModel modelo = (DefaultTableModel) Testados.getModel();
         for (int i = modelo.getRowCount() - 1; i >= 0; i--) {
             modelo.removeRow(i);  
         }
