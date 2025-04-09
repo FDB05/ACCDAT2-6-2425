@@ -634,6 +634,55 @@ public void eliminarEstado(String tipoEstado) {
         }
     }
 }
+public List<Tipounidad> buscarTipoUnidadFiltrado(String telefono, String localidad) {
+    inicializaFactoryController();
+    List<Tipounidad> resultado = new ArrayList<>();
+    try {
+        var em = emf.createEntityManager();
+        String query = "SELECT t FROM Tipounidad t WHERE 1=1";
+        if (telefono != null && !telefono.isEmpty()) {
+            query += " AND t.numerotelefono = :telefono";
+        }
+        if (localidad != null && !localidad.isEmpty()) {
+            query += " AND t.localidad = :localidad";
+        }
+        TypedQuery<Tipounidad> q = em.createQuery(query, Tipounidad.class);
+        if (telefono != null && !telefono.isEmpty()) {
+            q.setParameter("telefono", telefono);
+        }
+        if (localidad != null && !localidad.isEmpty()) {
+            q.setParameter("localidad", localidad);
+        }
+        resultado = q.getResultList();
+    } finally {
+        cierraFactoryController();
+    }
+    return resultado;
+}
+
+
+    public List<String> obtenerTelefonosUnicos() {
+        inicializaFactoryController();
+        EntityManager em = emf.createEntityManager();
+        List<String> telefonos = em.createQuery("SELECT DISTINCT t.numerotelefono FROM Tipounidad t", String.class).getResultList();
+
+        em.close();
+        cierraFactoryController();
+
+        return telefonos;
+    }
+
+
+public List<String> obtenerLocalidadesUnicas() {
+    inicializaFactoryController();
+    EntityManager em = emf.createEntityManager();
+    List<String> localidades = em.createQuery("SELECT DISTINCT t.localidad FROM Tipounidad t", String.class).getResultList();
+    em.close();
+    cierraFactoryController();
+    return localidades;
+}
+
+
 
 
 

@@ -7,6 +7,7 @@ package vista;
 import controlador.ControladorMaestro;
 import java.util.List;
 import modelo.Estado;
+import modelo.Tipounidad;
 
 /**
  *
@@ -43,7 +44,12 @@ public interface InterfazVista {
     public String getNumeroTelefono();
     public String getTipoUnidadMod(); 
     public String getNombreUnidadMod(); 
-    public void cargarTablaTipoUnidad(List<Object[]> list); 
+    public void cargarTablaTipoUnidad(List<Tipounidad> lista); 
+    public void setCBunidadTelefono(List<String> telefonos);
+    public void setCBunidadLocalidad(List<String> localidades);
+
+    public String getUnidadTelefonoSeleccionado();
+    public String getUnidadLocalidadSeleccionado();
 
     // metodos nuevos para Estado
     public String getTipoEstado(); 
@@ -74,4 +80,5 @@ public interface InterfazVista {
     static final String MODIFICARESTADO = "Metodo para modificar un estado";
     static final String CARGARESTADO = "Metodo para cargar todos los estados";
     static final String ELIMINARESTADO ="Metodo para eliminar un estado";
+    static final String ACTUALIZATIPOUNIDAD ="Metodo para actualizar combobox";
 }

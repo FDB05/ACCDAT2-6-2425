@@ -7,11 +7,14 @@ package vista;
 import controlador.ControladorMaestro;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Estado;
 import modelo.ModeloMaestro;
+import modelo.Tipounidad;
 import modelo.Unidades;
 
 /**
@@ -46,6 +49,8 @@ public class Ventana1 extends javax.swing.JFrame implements InterfazVista{
         BTNeliminarestado.setActionCommand(ELIMINARESTADO);
         BTNmodificarestado.setActionCommand(MODIFICARESTADO);
         BTNlecturaestado.setActionCommand(CARGARESTADO);
+        BTNactualizarunidades.setActionCommand(ACTUALIZATIPOUNIDAD);
+        
        
         
         
@@ -148,6 +153,7 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         jLabel20 = new javax.swing.JLabel();
         CBunidadlocalidad = new javax.swing.JComboBox<>();
         CBunidadtelefono = new javax.swing.JComboBox<>();
+        BTNactualizarunidades = new javax.swing.JButton();
         JFIestado = new javax.swing.JFrame();
         TFtipoestado = new javax.swing.JTextField();
         TFnombreestado = new javax.swing.JTextField();
@@ -816,9 +822,16 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel20.setText("Numero telefono");
 
-        CBunidadlocalidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        CBunidadlocalidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Actualiza" }));
 
-        CBunidadtelefono.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        CBunidadtelefono.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Actualiza" }));
+
+        BTNactualizarunidades.setText("Actualizar");
+        BTNactualizarunidades.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNactualizarunidadesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout JFCtipounidadLayout = new javax.swing.GroupLayout(JFCtipounidad.getContentPane());
         JFCtipounidad.getContentPane().setLayout(JFCtipounidadLayout);
@@ -827,11 +840,13 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JFCtipounidadLayout.createSequentialGroup()
                 .addGroup(JFCtipounidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(JFCtipounidadLayout.createSequentialGroup()
-                        .addContainerGap(81, Short.MAX_VALUE)
+                        .addContainerGap(71, Short.MAX_VALUE)
                         .addComponent(BTNback6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(BTNleertipounidad)
-                        .addGap(118, 118, 118))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BTNactualizarunidades)
+                        .addGap(36, 36, 36))
                     .addGroup(JFCtipounidadLayout.createSequentialGroup()
                         .addGap(63, 63, 63)
                         .addGroup(JFCtipounidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -864,7 +879,8 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(JFCtipounidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(BTNleertipounidad)
-                            .addComponent(BTNback6))))
+                            .addComponent(BTNback6)
+                            .addComponent(BTNactualizarunidades))))
                 .addContainerGap(121, Short.MAX_VALUE))
         );
 
@@ -1338,6 +1354,10 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         JFCestado.setVisible(false);
     }//GEN-LAST:event_BTNback7ActionPerformed
 
+    private void BTNactualizarunidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNactualizarunidadesActionPerformed
+        
+    }//GEN-LAST:event_BTNactualizarunidadesActionPerformed
+
     
 
     private void rellenaComboEstado(){
@@ -1409,6 +1429,7 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     private javax.swing.JButton BTNMtelef;
     private javax.swing.JButton BTNMunidad;
     private javax.swing.JButton BTNMunidad1;
+    private javax.swing.JButton BTNactualizarunidades;
     private javax.swing.JButton BTNaddLlamada;
     private javax.swing.JButton BTNaddUnidad;
     private javax.swing.JButton BTNañadirtipounidad;
@@ -1549,6 +1570,7 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
        BTNeliminarestado.addActionListener(This);
        BTNmodificarestado.addActionListener(This);
        BTNlecturaestado.addActionListener(This);
+       BTNactualizarunidades.addActionListener(This);
        
     }
 
@@ -1694,6 +1716,31 @@ public String getNumeroTelefono() {
     return TFnumerounidad.getText();
 }
 
+public String getUnidadTelefonoSeleccionado() {
+    return (String) CBunidadtelefono.getSelectedItem();
+}
+
+public String getUnidadLocalidadSeleccionado() {
+    return (String) CBunidadlocalidad.getSelectedItem();
+}
+
+public void setCBunidadTelefono(List<String> telefonos) {
+    CBunidadtelefono.removeAllItems();
+     CBunidadtelefono.addItem("");
+    for (String t : telefonos) {
+        CBunidadtelefono.addItem(t);
+    }
+}
+
+public void setCBunidadLocalidad(List<String> localidades) {
+    CBunidadlocalidad.removeAllItems();
+    CBunidadlocalidad.addItem("");
+    for (String l : localidades) {
+        CBunidadlocalidad.addItem(l);
+    }
+}
+
+
 
     public String getTipoUnidadMod() {
         return TFtipoUnidadMod.getText();  
@@ -1719,15 +1766,20 @@ public String getNumeroTelefono() {
         return TFnombreEstadoMod.getText();  
     }
 
-    public void cargarTablaTipoUnidad(List<Object[]> list) {
-        DefaultTableModel modelo = (DefaultTableModel) Tablatipounidad.getModel();
-        for (int i = modelo.getRowCount() - 1; i >= 0; i--) {
-            modelo.removeRow(i);  
-        }
-        for (Object[] e : list) {
-            modelo.addRow(e);  
-        }
+    public void cargarTablaTipoUnidad(List<Tipounidad> lista) {
+    DefaultTableModel modelo = (DefaultTableModel) Tablatipounidad.getModel(); // Reemplaza con el nombre real de tu tabla
+    modelo.setRowCount(0); // Limpiar
+
+    for (Tipounidad t : lista) {
+        modelo.addRow(new Object[]{
+            t.getTipounidad(),
+            t.getNombreunidad(),
+            t.getNumerotelefono(),
+            t.getLocalidad()
+        });
     }
+}
+
 
     public void cargarTablaEstado(List<Estado> list) {
     DefaultTableModel modelo = (DefaultTableModel) Testados.getModel();

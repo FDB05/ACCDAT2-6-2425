@@ -9,6 +9,7 @@ import java.util.Date;
 import modelo.ModeloMaestro;
 import java.util.List;
 import modelo.Estado;
+import modelo.Tipounidad;
 import vista.InterfazVista;
 
 public class ControladorMaestro implements ActionListener {
@@ -18,14 +19,17 @@ public class ControladorMaestro implements ActionListener {
     private final ModeloMaestro modelo;
     
     public ControladorMaestro(InterfazVista vista, ModeloMaestro modelo) {
-        
+
         this.vista = vista;
         this.modelo = modelo;
-        
+
         this.vista.setControlador(this);
         this.vista.arranca();
+
+
+
     }
-    
+
     
     
     @Override
@@ -117,10 +121,11 @@ public class ControladorMaestro implements ActionListener {
           case InterfazVista.INSERTARTIPO -> {
               String tipo = vista.getTipoUnidad();
               String nombre = vista.getNombreUnidad();
-              String telefono = vista.getNumeroTelefono(); // ← necesitas este método en la vista
-              String localidad = vista.getLocalidad();     // ← y también este
+              String telefono = vista.getNumeroTelefono(); // 
+              String localidad = vista.getLocalidad();     // 
               boolean existe = modelo.insertaTipoUnidad(tipo, nombre, telefono, localidad);
               vista.soltarPopApp(existe);
+              
           }
 
             case InterfazVista.ELIMINARTIPO -> {
@@ -141,8 +146,12 @@ public class ControladorMaestro implements ActionListener {
             }
 
             case InterfazVista.CARGARTIPO -> {
-                List<Object[]> listTipo = modelo.cargarTipoUnidad();
-                vista.cargarTablaTipoUnidad(listTipo);
+
+                String telefono = vista.getUnidadTelefonoSeleccionado();
+                String localidad = vista.getUnidadLocalidadSeleccionado();
+
+                List<Tipounidad> resultados = modelo.buscarTipoUnidadFiltrado(telefono, localidad);
+                vista.cargarTablaTipoUnidad(resultados); // Este método deberías tenerlo como ya tenías
             }
 
             case InterfazVista.INSERTARESTADO -> {
@@ -152,31 +161,35 @@ public class ControladorMaestro implements ActionListener {
                 vista.soltarPopApp(existeEstado);
             }
 
-          case InterfazVista.MODIFICARESTADO -> {
-              String tipoEstadoMod = vista.getTipoEstado();  // Obtener el tipo de estado desde la vista
-              String nombreEstadoMod = vista.getNombreEstado();  // Obtener el nombre del estado desde la vista
-              modelo.modificarEstado(tipoEstadoMod, nombreEstadoMod);  // Llamar al método de modificación
-          }
+            case InterfazVista.MODIFICARESTADO -> {
+                String tipoEstadoMod = vista.getTipoEstado();  // Obtener el tipo de estado desde la vista
+                String nombreEstadoMod = vista.getNombreEstado();  // Obtener el nombre del estado desde la vista
+                modelo.modificarEstado(tipoEstadoMod, nombreEstadoMod);  // Llamar al método de modificación
+            }
 
+            case InterfazVista.CARGARESTADO -> {
+                String tipoSeleccionado = vista.getTipoEstado();
+                String nombreBusqueda = vista.getNombreEstado();
 
-          case InterfazVista.CARGARESTADO -> {
-              String tipoSeleccionado = vista.getTipoEstado();
-              String nombreBusqueda = vista.getNombreEstado();
-
-              List<Estado> resultados = modelo.buscarEstadosFiltrados(tipoSeleccionado, nombreBusqueda);
+                List<Estado> resultados = modelo.buscarEstadosFiltrados(tipoSeleccionado, nombreBusqueda);
               vista.cargarTablaEstado(resultados);
           }
-            
-           case InterfazVista.ELIMINARESTADO -> {
-              String tipoEstado = vista.getTipoEstado(); // Obtener el tipo de estado desde la vista
+          case InterfazVista.ACTUALIZATIPOUNIDAD -> {
+              List<String> telefonos = modelo.obtenerTelefonosUnicos();
+              List<String> localidades = modelo.obtenerLocalidadesUnicas();
 
-              // Llamar al modelo para eliminar el estado
-              modelo.eliminarEstado(tipoEstado);
-              vista.soltarPopApp(true); // Mostrar mensaje de éxito (true indica que la eliminación fue exitosa)
+              vista.setCBunidadTelefono(telefonos);
+              vista.setCBunidadLocalidad(localidades);
+
           }
 
-            
-            
+            case InterfazVista.ELIMINARESTADO -> {
+                String tipoEstado = vista.getTipoEstado(); // Obtener el tipo de estado desde la vista
+
+                // Llamar al modelo para eliminar el estado
+                modelo.eliminarEstado(tipoEstado);
+                vista.soltarPopApp(true); // Mostrar mensaje de éxito (true indica que la eliminación fue exitosa)
+            }
 
         }
 
