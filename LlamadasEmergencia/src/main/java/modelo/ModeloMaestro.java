@@ -22,6 +22,7 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -463,22 +464,29 @@ public void inicializarDatos() {
         Tipounidad tipoUnidad1 = new Tipounidad();
         tipoUnidad1.setTipounidad("AM");
         tipoUnidad1.setNombreunidad("Ambulancia");
+        tipoUnidad1.setNumerotelefono("112");
+        tipoUnidad1.setLocalidad("Ciudad Real");
+        
         em.persist(tipoUnidad1);
 
         Tipounidad tipoUnidad2 = new Tipounidad();
         tipoUnidad2.setTipounidad("BM");
         tipoUnidad2.setNombreunidad("Bombero");
+        tipoUnidad2.setNumerotelefono("1006");
+        tipoUnidad2.setLocalidad("Ciudad Real");
         em.persist(tipoUnidad2);
 
         Tipounidad tipoUnidad3 = new Tipounidad();
         tipoUnidad3.setTipounidad("PN");
         tipoUnidad3.setNombreunidad("Policia Nacional");
+        tipoUnidad3.setNumerotelefono("091");
+        tipoUnidad3.setLocalidad("Ciudad Real");
         em.persist(tipoUnidad3);
     }
     
     //JULIAN
     
-    public boolean insertaTipoUnidad(String tipo, String nombre) {
+   public boolean insertaTipoUnidad(String tipo, String nombre, String telefono, String localidad) {
     boolean existe = false;
     inicializaFactoryController();
     TipounidadJpaController tipounidadJpaController = new TipounidadJpaController(emf);
@@ -486,6 +494,8 @@ public void inicializarDatos() {
     Tipounidad tipoUnidad = new Tipounidad();
     tipoUnidad.setTipounidad(tipo); 
     tipoUnidad.setNombreunidad(nombre); 
+    tipoUnidad.setNumerotelefono(telefono);
+    tipoUnidad.setLocalidad(localidad);
 
     try {
         tipounidadJpaController.create(tipoUnidad);
@@ -497,6 +507,7 @@ public void inicializarDatos() {
     }
     return existe;
 }
+
     public void eliminarTipoUnidad(String tipo) {
     inicializaFactoryController();
     TipounidadJpaController tipounidadJpaController = new TipounidadJpaController(emf);
@@ -587,7 +598,7 @@ public void modificarEstado(String tipo, String nombre) {
     cierraFactoryController();
 }
 
-public List<Object[]> cargarEstado() {
+/*public List<Object[]> cargarEstado() {
     inicializaFactoryController();
     TypedQuery<Object[]> query = em.createQuery(
         "SELECT e.tipoestado, e.nombreestado FROM Estado e", 
@@ -596,7 +607,15 @@ public List<Object[]> cargarEstado() {
     List<Object[]> list = query.getResultList();
     cierraFactoryController();
     return list;
+}*/
+public List<Estado> buscarEstadosFiltrados(String tipo, String nombre) {
+    inicializaFactoryController();
+    EstadoJpaController estadoJpaController = new EstadoJpaController(emf);
+    List<Estado> lista = estadoJpaController.buscarEstadosConFiltros(tipo, nombre);
+    cierraFactoryController();
+    return lista;
 }
+
 public void eliminarEstado(String tipoEstado) {
     inicializaFactoryController(); // Inicializar el controlador para la base de datos
     EstadoJpaController estadoJpaController = new EstadoJpaController(emf); // Crear el controlador de la entidad Estado

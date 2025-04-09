@@ -12,6 +12,7 @@ import jakarta.persistence.EntityManagerFactory;
 import java.io.Serializable;
 import jakarta.persistence.Query;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 import modelo.Llamadas;
@@ -205,5 +206,32 @@ public class EstadoJpaController implements Serializable {
             em.close();
         }
     }
+    public List<Estado> buscarEstadosConFiltros(String tipo, String nombre) {
+    EntityManager em = getEntityManager();
+    try {
+        String jpql = "SELECT e FROM Estado e WHERE 1=1";
+
+        if (tipo != null && !tipo.isEmpty()) {
+            jpql += " AND e.tipoestado = :tipo";
+        }
+        if (nombre != null && !nombre.isEmpty()) {
+            jpql += " AND e.nombreestado LIKE :nombre";
+        }
+
+        TypedQuery<Estado> query = em.createQuery(jpql, Estado.class);
+
+        if (tipo != null && !tipo.isEmpty()) {
+            query.setParameter("tipo", tipo);
+        }
+        if (nombre != null && !nombre.isEmpty()) {
+            query.setParameter("nombre", "%" + nombre + "%");
+        }
+
+        return query.getResultList();
+    } finally {
+        em.close();
+    }
+}
+
     
 }

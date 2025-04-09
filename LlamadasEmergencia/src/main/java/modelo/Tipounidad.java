@@ -38,6 +38,14 @@ public class Tipounidad implements Serializable {
     @Size(min = 1, max = 2)
     @Column(name = "TIPOUNIDAD")
     private String tipounidad;
+    @Size(max = 20)
+    @Column(name = "NUMEROTELEFONO")
+    private String numerotelefono;
+
+    @Size(max = 50)
+    @Column(name = "LOCALIDAD")
+    private String localidad;
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
@@ -57,6 +65,13 @@ public class Tipounidad implements Serializable {
         this.tipounidad = tipounidad;
         this.nombreunidad = nombreunidad;
     }
+    public Tipounidad(String tipounidad, String nombreunidad, String numerotelefono, String localidad) {
+        this.tipounidad = tipounidad;
+        this.nombreunidad = nombreunidad;
+        this.numerotelefono = numerotelefono;
+        this.localidad = localidad;
+    }
+
 
     public String getTipounidad() {
         return tipounidad;
@@ -74,7 +89,22 @@ public class Tipounidad implements Serializable {
         this.nombreunidad = nombreunidad;
     }
 
-    
+    public String getNumerotelefono() {
+        return numerotelefono;
+    }
+
+    public void setNumerotelefono(String numerotelefono) {
+        this.numerotelefono = numerotelefono;
+    }
+
+    public String getLocalidad() {
+        return localidad;
+    }
+
+    public void setLocalidad(String localidad) {
+        this.localidad = localidad;
+    }
+
     public Collection<Unidades> getUnidadesCollection() {
         return unidadesCollection;
     }

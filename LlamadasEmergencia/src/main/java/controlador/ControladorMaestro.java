@@ -8,6 +8,7 @@ import java.util.Date;
 
 import modelo.ModeloMaestro;
 import java.util.List;
+import modelo.Estado;
 import vista.InterfazVista;
 
 public class ControladorMaestro implements ActionListener {
@@ -111,15 +112,17 @@ public class ControladorMaestro implements ActionListener {
             
             modelo.modificarUnidad(nUnidad, estado, tUnidad);
        }
-       
-       //JULIAN
-       
-            case InterfazVista.INSERTARTIPO -> {
-                String tipo = vista.getTipoUnidad();
-                String nombre = vista.getNombreUnidad();
-                boolean existe = modelo.insertaTipoUnidad(tipo, nombre);
-                vista.soltarPopApp(existe);
-            }
+
+          //JULIAN
+          case InterfazVista.INSERTARTIPO -> {
+              String tipo = vista.getTipoUnidad();
+              String nombre = vista.getNombreUnidad();
+              String telefono = vista.getNumeroTelefono(); // ← necesitas este método en la vista
+              String localidad = vista.getLocalidad();     // ← y también este
+              boolean existe = modelo.insertaTipoUnidad(tipo, nombre, telefono, localidad);
+              vista.soltarPopApp(existe);
+          }
+
             case InterfazVista.ELIMINARTIPO -> {
                 String tipoUnidad = vista.getTipoUnidad();
 
@@ -156,10 +159,13 @@ public class ControladorMaestro implements ActionListener {
           }
 
 
-            case InterfazVista.CARGARESTADO -> {
-                List<Object[]> listEstado = modelo.cargarEstado();
-                vista.cargarTablaEstado(listEstado);
-            }
+          case InterfazVista.CARGARESTADO -> {
+              String tipoSeleccionado = vista.getTipoEstado();
+              String nombreBusqueda = vista.getNombreEstado();
+
+              List<Estado> resultados = modelo.buscarEstadosFiltrados(tipoSeleccionado, nombreBusqueda);
+              vista.cargarTablaEstado(resultados);
+          }
             
            case InterfazVista.ELIMINARESTADO -> {
               String tipoEstado = vista.getTipoEstado(); // Obtener el tipo de estado desde la vista

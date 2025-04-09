@@ -6,6 +6,7 @@ package vista;
 
 import controlador.ControladorMaestro;
 import java.util.List;
+import modelo.Estado;
 
 /**
  *
@@ -38,6 +39,8 @@ public interface InterfazVista {
     // metodos nuevos para TipoUnidad
     public String getTipoUnidad(); 
     public String getNombreUnidad(); 
+    public String getLocalidad();
+    public String getNumeroTelefono();
     public String getTipoUnidadMod(); 
     public String getNombreUnidadMod(); 
     public void cargarTablaTipoUnidad(List<Object[]> list); 
@@ -47,7 +50,7 @@ public interface InterfazVista {
     public String getNombreEstado(); 
     public String getTipoEstadoMod(); 
     public String getNombreEstadoMod(); 
-    public void cargarTablaEstado(List<Object[]> list);
+    public void cargarTablaEstado(List<Estado> list);
     
     // Comandos para las operaciones
     static final String FILTRARUNIDADES = "Metodo para filtrar el tipo de Unidades que quieres";

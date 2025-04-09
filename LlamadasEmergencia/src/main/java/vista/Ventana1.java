@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import modelo.Estado;
 import modelo.ModeloMaestro;
 import modelo.Unidades;
 
@@ -134,11 +135,19 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         BTNback5 = new javax.swing.JButton();
         BTNeliminartipounidad = new javax.swing.JButton();
         BTNmodificartipounidad = new javax.swing.JButton();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        TFnumerounidad = new javax.swing.JTextField();
+        TFlocalidadunidad = new javax.swing.JTextField();
         JFCtipounidad = new javax.swing.JFrame();
         jScrollPane1 = new javax.swing.JScrollPane();
         Tablatipounidad = new javax.swing.JTable();
         BTNleertipounidad = new javax.swing.JButton();
         BTNback6 = new javax.swing.JButton();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        CBunidadlocalidad = new javax.swing.JComboBox<>();
+        CBunidadtelefono = new javax.swing.JComboBox<>();
         JFIestado = new javax.swing.JFrame();
         TFtipoestado = new javax.swing.JTextField();
         TFnombreestado = new javax.swing.JTextField();
@@ -715,6 +724,10 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
             }
         });
 
+        jLabel17.setText("Numero de Telefono:");
+
+        jLabel18.setText("Localidad:");
+
         javax.swing.GroupLayout JFItipounidadLayout = new javax.swing.GroupLayout(JFItipounidad.getContentPane());
         JFItipounidad.getContentPane().setLayout(JFItipounidadLayout);
         JFItipounidadLayout.setHorizontalGroup(
@@ -740,8 +753,18 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
                             .addGroup(JFItipounidadLayout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addGap(32, 32, 32)
-                                .addComponent(TFtipounidad, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(337, Short.MAX_VALUE))
+                                .addComponent(TFtipounidad, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(57, 57, 57)
+                        .addGroup(JFItipounidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(JFItipounidadLayout.createSequentialGroup()
+                                .addComponent(jLabel18)
+                                .addGap(18, 18, 18)
+                                .addComponent(TFlocalidadunidad, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(JFItipounidadLayout.createSequentialGroup()
+                                .addComponent(jLabel17)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(TFnumerounidad, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
         JFItipounidadLayout.setVerticalGroup(
             JFItipounidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -749,11 +772,15 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
                 .addGap(116, 116, 116)
                 .addGroup(JFItipounidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(TFnombreunidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TFnombreunidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel17)
+                    .addComponent(TFnumerounidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(38, 38, 38)
                 .addGroup(JFItipounidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(TFtipounidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TFtipounidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel18)
+                    .addComponent(TFlocalidadunidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(53, 53, 53)
                 .addGroup(JFItipounidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BTNañadirtipounidad)
@@ -765,13 +792,13 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         Tablatipounidad.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Tipo unidad", "Nombre unidad"
+                "Tipo unidad", "Nombre unidad", "Numero telefono", "Localidad"
             }
         ));
         jScrollPane1.setViewportView(Tablatipounidad);
@@ -785,28 +812,59 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
             }
         });
 
+        jLabel19.setText("Localidad");
+
+        jLabel20.setText("Numero telefono");
+
+        CBunidadlocalidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        CBunidadtelefono.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout JFCtipounidadLayout = new javax.swing.GroupLayout(JFCtipounidad.getContentPane());
         JFCtipounidad.getContentPane().setLayout(JFCtipounidadLayout);
         JFCtipounidadLayout.setHorizontalGroup(
             JFCtipounidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JFCtipounidadLayout.createSequentialGroup()
-                .addContainerGap(81, Short.MAX_VALUE)
-                .addComponent(BTNback6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(BTNleertipounidad)
-                .addGap(118, 118, 118)
+                .addGroup(JFCtipounidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(JFCtipounidadLayout.createSequentialGroup()
+                        .addContainerGap(81, Short.MAX_VALUE)
+                        .addComponent(BTNback6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BTNleertipounidad)
+                        .addGap(118, 118, 118))
+                    .addGroup(JFCtipounidadLayout.createSequentialGroup()
+                        .addGap(63, 63, 63)
+                        .addGroup(JFCtipounidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel19)
+                            .addComponent(jLabel20))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(JFCtipounidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(CBunidadlocalidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CBunidadtelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24))
         );
         JFCtipounidadLayout.setVerticalGroup(
             JFCtipounidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(JFCtipounidadLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addGroup(JFCtipounidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(JFCtipounidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(BTNleertipounidad)
-                        .addComponent(BTNback6))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(JFCtipounidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(JFCtipounidadLayout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(JFCtipounidadLayout.createSequentialGroup()
+                        .addGap(76, 76, 76)
+                        .addGroup(JFCtipounidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel19)
+                            .addComponent(CBunidadlocalidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(JFCtipounidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel20)
+                            .addComponent(CBunidadtelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(JFCtipounidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(BTNleertipounidad)
+                            .addComponent(BTNback6))))
                 .addContainerGap(121, Short.MAX_VALUE))
         );
 
@@ -1379,6 +1437,8 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     private javax.swing.JComboBox<String> CBestado1;
     private javax.swing.JComboBox<String> CBtipounidad;
     private javax.swing.JComboBox<String> CBtipounidad1;
+    private javax.swing.JComboBox<String> CBunidadlocalidad;
+    private javax.swing.JComboBox<String> CBunidadtelefono;
     private javax.swing.JFrame JFCestado;
     private javax.swing.JFrame JFCllamadas;
     private javax.swing.JFrame JFCtipounidad;
@@ -1400,10 +1460,12 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     private javax.swing.JTextField TFexito;
     private javax.swing.JTextField TFfecha;
     private javax.swing.JTextField TFfecha1;
+    private javax.swing.JTextField TFlocalidadunidad;
     private javax.swing.JTextField TFnombreestado;
     private javax.swing.JTextField TFnombreunidad;
     private javax.swing.JTextField TFnumTelefono1;
     private javax.swing.JTextField TFnumUnidad1;
+    private javax.swing.JTextField TFnumerounidad;
     private javax.swing.JTextField TFsinExito;
     private javax.swing.JTextField TFtipoestado;
     private javax.swing.JTextField TFtipounidad;
@@ -1421,7 +1483,11 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1620,6 +1686,14 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     public String getNombreUnidad() {
         return TFnombreunidad.getText();  
     }
+    public String getLocalidad() {
+    return TFlocalidadunidad.getText();
+}
+
+public String getNumeroTelefono() {
+    return TFnumerounidad.getText();
+}
+
 
     public String getTipoUnidadMod() {
         return TFtipoUnidadMod.getText();  
@@ -1655,16 +1729,23 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         }
     }
 
-    public void cargarTablaEstado(List<Object[]> list) {
-        
-        DefaultTableModel modelo = (DefaultTableModel) Testados.getModel();
-        for (int i = modelo.getRowCount() - 1; i >= 0; i--) {
-            modelo.removeRow(i);  
-        }
-        for (Object[] e : list) {
-            modelo.addRow(e);  
-        }
+    public void cargarTablaEstado(List<Estado> list) {
+    DefaultTableModel modelo = (DefaultTableModel) Testados.getModel();
+    
+    // Limpiar la tabla
+    for (int i = modelo.getRowCount() - 1; i >= 0; i--) {
+        modelo.removeRow(i);
     }
+
+    // Cargar cada Estado como fila
+    for (Estado e : list) {
+        modelo.addRow(new Object[] {
+            e.getTipoestado(),
+            e.getNombreestado()
+        });
+    }
+}
+
 
 
 
