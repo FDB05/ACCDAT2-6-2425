@@ -26,9 +26,23 @@ import java.util.Collection;
 @Table(name = "TIPOUNIDAD")
 
 @NamedQueries({
-    @NamedQuery(name = "Tipounidad.findAll", query = "SELECT t FROM Tipounidad t"),
-    @NamedQuery(name = "Tipounidad.findByTipounidad", query = "SELECT t FROM Tipounidad t WHERE t.tipounidad = :tipounidad"),
-    @NamedQuery(name = "Tipounidad.findByNombreunidad", query = "SELECT t FROM Tipounidad t WHERE t.nombreunidad = :nombreunidad")})
+    @NamedQuery(name = "Tipounidad.findAll",
+            query = "SELECT t FROM Tipounidad t"),
+
+    @NamedQuery(name = "Tipounidad.findByTipounidad",
+            query = "SELECT t FROM Tipounidad t WHERE t.tipounidad = :tipounidad"),
+
+    @NamedQuery(name = "Tipounidad.findByNombreunidad",
+            query = "SELECT t FROM Tipounidad t WHERE t.nombreunidad = :nombreunidad"),
+
+    @NamedQuery(name = "Tipounidad.findByTelefono",
+            query = "SELECT t FROM Tipounidad t WHERE t.numerotelefono = :telefono"),
+
+    @NamedQuery(name = "Tipounidad.findByLocalidad",
+            query = "SELECT t FROM Tipounidad t WHERE t.localidad = :localidad"),
+
+    @NamedQuery(name = "Tipounidad.findByTelefonoYLocalidad",
+            query = "SELECT t FROM Tipounidad t WHERE t.numerotelefono = :telefono AND t.localidad = :localidad")})
 public class Tipounidad implements Serializable {
 
     private static final long serialVersionUID = 1L;

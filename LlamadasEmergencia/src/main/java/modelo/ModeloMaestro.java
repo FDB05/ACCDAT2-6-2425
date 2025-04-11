@@ -617,24 +617,24 @@ public List<Estado> buscarEstadosFiltrados(String tipo, String nombre) {
 }
 
 public void eliminarEstado(String tipoEstado) {
-    inicializaFactoryController(); // Inicializar el controlador para la base de datos
-    EstadoJpaController estadoJpaController = new EstadoJpaController(emf); // Crear el controlador de la entidad Estado
+    inicializaFactoryController(); 
+    EstadoJpaController estadoJpaController = new EstadoJpaController(emf); 
 
-    Estado estado = estadoJpaController.findEstado(tipoEstado); // Buscar el estado por su tipo
+    Estado estado = estadoJpaController.findEstado(tipoEstado); 
 
     if (estado != null) { // Si el estado existe, lo eliminamos
         try {
             estadoJpaController.destroy(tipoEstado); // Eliminar el estado de la base de datos
         } catch (IllegalOrphanException ex) {
-            Logger.getLogger(ModeloMaestro.class.getName()).log(Level.SEVERE, null, ex); // Capturar excepciones si las hay
+            Logger.getLogger(ModeloMaestro.class.getName()).log(Level.SEVERE, null, ex); 
         } catch (NonexistentEntityException ex) {
-            Logger.getLogger(ModeloMaestro.class.getName()).log(Level.SEVERE, null, ex); // Capturar excepciones si el estado no existe
+            Logger.getLogger(ModeloMaestro.class.getName()).log(Level.SEVERE, null, ex); 
         } finally {
-            cierraFactoryController(); // Cerrar el controlador
+            cierraFactoryController(); 
         }
     }
 }
-public List<Tipounidad> buscarTipoUnidadFiltrado(String telefono, String localidad) {
+/*public List<Tipounidad> buscarTipoUnidadFiltrado(String telefono, String localidad) {
     inicializaFactoryController();
     List<Tipounidad> resultado = new ArrayList<>();
     try {
@@ -654,6 +654,36 @@ public List<Tipounidad> buscarTipoUnidadFiltrado(String telefono, String localid
             q.setParameter("localidad", localidad);
         }
         resultado = q.getResultList();
+    } finally {
+        cierraFactoryController();
+    }
+    return resultado;
+}*/
+
+public List<Tipounidad> buscarTipoUnidadFiltrado(String telefono, String localidad) {
+    inicializaFactoryController();
+    List<Tipounidad> resultado = new ArrayList<>();
+    System.out.println("Consulta almacenada con parametros funcionando...");
+    try {
+        var em = emf.createEntityManager();
+
+        if ((telefono == null || telefono.isEmpty()) && (localidad == null || localidad.isEmpty())) {
+            resultado = em.createNamedQuery("Tipounidad.findAll", Tipounidad.class).getResultList();
+        } else if (telefono != null && !telefono.isEmpty() && (localidad == null || localidad.isEmpty())) {
+            resultado = em.createNamedQuery("Tipounidad.findByTelefono", Tipounidad.class)
+                          .setParameter("telefono", telefono)
+                          .getResultList();
+        } else if ((telefono == null || telefono.isEmpty()) && localidad != null && !localidad.isEmpty()) {
+            resultado = em.createNamedQuery("Tipounidad.findByLocalidad", Tipounidad.class)
+                          .setParameter("localidad", localidad)
+                          .getResultList();
+        } else {
+            resultado = em.createNamedQuery("Tipounidad.findByTelefonoYLocalidad", Tipounidad.class)
+                          .setParameter("telefono", telefono)
+                          .setParameter("localidad", localidad)
+                          .getResultList();
+        }
+
     } finally {
         cierraFactoryController();
     }

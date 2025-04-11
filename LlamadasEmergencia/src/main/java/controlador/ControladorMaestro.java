@@ -151,7 +151,7 @@ public class ControladorMaestro implements ActionListener {
                 String localidad = vista.getUnidadLocalidadSeleccionado();
 
                 List<Tipounidad> resultados = modelo.buscarTipoUnidadFiltrado(telefono, localidad);
-                vista.cargarTablaTipoUnidad(resultados); // Este método deberías tenerlo como ya tenías
+                vista.cargarTablaTipoUnidad(resultados); 
             }
 
             case InterfazVista.INSERTARESTADO -> {
@@ -162,9 +162,9 @@ public class ControladorMaestro implements ActionListener {
             }
 
             case InterfazVista.MODIFICARESTADO -> {
-                String tipoEstadoMod = vista.getTipoEstado();  // Obtener el tipo de estado desde la vista
-                String nombreEstadoMod = vista.getNombreEstado();  // Obtener el nombre del estado desde la vista
-                modelo.modificarEstado(tipoEstadoMod, nombreEstadoMod);  // Llamar al método de modificación
+                String tipoEstadoMod = vista.getTipoEstado();  
+                String nombreEstadoMod = vista.getNombreEstado();  
+                modelo.modificarEstado(tipoEstadoMod, nombreEstadoMod);  
             }
 
             case InterfazVista.CARGARESTADO -> {
@@ -184,11 +184,11 @@ public class ControladorMaestro implements ActionListener {
           }
 
             case InterfazVista.ELIMINARESTADO -> {
-                String tipoEstado = vista.getTipoEstado(); // Obtener el tipo de estado desde la vista
+                String tipoEstado = vista.getTipoEstado(); 
 
-                // Llamar al modelo para eliminar el estado
+                
                 modelo.eliminarEstado(tipoEstado);
-                vista.soltarPopApp(true); // Mostrar mensaje de éxito (true indica que la eliminación fue exitosa)
+                vista.soltarPopApp(true); 
             }
 
         }
