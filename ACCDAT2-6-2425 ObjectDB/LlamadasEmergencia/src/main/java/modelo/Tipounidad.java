@@ -13,8 +13,7 @@ import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+
 import java.io.Serializable;
 import java.util.Collection;
 
@@ -48,21 +47,20 @@ public class Tipounidad implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 2)
+ 
+
     @Column(name = "TIPOUNIDAD")
     private String tipounidad;
-    @Size(max = 20)
+ 
     @Column(name = "NUMEROTELEFONO")
     private String numerotelefono;
 
-    @Size(max = 50)
+
     @Column(name = "LOCALIDAD")
     private String localidad;
 
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
+
     @Column(name = "NOMBREUNIDAD")
     private String nombreunidad;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipounidad")

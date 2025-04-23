@@ -17,8 +17,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collection;
@@ -43,20 +42,20 @@ public class Llamadas implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
-    @NotNull
+
     @Column(name = "NUMEROTELF")
     private BigDecimal numerotelf;
     @Basic(optional = false)
-    @NotNull
+
     @Column(name = "FECHAHORA")
     @Temporal(TemporalType.DATE)
     private Date fechahora;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
+  
+
     @Column(name = "UBICACION")
     private String ubicacion;
-    @Size(max = 255)
+
     @Column(name = "DESCRIPCION")
     private String descripcion;
     @JoinColumn(name = "ESTADO", referencedColumnName = "TIPOESTADO")

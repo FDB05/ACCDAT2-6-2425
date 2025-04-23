@@ -13,8 +13,7 @@ import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+
 import java.io.Serializable;
 import java.util.Collection;
 
@@ -33,13 +32,13 @@ public class Estado implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 2)
+    
+    
     @Column(name = "TIPOESTADO")
     private String tipoestado;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
+
+    
     @Column(name = "NOMBREESTADO")
     private String nombreestado;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "estado")

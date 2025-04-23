@@ -13,7 +13,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotNull;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 
@@ -33,7 +33,7 @@ public class Movilizaciones implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
-    @NotNull
+
     @Column(name = "IDMOVILIZACION")
     private BigDecimal idmovilizacion;
     @JoinColumn(name = "NUMEROTELF", referencedColumnName = "NUMEROTELF")
