@@ -16,6 +16,7 @@ import jakarta.persistence.Table;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 
 /**
  *
@@ -64,7 +65,8 @@ public class Tipounidad implements Serializable {
     @Column(name = "NOMBREUNIDAD")
     private String nombreunidad;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipounidad")
-    private Collection<Unidades> unidadesCollection;
+    private List<Unidades> unidadesCollection;
+
 
     public Tipounidad() {
     }
@@ -117,14 +119,13 @@ public class Tipounidad implements Serializable {
         this.localidad = localidad;
     }
 
-    public Collection<Unidades> getUnidadesCollection() {
+    public List<Unidades> getUnidadesCollection() {
         return unidadesCollection;
     }
 
-    public void setUnidadesCollection(Collection<Unidades> unidadesCollection) {
+    public void setUnidadesCollection(List<Unidades> unidadesCollection) {
         this.unidadesCollection = unidadesCollection;
     }
-
     @Override
     public int hashCode() {
         int hash = 0;

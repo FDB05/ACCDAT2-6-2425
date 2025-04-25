@@ -1359,29 +1359,40 @@ setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     }//GEN-LAST:event_BTNactualizarunidadesActionPerformed
 
     
+    private void rellenaComboEstado() {
+        CBestado.removeAllItems();
+        CBestado1.removeAllItems();
 
-    private void rellenaComboEstado(){
-          CBestado.removeAllItems();
-           CBestado.addItem("");
-           CBestado1.removeAllItems();
-        List<Object[]> estados=ModeloMaestro.LeerDataEstado();
-        for(Object[] estado:estados){
-            CBestado.addItem((String)estado[0]);
-            CBestado1.addItem((String)estado[0]);}
-    }
-    
-    private void rellenaComboTipoUnidad() {
-        CBtipounidad.removeAllItems();
-        CBtipounidad1.removeAllItems();
-        List<Object[]> tiposUnidad = ModeloMaestro.LeerDataTipoUnidad();
-        CBtipounidad.addItem("");
-        CBdisponibilidad1.addItem("");
-        for (Object[] tipo : tiposUnidad) {
-            CBtipounidad.addItem((String) tipo[0]);
-            CBtipounidad1.addItem((String) tipo[0]);
+        CBestado.addItem("");
+        CBestado1.addItem("");
 
+        List<Estado> estados = ModeloMaestro.LeerDataEstado();
+        for (Estado estado : estados) {
+            if (estado != null && estado.getTipoestado() != null) {
+                CBestado.addItem(estado.getTipoestado());
+                CBestado1.addItem(estado.getTipoestado());
+            }
         }
     }
+
+    
+   private void rellenaComboTipoUnidad() {
+    CBtipounidad.removeAllItems();
+    CBtipounidad1.removeAllItems();
+
+    List<Tipounidad> tiposUnidad = ModeloMaestro.LeerDataTipoUnidad();
+
+    CBtipounidad.addItem("");
+    CBtipounidad1.addItem("");
+
+    for (Tipounidad tipo : tiposUnidad) {
+        if (tipo != null && tipo.getTipounidad() != null) {
+            CBtipounidad.addItem(tipo.getTipounidad());
+            CBtipounidad1.addItem(tipo.getTipounidad());
+        }
+    }
+}
+
 
     
     /**

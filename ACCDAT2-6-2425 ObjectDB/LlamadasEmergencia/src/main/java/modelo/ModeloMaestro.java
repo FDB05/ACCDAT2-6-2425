@@ -11,6 +11,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.LockModeType;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
@@ -22,8 +23,10 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -187,26 +190,28 @@ emf.close();
 ///-------------------------
 //--------------------------
 ///-------------------------
-public static List<Object[]> LeerDataTipoUnidad() {
-        inicializaFactoryController();
-        TypedQuery<Object[]> query = em.createQuery(
-            "SELECT t.tipounidad, t.nombreunidad FROM Tipounidad t", 
-            Object[].class);
-        
-        List<Object[]> list = query.getResultList();
-        cierraFactoryController();
-        return list;
-    }
+public static List<Tipounidad> LeerDataTipoUnidad() {
+    inicializaFactoryController();
+    
+    TypedQuery<Tipounidad> query = em.createQuery(
+        "SELECT t FROM Tipounidad t", 
+        Tipounidad.class);
 
-   public static List<Object[]> LeerDataEstado() {
+    List<Tipounidad> list = query.getResultList();
+    cierraFactoryController();
+    return list;
+}
+
+
+
+   public static List<Estado> LeerDataEstado() {
     try {
         inicializaFactoryController();
-        TypedQuery<Object[]> query = em.createQuery(
-            "SELECT e.tipoestado, e.nombreestado FROM Estado e", 
-            Object[].class);
+        TypedQuery<Estado> query = em.createQuery(
+            "SELECT e FROM Estado e", 
+            Estado.class);
         
-        List<Object[]> list = query.getResultList();
-        return list;
+        return query.getResultList();
     } catch (Exception e) {
         e.printStackTrace(); 
         return new ArrayList<>(); 
@@ -214,6 +219,31 @@ public static List<Object[]> LeerDataTipoUnidad() {
         cierraFactoryController();
     }
 }
+
+//    public static void consultaDatosUsuarioConJPQL(int idUsuario){
+//                
+//        Usuarios usuario = null;
+//        
+//        TypedQuery<Usuarios> query = entitymanager.createQuery("Select u from Usuarios u WHERE u.idusuario=:IDUSUARIOP", Usuarios.class);
+//        query.setParameter("IDUSUARIOP", idUsuario);
+//        
+//
+//        try{
+//            usuario = query.getSingleResult();
+//        
+//            System.out.print("USUARIO \t");
+//            System.out.print("CONTRASEÑA");
+//            System.out.println();
+//
+//            System.out.print(usuario.getNombre()+"\t");
+//            System.out.print("\t"+usuario.getContra());
+//            System.out.println();
+//
+//                    
+//        } catch (NoResultException e){
+//            System.out.println("El usuario no existe");
+//        }
+//    }
 //-----------------------------------
 //-----------------------------------
 //-----------------------------------
@@ -406,39 +436,66 @@ public boolean insertaLlamada(int numtef,String fecha,String ubicacion,String de
 //---------------------------------
 
 public void inicializarDatos() {
-        inicializaFactoryController();
-        EntityTransaction transaction = em.getTransaction();
-        try {
-            transaction.begin();
+    inicializaFactoryController();  
+    EntityTransaction transaction = em.getTransaction();
+    try {
+        transaction.begin();  
 
-           
-            if (!datosExistentes("Estado")) {
-                insertarDatosEstado();
-            }
-
-            
-            if (!datosExistentes("TipoUnidad")) {
-                insertarDatosTipoUnidad();
-            }
-
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction.isActive()) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        } finally {
-            cierraFactoryController();
+        if (!datosExistentes("Estado")) {
+            insertarDatosEstado();  
         }
-    }
 
-    private boolean datosExistentes(String nombreTabla) {
-    Query query = em.createNativeQuery("SELECT COUNT(*) FROM " + nombreTabla);
-    BigDecimal count = (BigDecimal) query.getSingleResult(); 
-    return count.compareTo(BigDecimal.ZERO) > 0; 
+        if (!datosExistentes("TipoUnidad")) {
+            insertarDatosTipoUnidad(); 
+        }
+
+        transaction.commit(); 
+    } catch (Exception e) {
+        if (transaction.isActive()) {
+            transaction.rollback();  
+        }
+        e.printStackTrace();
+    } finally {
+        // Cierra el EntityManager solo después de finalizar la transacción
+        if (em != null && em.isOpen()) {
+            em.close();
+        }
+        
+        // Ahora podemos cerrar el EntityManagerFactory ya que no está en uso
+        cierraFactoryController();  
+    }
 }
 
-    private void insertarDatosEstado() {
+private boolean datosExistentes(String nombreTabla) {
+    // Mapea el nombre de la tabla a la consulta JPQL correspondiente
+    Map<String, String> tablaToEntityMap = new HashMap<>();
+    tablaToEntityMap.put("Tipounidad", "SELECT COUNT(t) FROM Tipounidad t");
+    tablaToEntityMap.put("Unidades", "SELECT COUNT(u) FROM Unidades u");
+    tablaToEntityMap.put("Estado", "SELECT COUNT(e) FROM Estado e");  // Agregar la entidad Estado
+    // Agregar más entradas según sea necesario
+
+    // Verifica si el nombre de la tabla existe en el mapa
+    String jpqlQuery = tablaToEntityMap.get(nombreTabla);
+    
+    if (jpqlQuery == null) {
+        throw new IllegalArgumentException("Tabla desconocida: " + nombreTabla);
+    }
+
+    // Ejecuta la consulta JPQL
+    Query query = em.createQuery(jpqlQuery);
+    Long count = (Long) query.getSingleResult();
+    return count > 0;
+}
+
+
+
+   private void insertarDatosEstado() {
+    // Verifica si ya hay una transacción activa antes de comenzar una nueva
+    if (!em.getTransaction().isActive()) {
+        em.getTransaction().begin();  // Solo comienza la transacción si no está activa
+    }
+
+    try {
         Estado estado1 = new Estado();
         estado1.setTipoestado("DE");
         estado1.setNombreestado("Denegado");
@@ -458,15 +515,32 @@ public void inicializarDatos() {
         estado4.setTipoestado("PC");
         estado4.setNombreestado("En proceso");
         em.persist(estado4);
+
+        // Confirmar los cambios con commit
+        em.getTransaction().commit();
+    } catch (Exception e) {
+        // En caso de error, hacer rollback
+        if (em.getTransaction().isActive()) {
+            em.getTransaction().rollback();
+        }
+        e.printStackTrace();
     }
+}
+
 
     private void insertarDatosTipoUnidad() {
+    // Verifica si ya hay una transacción activa antes de comenzar una nueva
+    if (!em.getTransaction().isActive()) {
+        em.getTransaction().begin();  // Solo comienza la transacción si no está activa
+    }
+
+    try {
         Tipounidad tipoUnidad1 = new Tipounidad();
         tipoUnidad1.setTipounidad("AM");
         tipoUnidad1.setNombreunidad("Ambulancia");
         tipoUnidad1.setNumerotelefono("112");
         tipoUnidad1.setLocalidad("Ciudad Real");
-        
+
         em.persist(tipoUnidad1);
 
         Tipounidad tipoUnidad2 = new Tipounidad();
@@ -482,7 +556,17 @@ public void inicializarDatos() {
         tipoUnidad3.setNumerotelefono("091");
         tipoUnidad3.setLocalidad("Ciudad Real");
         em.persist(tipoUnidad3);
+
+        // Confirmar los cambios con commit
+        em.getTransaction().commit();
+    } catch (Exception e) {
+        // En caso de error, hacer rollback
+        if (em.getTransaction().isActive()) {
+            em.getTransaction().rollback();
+        }
+        e.printStackTrace();
     }
+}
     
     //JULIAN
     

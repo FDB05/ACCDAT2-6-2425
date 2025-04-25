@@ -43,7 +43,7 @@ public class TipounidadJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Collection<Unidades> attachedUnidadesCollection = new ArrayList<Unidades>();
+            List<Unidades> attachedUnidadesCollection = new ArrayList<Unidades>();
             for (Unidades unidadesCollectionUnidadesToAttach : tipounidad.getUnidadesCollection()) {
                 unidadesCollectionUnidadesToAttach = em.getReference(unidadesCollectionUnidadesToAttach.getClass(), unidadesCollectionUnidadesToAttach.getNumerounidad());
                 attachedUnidadesCollection.add(unidadesCollectionUnidadesToAttach);
@@ -78,8 +78,8 @@ public class TipounidadJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             Tipounidad persistentTipounidad = em.find(Tipounidad.class, tipounidad.getTipounidad());
-            Collection<Unidades> unidadesCollectionOld = persistentTipounidad.getUnidadesCollection();
-            Collection<Unidades> unidadesCollectionNew = tipounidad.getUnidadesCollection();
+            List<Unidades> unidadesCollectionOld = persistentTipounidad.getUnidadesCollection();
+            List<Unidades> unidadesCollectionNew = tipounidad.getUnidadesCollection();
             List<String> illegalOrphanMessages = null;
             for (Unidades unidadesCollectionOldUnidades : unidadesCollectionOld) {
                 if (!unidadesCollectionNew.contains(unidadesCollectionOldUnidades)) {
@@ -92,7 +92,7 @@ public class TipounidadJpaController implements Serializable {
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
             }
-            Collection<Unidades> attachedUnidadesCollectionNew = new ArrayList<Unidades>();
+            List<Unidades> attachedUnidadesCollectionNew = new ArrayList<Unidades>();
             for (Unidades unidadesCollectionNewUnidadesToAttach : unidadesCollectionNew) {
                 unidadesCollectionNewUnidadesToAttach = em.getReference(unidadesCollectionNewUnidadesToAttach.getClass(), unidadesCollectionNewUnidadesToAttach.getNumerounidad());
                 attachedUnidadesCollectionNew.add(unidadesCollectionNewUnidadesToAttach);

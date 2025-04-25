@@ -16,6 +16,7 @@ import jakarta.persistence.Table;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 
 /**
  *
@@ -42,7 +43,7 @@ public class Estado implements Serializable {
     @Column(name = "NOMBREESTADO")
     private String nombreestado;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "estado")
-    private Collection<Llamadas> llamadasCollection;
+    private List<Llamadas> llamadasCollection;
 
     public Estado() {
     }
@@ -73,13 +74,13 @@ public class Estado implements Serializable {
     }
 
     
-    public Collection<Llamadas> getLlamadasCollection() {
-        return llamadasCollection;
-    }
+ public List<Llamadas> getLlamadasCollection() {
+    return llamadasCollection;
+}
 
-    public void setLlamadasCollection(Collection<Llamadas> llamadasCollection) {
-        this.llamadasCollection = llamadasCollection;
-    }
+public void setLlamadasCollection(List<Llamadas> llamadasCollection) {
+    this.llamadasCollection = llamadasCollection;
+}
 
     @Override
     public int hashCode() {

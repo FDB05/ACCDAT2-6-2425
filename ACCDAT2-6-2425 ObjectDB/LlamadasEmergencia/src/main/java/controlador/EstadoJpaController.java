@@ -37,97 +37,104 @@ public class EstadoJpaController implements Serializable {
     }
 
     public void create(Estado estado) throws PreexistingEntityException, Exception {
-        if (estado.getLlamadasCollection() == null) {
-            estado.setLlamadasCollection(new ArrayList<Llamadas>());
+    if (estado.getLlamadasCollection() == null) {
+        estado.setLlamadasCollection(new ArrayList<Llamadas>());
+    }
+    EntityManager em = null;
+    try {
+        em = getEntityManager();
+        em.getTransaction().begin();
+        List<Llamadas> attachedLlamadasCollection = new ArrayList<>();
+        for (Llamadas llamadasCollectionLlamadasToAttach : estado.getLlamadasCollection()) {
+            llamadasCollectionLlamadasToAttach = em.getReference(llamadasCollectionLlamadasToAttach.getClass(), llamadasCollectionLlamadasToAttach.getNumerotelf());
+            attachedLlamadasCollection.add(llamadasCollectionLlamadasToAttach);
         }
-        EntityManager em = null;
-        try {
-            em = getEntityManager();
-            em.getTransaction().begin();
-            Collection<Llamadas> attachedLlamadasCollection = new ArrayList<Llamadas>();
-            for (Llamadas llamadasCollectionLlamadasToAttach : estado.getLlamadasCollection()) {
-                llamadasCollectionLlamadasToAttach = em.getReference(llamadasCollectionLlamadasToAttach.getClass(), llamadasCollectionLlamadasToAttach.getNumerotelf());
-                attachedLlamadasCollection.add(llamadasCollectionLlamadasToAttach);
+        estado.setLlamadasCollection(attachedLlamadasCollection);
+        em.persist(estado);
+        for (Llamadas llamadasCollectionLlamadas : estado.getLlamadasCollection()) {
+            Estado oldEstado = llamadasCollectionLlamadas.getEstado();
+            llamadasCollectionLlamadas.setEstado(estado);
+            llamadasCollectionLlamadas = em.merge(llamadasCollectionLlamadas);
+            if (oldEstado != null) {
+                oldEstado.getLlamadasCollection().remove(llamadasCollectionLlamadas);
+                oldEstado = em.merge(oldEstado);
             }
-            estado.setLlamadasCollection(attachedLlamadasCollection);
-            em.persist(estado);
-            for (Llamadas llamadasCollectionLlamadas : estado.getLlamadasCollection()) {
-                Estado oldEstadoOfLlamadasCollectionLlamadas = llamadasCollectionLlamadas.getEstado();
-                llamadasCollectionLlamadas.setEstado(estado);
-                llamadasCollectionLlamadas = em.merge(llamadasCollectionLlamadas);
-                if (oldEstadoOfLlamadasCollectionLlamadas != null) {
-                    oldEstadoOfLlamadasCollectionLlamadas.getLlamadasCollection().remove(llamadasCollectionLlamadas);
-                    oldEstadoOfLlamadasCollectionLlamadas = em.merge(oldEstadoOfLlamadasCollectionLlamadas);
-                }
-            }
-            em.getTransaction().commit();
-        } catch (Exception ex) {
-            if (findEstado(estado.getTipoestado()) != null) {
-                throw new PreexistingEntityException("Estado " + estado + " already exists.", ex);
-            }
-            throw ex;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
+        }
+        em.getTransaction().commit();
+    } catch (Exception ex) {
+        if (findEstado(estado.getTipoestado()) != null) {
+            throw new PreexistingEntityException("Estado " + estado + " already exists.", ex);
+        }
+        throw ex;
+    } finally {
+        if (em != null) {
+            em.close();
         }
     }
+}
 
-    public void edit(Estado estado) throws IllegalOrphanException, NonexistentEntityException, Exception {
-        EntityManager em = null;
-        try {
-            em = getEntityManager();
-            em.getTransaction().begin();
-            Estado persistentEstado = em.find(Estado.class, estado.getTipoestado());
-            Collection<Llamadas> llamadasCollectionOld = persistentEstado.getLlamadasCollection();
-            Collection<Llamadas> llamadasCollectionNew = estado.getLlamadasCollection();
-            List<String> illegalOrphanMessages = null;
-            for (Llamadas llamadasCollectionOldLlamadas : llamadasCollectionOld) {
-                if (!llamadasCollectionNew.contains(llamadasCollectionOldLlamadas)) {
-                    if (illegalOrphanMessages == null) {
-                        illegalOrphanMessages = new ArrayList<String>();
-                    }
-                    illegalOrphanMessages.add("You must retain Llamadas " + llamadasCollectionOldLlamadas + " since its estado field is not nullable.");
+
+ public void edit(Estado estado) throws IllegalOrphanException, NonexistentEntityException, Exception {
+    EntityManager em = null;
+    try {
+        em = getEntityManager();
+        em.getTransaction().begin();
+        Estado persistentEstado = em.find(Estado.class, estado.getTipoestado());
+        List<Llamadas> llamadasCollectionOld = persistentEstado.getLlamadasCollection();
+        List<Llamadas> llamadasCollectionNew = estado.getLlamadasCollection();
+
+        List<String> illegalOrphanMessages = null;
+        for (Llamadas llamadasOld : llamadasCollectionOld) {
+            if (!llamadasCollectionNew.contains(llamadasOld)) {
+                if (illegalOrphanMessages == null) {
+                    illegalOrphanMessages = new ArrayList<>();
                 }
-            }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
-            }
-            Collection<Llamadas> attachedLlamadasCollectionNew = new ArrayList<Llamadas>();
-            for (Llamadas llamadasCollectionNewLlamadasToAttach : llamadasCollectionNew) {
-                llamadasCollectionNewLlamadasToAttach = em.getReference(llamadasCollectionNewLlamadasToAttach.getClass(), llamadasCollectionNewLlamadasToAttach.getNumerotelf());
-                attachedLlamadasCollectionNew.add(llamadasCollectionNewLlamadasToAttach);
-            }
-            llamadasCollectionNew = attachedLlamadasCollectionNew;
-            estado.setLlamadasCollection(llamadasCollectionNew);
-            estado = em.merge(estado);
-            for (Llamadas llamadasCollectionNewLlamadas : llamadasCollectionNew) {
-                if (!llamadasCollectionOld.contains(llamadasCollectionNewLlamadas)) {
-                    Estado oldEstadoOfLlamadasCollectionNewLlamadas = llamadasCollectionNewLlamadas.getEstado();
-                    llamadasCollectionNewLlamadas.setEstado(estado);
-                    llamadasCollectionNewLlamadas = em.merge(llamadasCollectionNewLlamadas);
-                    if (oldEstadoOfLlamadasCollectionNewLlamadas != null && !oldEstadoOfLlamadasCollectionNewLlamadas.equals(estado)) {
-                        oldEstadoOfLlamadasCollectionNewLlamadas.getLlamadasCollection().remove(llamadasCollectionNewLlamadas);
-                        oldEstadoOfLlamadasCollectionNewLlamadas = em.merge(oldEstadoOfLlamadasCollectionNewLlamadas);
-                    }
-                }
-            }
-            em.getTransaction().commit();
-        } catch (Exception ex) {
-            String msg = ex.getLocalizedMessage();
-            if (msg == null || msg.length() == 0) {
-                String id = estado.getTipoestado();
-                if (findEstado(id) == null) {
-                    throw new NonexistentEntityException("The estado with id " + id + " no longer exists.");
-                }
-            }
-            throw ex;
-        } finally {
-            if (em != null) {
-                em.close();
+                illegalOrphanMessages.add("You must retain Llamadas " + llamadasOld + " since its estado field is not nullable.");
             }
         }
+
+        if (illegalOrphanMessages != null) {
+            throw new IllegalOrphanException(illegalOrphanMessages);
+        }
+
+        List<Llamadas> attachedLlamadasCollectionNew = new ArrayList<>();
+        for (Llamadas llamadasNewToAttach : llamadasCollectionNew) {
+            llamadasNewToAttach = em.getReference(llamadasNewToAttach.getClass(), llamadasNewToAttach.getNumerotelf());
+            attachedLlamadasCollectionNew.add(llamadasNewToAttach);
+        }
+        llamadasCollectionNew = attachedLlamadasCollectionNew;
+        estado.setLlamadasCollection(llamadasCollectionNew);
+        estado = em.merge(estado);
+
+        for (Llamadas llamadasNew : llamadasCollectionNew) {
+            if (!llamadasCollectionOld.contains(llamadasNew)) {
+                Estado oldEstado = llamadasNew.getEstado();
+                llamadasNew.setEstado(estado);
+                llamadasNew = em.merge(llamadasNew);
+                if (oldEstado != null && !oldEstado.equals(estado)) {
+                    oldEstado.getLlamadasCollection().remove(llamadasNew);
+                    oldEstado = em.merge(oldEstado);
+                }
+            }
+        }
+
+        em.getTransaction().commit();
+    } catch (Exception ex) {
+        String msg = ex.getLocalizedMessage();
+        if (msg == null || msg.length() == 0) {
+            String id = estado.getTipoestado();
+            if (findEstado(id) == null) {
+                throw new NonexistentEntityException("The estado with id " + id + " no longer exists.");
+            }
+        }
+        throw ex;
+    } finally {
+        if (em != null) {
+            em.close();
+        }
     }
+}
+
 
     public void destroy(String id) throws IllegalOrphanException, NonexistentEntityException {
         EntityManager em = null;
