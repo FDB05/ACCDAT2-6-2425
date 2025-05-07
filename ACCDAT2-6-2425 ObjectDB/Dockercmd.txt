@@ -1,0 +1,2 @@
+docker load -i "C:\Users\julia\Downloads\imagen_objectdb292.tar"
+docker run -p 6136:6136 --name objectdb292 -it imagen_objectdb292
