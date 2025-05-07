@@ -74,14 +74,23 @@ public class EstadoJpaController implements Serializable {
 }
 
 
- public void edit(Estado estado) throws IllegalOrphanException, NonexistentEntityException, Exception {
+public void edit(Estado estado) throws IllegalOrphanException, NonexistentEntityException, Exception {
     EntityManager em = null;
     try {
         em = getEntityManager();
         em.getTransaction().begin();
+
         Estado persistentEstado = em.find(Estado.class, estado.getTipoestado());
+
         List<Llamadas> llamadasCollectionOld = persistentEstado.getLlamadasCollection();
+        if (llamadasCollectionOld == null) {
+            llamadasCollectionOld = new ArrayList<>();
+        }
+
         List<Llamadas> llamadasCollectionNew = estado.getLlamadasCollection();
+        if (llamadasCollectionNew == null) {
+            llamadasCollectionNew = new ArrayList<>();
+        }
 
         List<String> illegalOrphanMessages = null;
         for (Llamadas llamadasOld : llamadasCollectionOld) {
@@ -99,9 +108,13 @@ public class EstadoJpaController implements Serializable {
 
         List<Llamadas> attachedLlamadasCollectionNew = new ArrayList<>();
         for (Llamadas llamadasNewToAttach : llamadasCollectionNew) {
-            llamadasNewToAttach = em.getReference(llamadasNewToAttach.getClass(), llamadasNewToAttach.getNumerotelf());
+            llamadasNewToAttach = em.getReference(
+                llamadasNewToAttach.getClass(),
+                llamadasNewToAttach.getNumerotelf()
+            );
             attachedLlamadasCollectionNew.add(llamadasNewToAttach);
         }
+
         llamadasCollectionNew = attachedLlamadasCollectionNew;
         estado.setLlamadasCollection(llamadasCollectionNew);
         estado = em.merge(estado);
@@ -112,8 +125,12 @@ public class EstadoJpaController implements Serializable {
                 llamadasNew.setEstado(estado);
                 llamadasNew = em.merge(llamadasNew);
                 if (oldEstado != null && !oldEstado.equals(estado)) {
-                    oldEstado.getLlamadasCollection().remove(llamadasNew);
-                    oldEstado = em.merge(oldEstado);
+                    List<Llamadas> oldList = oldEstado.getLlamadasCollection();
+                    if (oldList != null) {
+                        oldList.remove(llamadasNew);
+                        oldEstado.setLlamadasCollection(oldList);
+                        em.merge(oldEstado);
+                    }
                 }
             }
         }
@@ -136,37 +153,47 @@ public class EstadoJpaController implements Serializable {
 }
 
 
-    public void destroy(String id) throws IllegalOrphanException, NonexistentEntityException {
-        EntityManager em = null;
+
+public void destroy(String id) throws IllegalOrphanException, NonexistentEntityException {
+    EntityManager em = null;
+    try {
+        em = getEntityManager();
+        em.getTransaction().begin();
+        Estado estado;
         try {
-            em = getEntityManager();
-            em.getTransaction().begin();
-            Estado estado;
-            try {
-                estado = em.getReference(Estado.class, id);
-                estado.getTipoestado();
-            } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The estado with id " + id + " no longer exists.", enfe);
-            }
-            List<String> illegalOrphanMessages = null;
-            Collection<Llamadas> llamadasCollectionOrphanCheck = estado.getLlamadasCollection();
-            for (Llamadas llamadasCollectionOrphanCheckLlamadas : llamadasCollectionOrphanCheck) {
+            estado = em.getReference(Estado.class, id);
+            estado.getTipoestado(); // Asegura que está cargado
+        } catch (EntityNotFoundException enfe) {
+            throw new NonexistentEntityException("El estado con id " + id + " ya no existe.", enfe);
+        }
+
+        List<String> illegalOrphanMessages = null;
+        Collection<Llamadas> llamadasCollectionOrphanCheck = estado.getLlamadasCollection();
+
+        if (llamadasCollectionOrphanCheck != null) {
+            for (Llamadas llamada : llamadasCollectionOrphanCheck) {
                 if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<String>();
+                    illegalOrphanMessages = new ArrayList<>();
                 }
-                illegalOrphanMessages.add("This Estado (" + estado + ") cannot be destroyed since the Llamadas " + llamadasCollectionOrphanCheckLlamadas + " in its llamadasCollection field has a non-nullable estado field.");
-            }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
-            }
-            em.remove(estado);
-            em.getTransaction().commit();
-        } finally {
-            if (em != null) {
-                em.close();
+                illegalOrphanMessages.add("No se puede eliminar el Estado (" + estado.getTipoestado() +
+                        ") porque la llamada (" + llamada.getEstado()+
+                        ") aún está asociada y su campo estado no puede ser nulo.");
             }
         }
+
+        if (illegalOrphanMessages != null) {
+            throw new IllegalOrphanException(illegalOrphanMessages);
+        }
+
+        em.remove(estado);
+        em.getTransaction().commit();
+    } finally {
+        if (em != null) {
+            em.close();
+        }
     }
+}
+
 
     public List<Estado> findEstadoEntities() {
         return findEstadoEntities(true, -1, -1);

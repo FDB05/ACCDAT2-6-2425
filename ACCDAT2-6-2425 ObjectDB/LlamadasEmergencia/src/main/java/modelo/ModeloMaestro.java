@@ -445,7 +445,7 @@ public void inicializarDatos() {
             insertarDatosEstado();  
         }
 
-        if (!datosExistentes("TipoUnidad")) {
+        if (!datosExistentes("Tipounidad")) {
             insertarDatosTipoUnidad(); 
         }
 
@@ -489,84 +489,53 @@ private boolean datosExistentes(String nombreTabla) {
 
 
 
-   private void insertarDatosEstado() {
-    // Verifica si ya hay una transacción activa antes de comenzar una nueva
-    if (!em.getTransaction().isActive()) {
-        em.getTransaction().begin();  // Solo comienza la transacción si no está activa
-    }
+  private void insertarDatosEstado() {
+    Estado estado1 = new Estado();
+    estado1.setTipoestado("DE");
+    estado1.setNombreestado("Denegado");
+    em.persist(estado1);
 
-    try {
-        Estado estado1 = new Estado();
-        estado1.setTipoestado("DE");
-        estado1.setNombreestado("Denegado");
-        em.persist(estado1);
+    Estado estado2 = new Estado();
+    estado2.setTipoestado("AT");
+    estado2.setNombreestado("Atendida");
+    em.persist(estado2);
 
-        Estado estado2 = new Estado();
-        estado2.setTipoestado("AT");
-        estado2.setNombreestado("Atendida");
-        em.persist(estado2);
+    Estado estado3 = new Estado();
+    estado3.setTipoestado("NT");
+    estado3.setNombreestado("Sin atender");
+    em.persist(estado3);
 
-        Estado estado3 = new Estado();
-        estado3.setTipoestado("NT");
-        estado3.setNombreestado("Sin atender");
-        em.persist(estado3);
-
-        Estado estado4 = new Estado();
-        estado4.setTipoestado("PC");
-        estado4.setNombreestado("En proceso");
-        em.persist(estado4);
-
-        // Confirmar los cambios con commit
-        em.getTransaction().commit();
-    } catch (Exception e) {
-        // En caso de error, hacer rollback
-        if (em.getTransaction().isActive()) {
-            em.getTransaction().rollback();
-        }
-        e.printStackTrace();
-    }
+    Estado estado4 = new Estado();
+    estado4.setTipoestado("PC");
+    estado4.setNombreestado("En proceso");
+    em.persist(estado4);
 }
+
 
 
     private void insertarDatosTipoUnidad() {
-    // Verifica si ya hay una transacción activa antes de comenzar una nueva
-    if (!em.getTransaction().isActive()) {
-        em.getTransaction().begin();  // Solo comienza la transacción si no está activa
-    }
+    Tipounidad tipoUnidad1 = new Tipounidad();
+    tipoUnidad1.setTipounidad("AM");
+    tipoUnidad1.setNombreunidad("Ambulancia");
+    tipoUnidad1.setNumerotelefono("112");
+    tipoUnidad1.setLocalidad("Ciudad Real");
+    em.persist(tipoUnidad1);
 
-    try {
-        Tipounidad tipoUnidad1 = new Tipounidad();
-        tipoUnidad1.setTipounidad("AM");
-        tipoUnidad1.setNombreunidad("Ambulancia");
-        tipoUnidad1.setNumerotelefono("112");
-        tipoUnidad1.setLocalidad("Ciudad Real");
+    Tipounidad tipoUnidad2 = new Tipounidad();
+    tipoUnidad2.setTipounidad("BM");
+    tipoUnidad2.setNombreunidad("Bombero");
+    tipoUnidad2.setNumerotelefono("1006");
+    tipoUnidad2.setLocalidad("Ciudad Real");
+    em.persist(tipoUnidad2);
 
-        em.persist(tipoUnidad1);
-
-        Tipounidad tipoUnidad2 = new Tipounidad();
-        tipoUnidad2.setTipounidad("BM");
-        tipoUnidad2.setNombreunidad("Bombero");
-        tipoUnidad2.setNumerotelefono("1006");
-        tipoUnidad2.setLocalidad("Ciudad Real");
-        em.persist(tipoUnidad2);
-
-        Tipounidad tipoUnidad3 = new Tipounidad();
-        tipoUnidad3.setTipounidad("PN");
-        tipoUnidad3.setNombreunidad("Policia Nacional");
-        tipoUnidad3.setNumerotelefono("091");
-        tipoUnidad3.setLocalidad("Ciudad Real");
-        em.persist(tipoUnidad3);
-
-        // Confirmar los cambios con commit
-        em.getTransaction().commit();
-    } catch (Exception e) {
-        // En caso de error, hacer rollback
-        if (em.getTransaction().isActive()) {
-            em.getTransaction().rollback();
-        }
-        e.printStackTrace();
-    }
+    Tipounidad tipoUnidad3 = new Tipounidad();
+    tipoUnidad3.setTipounidad("PN");
+    tipoUnidad3.setNombreunidad("Policía Nacional");
+    tipoUnidad3.setNumerotelefono("091");
+    tipoUnidad3.setLocalidad("Ciudad Real");
+    em.persist(tipoUnidad3);
 }
+
     
     //JULIAN
     
@@ -596,20 +565,28 @@ private boolean datosExistentes(String nombreTabla) {
     inicializaFactoryController();
     TipounidadJpaController tipounidadJpaController = new TipounidadJpaController(emf);
 
-    Tipounidad tipoUnidad = tipounidadJpaController.findTipounidad(tipo);  // Buscar tipo de unidad
+    Tipounidad tipoUnidad = tipounidadJpaController.findTipounidad(tipo);  
 
     if (tipoUnidad != null) {
         try {
-            tipounidadJpaController.destroy(tipo);  // Eliminar tipo de unidad
-        } catch (IllegalOrphanException ex) {
-            Logger.getLogger(ModeloMaestro.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NonexistentEntityException ex) {
+            // Eliminar unidades asociadas si las hay
+            if (tipoUnidad.getUnidadesCollection() != null) {
+                for (Unidades u : tipoUnidad.getUnidadesCollection()) {
+                    em.getTransaction().begin();
+                    em.remove(em.contains(u) ? u : em.merge(u));
+                    em.getTransaction().commit();
+                }
+            }
+
+            tipounidadJpaController.destroy(tipo);  // Ahora puedes eliminarla
+        } catch (IllegalOrphanException | NonexistentEntityException ex) {
             Logger.getLogger(ModeloMaestro.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             cierraFactoryController();
         }
     }
 }
+
 
 
 public void modificarTipoUnidad(String tipo, String nombre) {
@@ -681,8 +658,16 @@ public void modificarEstado(String tipo, String nombre) {
     }
     cierraFactoryController();
 }
+public List<Estado> cargarEstados() {
+    inicializaFactoryController();
+    TypedQuery<Estado> query = em.createQuery("SELECT e FROM Estado e", Estado.class);
+    List<Estado> list = query.getResultList();
+    cierraFactoryController();
+    return list;
+}
 
-/*public List<Object[]> cargarEstado() {
+
+public List<Object[]> cargarEstado() {
     inicializaFactoryController();
     TypedQuery<Object[]> query = em.createQuery(
         "SELECT e.tipoestado, e.nombreestado FROM Estado e", 
@@ -691,7 +676,7 @@ public void modificarEstado(String tipo, String nombre) {
     List<Object[]> list = query.getResultList();
     cierraFactoryController();
     return list;
-}*/
+}
 public List<Estado> buscarEstadosFiltrados(String tipo, String nombre) {
     inicializaFactoryController();
     EstadoJpaController estadoJpaController = new EstadoJpaController(emf);

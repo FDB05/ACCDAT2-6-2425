@@ -1750,6 +1750,12 @@ public void setCBunidadLocalidad(List<String> localidades) {
         CBunidadlocalidad.addItem(l);
     }
 }
+/*public void actualizarComboEstados(List<Estado> lista) {
+    cb.removeAllItems();
+    for (Estado estado : lista) {
+        comboEstado.addItem(estado.getNombreestado());
+    }
+}*/
 
 
 

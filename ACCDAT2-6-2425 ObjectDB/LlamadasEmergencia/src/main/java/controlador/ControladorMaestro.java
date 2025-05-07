@@ -67,65 +67,65 @@ public class ControladorMaestro implements ActionListener {
                 query = modelo.filtrarUnidadesPorTipoUnidadDisponibilidad(tUnidad, estado);
             } 
 
-            vista.cargarTablaUnidades(query); 
-            break;
-        }
-       case InterfazVista.INSERTARUNIDAD->{
-            int nUnidad = vista.getNunidad1(); 
-            String tUnidad = vista.getBtipoUnidad1(); 
-            boolean estado = Boolean.parseBoolean(vista.getBdisponibilidad1()); 
-            
-           boolean existe= modelo.insertaUnidad(nUnidad, estado, tUnidad);
-            vista.soltarPopApp(existe);
-       }
-       case InterfazVista.INSERTARLLAMADAS->{
-       String estado = vista.getCBestado1();
-            int numT = vista.getNtelefono1();
-            String fecha = vista.getFecha1();
-            String descripcion=vista.getDescripcion();
-            String ubicacion=vista.getUbicacion();
-            
-           boolean existe= modelo.insertaLlamada(numT, fecha, ubicacion, descripcion, estado);
-                        vista.soltarPopApp(existe);
+                vista.cargarTablaUnidades(query);
+                break;
+            }
+            case InterfazVista.INSERTARUNIDAD -> {
+                int nUnidad = vista.getNunidad1();
+                String tUnidad = vista.getBtipoUnidad1();
+                boolean estado = Boolean.parseBoolean(vista.getBdisponibilidad1());
 
-       }
-       case InterfazVista.ELIMINARUNALLAMADA->{
-           int numtef=vista.getNtelefono1();
-           modelo.eliminarLlamada(numtef);
-       }
-       case InterfazVista.ELIMINARUNAUNIDAD->{
-       int numUnida=vista.getNtelefono1();
-       modelo.eliminarUnidad(numUnida);
-       }
-       case InterfazVista.MODIFICARUNALLAMADA->{
-       String estado = vista.getCBestado1();
-            int numT = vista.getNtelefono1();
-            String fecha = vista.getFecha1();
-            String descripcion=vista.getDescripcion();
-            String ubicacion=vista.getUbicacion();
-            
-            modelo.modificarLlamada(numT, fecha, ubicacion, descripcion, estado);
-       }
-       
-       case InterfazVista.MODIFICARUNAUNIDAD->{
-            int nUnidad = vista.getNunidad1(); 
-            String tUnidad = vista.getBtipoUnidad1(); 
-            
-            boolean estado = Boolean.parseBoolean(vista.getBdisponibilidad1()); 
-            
-            modelo.modificarUnidad(nUnidad, estado, tUnidad);
-       }
+                boolean existe = modelo.insertaUnidad(nUnidad, estado, tUnidad);
+                vista.soltarPopApp(existe);
+            }
+            case InterfazVista.INSERTARLLAMADAS -> {
+                String estado = vista.getCBestado1();
+                int numT = vista.getNtelefono1();
+                String fecha = vista.getFecha1();
+                String descripcion = vista.getDescripcion();
+                String ubicacion = vista.getUbicacion();
 
-          //JULIAN
-          case InterfazVista.INSERTARTIPO -> {
-              String tipo = vista.getTipoUnidad();
-              String nombre = vista.getNombreUnidad();
-              String telefono = vista.getNumeroTelefono(); // 
-              String localidad = vista.getLocalidad();     // 
-              boolean existe = modelo.insertaTipoUnidad(tipo, nombre, telefono, localidad);
-              vista.soltarPopApp(existe);
-              
-          }
+                boolean existe = modelo.insertaLlamada(numT, fecha, ubicacion, descripcion, estado);
+                vista.soltarPopApp(existe);
+
+            }
+            case InterfazVista.ELIMINARUNALLAMADA -> {
+                int numtef = vista.getNtelefono1();
+                modelo.eliminarLlamada(numtef);
+            }
+            case InterfazVista.ELIMINARUNAUNIDAD -> {
+                int numUnida = vista.getNtelefono1();
+                modelo.eliminarUnidad(numUnida);
+            }
+            case InterfazVista.MODIFICARUNALLAMADA -> {
+                String estado = vista.getCBestado1();
+                int numT = vista.getNtelefono1();
+                String fecha = vista.getFecha1();
+                String descripcion = vista.getDescripcion();
+                String ubicacion = vista.getUbicacion();
+
+                modelo.modificarLlamada(numT, fecha, ubicacion, descripcion, estado);
+            }
+
+            case InterfazVista.MODIFICARUNAUNIDAD -> {
+                int nUnidad = vista.getNunidad1();
+                String tUnidad = vista.getBtipoUnidad1();
+
+                boolean estado = Boolean.parseBoolean(vista.getBdisponibilidad1());
+
+                modelo.modificarUnidad(nUnidad, estado, tUnidad);
+            }
+
+            //JULIAN
+            case InterfazVista.INSERTARTIPO -> {
+                String tipo = vista.getTipoUnidad();
+                String nombre = vista.getNombreUnidad();
+                String telefono = vista.getNumeroTelefono(); // 
+                String localidad = vista.getLocalidad();     // 
+                boolean existe = modelo.insertaTipoUnidad(tipo, nombre, telefono, localidad);
+                vista.soltarPopApp(existe);
+
+            }
 
             case InterfazVista.ELIMINARTIPO -> {
                 String tipoUnidad = vista.getTipoUnidad();
@@ -150,7 +150,7 @@ public class ControladorMaestro implements ActionListener {
                 String localidad = vista.getUnidadLocalidadSeleccionado();
 
                 List<Tipounidad> resultados = modelo.buscarTipoUnidadFiltrado(telefono, localidad);
-                vista.cargarTablaTipoUnidad(resultados); 
+                vista.cargarTablaTipoUnidad(resultados);
             }
 
             case InterfazVista.INSERTARESTADO -> {
@@ -158,36 +158,39 @@ public class ControladorMaestro implements ActionListener {
                 String nombreEstado = vista.getNombreEstado();
                 boolean existeEstado = modelo.insertaEstado(tipoEstado, nombreEstado);
                 vista.soltarPopApp(existeEstado);
+
+                // 🔁 Cargar todos los estados desde la BD
             }
 
             case InterfazVista.MODIFICARESTADO -> {
-                String tipoEstadoMod = vista.getTipoEstado();  
-                String nombreEstadoMod = vista.getNombreEstado();  
-                modelo.modificarEstado(tipoEstadoMod, nombreEstadoMod);  
+                String tipoEstadoMod = vista.getTipoEstado();
+                String nombreEstadoMod = vista.getNombreEstado();
+                modelo.modificarEstado(tipoEstadoMod, nombreEstadoMod);
             }
 
             case InterfazVista.CARGARESTADO -> {
                 String tipoSeleccionado = vista.getTipoEstado();
                 String nombreBusqueda = vista.getNombreEstado();
 
-                List<Estado> resultados = modelo.buscarEstadosFiltrados(tipoSeleccionado, nombreBusqueda);
-              vista.cargarTablaEstado(resultados);
-          }
-          case InterfazVista.ACTUALIZATIPOUNIDAD -> {
-              List<String> telefonos = modelo.obtenerTelefonosUnicos();
-              List<String> localidades = modelo.obtenerLocalidadesUnicas();
+                List<Estado> estadosActualizados = modelo.cargarEstados();
 
-              vista.setCBunidadTelefono(telefonos);
-              vista.setCBunidadLocalidad(localidades);
+                // 🔁 Actualizar la tabla con los datos
+                vista.cargarTablaEstado(estadosActualizados);
+            }
+            case InterfazVista.ACTUALIZATIPOUNIDAD -> {
+                List<String> telefonos = modelo.obtenerTelefonosUnicos();
+                List<String> localidades = modelo.obtenerLocalidadesUnicas();
 
-          }
+                vista.setCBunidadTelefono(telefonos);
+                vista.setCBunidadLocalidad(localidades);
+
+            }
 
             case InterfazVista.ELIMINARESTADO -> {
-                String tipoEstado = vista.getTipoEstado(); 
+                String tipoEstado = vista.getTipoEstado();
 
-                
                 modelo.eliminarEstado(tipoEstado);
-                vista.soltarPopApp(true); 
+                vista.soltarPopApp(true);
             }
 
         }

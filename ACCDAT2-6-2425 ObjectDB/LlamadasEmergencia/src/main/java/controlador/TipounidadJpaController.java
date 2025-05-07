@@ -73,92 +73,124 @@ public class TipounidadJpaController implements Serializable {
     }
 
     public void edit(Tipounidad tipounidad) throws IllegalOrphanException, NonexistentEntityException, Exception {
-        EntityManager em = null;
-        try {
-            em = getEntityManager();
-            em.getTransaction().begin();
-            Tipounidad persistentTipounidad = em.find(Tipounidad.class, tipounidad.getTipounidad());
-            List<Unidades> unidadesCollectionOld = persistentTipounidad.getUnidadesCollection();
-            List<Unidades> unidadesCollectionNew = tipounidad.getUnidadesCollection();
-            List<String> illegalOrphanMessages = null;
-            for (Unidades unidadesCollectionOldUnidades : unidadesCollectionOld) {
-                if (!unidadesCollectionNew.contains(unidadesCollectionOldUnidades)) {
-                    if (illegalOrphanMessages == null) {
-                        illegalOrphanMessages = new ArrayList<String>();
-                    }
-                    illegalOrphanMessages.add("You must retain Unidades " + unidadesCollectionOldUnidades + " since its tipounidad field is not nullable.");
-                }
-            }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
-            }
-            List<Unidades> attachedUnidadesCollectionNew = new ArrayList<Unidades>();
-            for (Unidades unidadesCollectionNewUnidadesToAttach : unidadesCollectionNew) {
-                unidadesCollectionNewUnidadesToAttach = em.getReference(unidadesCollectionNewUnidadesToAttach.getClass(), unidadesCollectionNewUnidadesToAttach.getNumerounidad());
-                attachedUnidadesCollectionNew.add(unidadesCollectionNewUnidadesToAttach);
-            }
-            unidadesCollectionNew = attachedUnidadesCollectionNew;
-            tipounidad.setUnidadesCollection(unidadesCollectionNew);
-            tipounidad = em.merge(tipounidad);
-            for (Unidades unidadesCollectionNewUnidades : unidadesCollectionNew) {
-                if (!unidadesCollectionOld.contains(unidadesCollectionNewUnidades)) {
-                    Tipounidad oldTipounidadOfUnidadesCollectionNewUnidades = unidadesCollectionNewUnidades.getTipounidad();
-                    unidadesCollectionNewUnidades.setTipounidad(tipounidad);
-                    unidadesCollectionNewUnidades = em.merge(unidadesCollectionNewUnidades);
-                    if (oldTipounidadOfUnidadesCollectionNewUnidades != null && !oldTipounidadOfUnidadesCollectionNewUnidades.equals(tipounidad)) {
-                        oldTipounidadOfUnidadesCollectionNewUnidades.getUnidadesCollection().remove(unidadesCollectionNewUnidades);
-                        oldTipounidadOfUnidadesCollectionNewUnidades = em.merge(oldTipounidadOfUnidadesCollectionNewUnidades);
-                    }
-                }
-            }
-            em.getTransaction().commit();
-        } catch (Exception ex) {
-            String msg = ex.getLocalizedMessage();
-            if (msg == null || msg.length() == 0) {
-                String id = tipounidad.getTipounidad();
-                if (findTipounidad(id) == null) {
-                    throw new NonexistentEntityException("The tipounidad with id " + id + " no longer exists.");
-                }
-            }
-            throw ex;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
-    }
+    EntityManager em = null;
+    try {
+        em = getEntityManager();
+        em.getTransaction().begin();
 
-    public void destroy(String id) throws IllegalOrphanException, NonexistentEntityException {
-        EntityManager em = null;
-        try {
-            em = getEntityManager();
-            em.getTransaction().begin();
-            Tipounidad tipounidad;
-            try {
-                tipounidad = em.getReference(Tipounidad.class, id);
-                tipounidad.getTipounidad();
-            } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The tipounidad with id " + id + " no longer exists.", enfe);
-            }
-            List<String> illegalOrphanMessages = null;
-            Collection<Unidades> unidadesCollectionOrphanCheck = tipounidad.getUnidadesCollection();
-            for (Unidades unidadesCollectionOrphanCheckUnidades : unidadesCollectionOrphanCheck) {
+        Tipounidad persistentTipounidad = em.find(Tipounidad.class, tipounidad.getTipounidad());
+
+        List<Unidades> unidadesCollectionOld = persistentTipounidad.getUnidadesCollection();
+        if (unidadesCollectionOld == null) {
+            unidadesCollectionOld = new ArrayList<>();
+        }
+
+        List<Unidades> unidadesCollectionNew = tipounidad.getUnidadesCollection();
+        if (unidadesCollectionNew == null) {
+            unidadesCollectionNew = new ArrayList<>();
+        }
+
+        List<String> illegalOrphanMessages = null;
+        for (Unidades unidadesCollectionOldUnidades : unidadesCollectionOld) {
+            if (!unidadesCollectionNew.contains(unidadesCollectionOldUnidades)) {
                 if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<String>();
+                    illegalOrphanMessages = new ArrayList<>();
                 }
-                illegalOrphanMessages.add("This Tipounidad (" + tipounidad + ") cannot be destroyed since the Unidades " + unidadesCollectionOrphanCheckUnidades + " in its unidadesCollection field has a non-nullable tipounidad field.");
-            }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
-            }
-            em.remove(tipounidad);
-            em.getTransaction().commit();
-        } finally {
-            if (em != null) {
-                em.close();
+                illegalOrphanMessages.add("You must retain Unidades " + unidadesCollectionOldUnidades + " since its tipounidad field is not nullable.");
             }
         }
+
+        if (illegalOrphanMessages != null) {
+            throw new IllegalOrphanException(illegalOrphanMessages);
+        }
+
+        List<Unidades> attachedUnidadesCollectionNew = new ArrayList<>();
+        for (Unidades unidadesCollectionNewUnidadesToAttach : unidadesCollectionNew) {
+            unidadesCollectionNewUnidadesToAttach = em.getReference(
+                unidadesCollectionNewUnidadesToAttach.getClass(),
+                unidadesCollectionNewUnidadesToAttach.getNumerounidad()
+            );
+            attachedUnidadesCollectionNew.add(unidadesCollectionNewUnidadesToAttach);
+        }
+
+        unidadesCollectionNew = attachedUnidadesCollectionNew;
+        tipounidad.setUnidadesCollection(unidadesCollectionNew);
+        tipounidad = em.merge(tipounidad);
+
+        for (Unidades unidadesCollectionNewUnidades : unidadesCollectionNew) {
+            if (!unidadesCollectionOld.contains(unidadesCollectionNewUnidades)) {
+                Tipounidad oldTipounidad = unidadesCollectionNewUnidades.getTipounidad();
+                unidadesCollectionNewUnidades.setTipounidad(tipounidad);
+                unidadesCollectionNewUnidades = em.merge(unidadesCollectionNewUnidades);
+                if (oldTipounidad != null && !oldTipounidad.equals(tipounidad)) {
+                    List<Unidades> oldList = oldTipounidad.getUnidadesCollection();
+                    if (oldList != null) {
+                        oldList.remove(unidadesCollectionNewUnidades);
+                        oldTipounidad.setUnidadesCollection(oldList);
+                        em.merge(oldTipounidad);
+                    }
+                }
+            }
+        }
+
+        em.getTransaction().commit();
+    } catch (Exception ex) {
+        String msg = ex.getLocalizedMessage();
+        if (msg == null || msg.length() == 0) {
+            String id = tipounidad.getTipounidad();
+            if (findTipounidad(id) == null) {
+                throw new NonexistentEntityException("The tipounidad with id " + id + " no longer exists.");
+            }
+        }
+        throw ex;
+    } finally {
+        if (em != null) {
+            em.close();
+        }
     }
+}
+
+
+   public void destroy(String id) throws IllegalOrphanException, NonexistentEntityException {
+    EntityManager em = null;
+    try {
+        em = getEntityManager();
+        em.getTransaction().begin();
+        Tipounidad tipounidad;
+        try {
+            tipounidad = em.getReference(Tipounidad.class, id);
+            tipounidad.getTipounidad(); // Asegura que existe
+        } catch (EntityNotFoundException enfe) {
+            throw new NonexistentEntityException("La Tipounidad con id " + id + " ya no existe.", enfe);
+        }
+
+        List<String> illegalOrphanMessages = null;
+
+        Collection<Unidades> unidadesCollectionOrphanCheck = tipounidad.getUnidadesCollection();
+        if (unidadesCollectionOrphanCheck != null) {
+            for (Unidades unidad : unidadesCollectionOrphanCheck) {
+                if (illegalOrphanMessages == null) {
+                    illegalOrphanMessages = new ArrayList<>();
+                }
+                illegalOrphanMessages.add("No se puede eliminar Tipounidad (" + tipounidad.getTipounidad() +
+                        ") porque la unidad (" + unidad.getTipounidad()+
+                        ") aún está asociada y su campo tipounidad no puede ser nulo.");
+            }
+        }
+
+        if (illegalOrphanMessages != null) {
+            throw new IllegalOrphanException(illegalOrphanMessages);
+        }
+
+        em.remove(tipounidad);
+        em.getTransaction().commit();
+    } finally {
+        if (em != null) {
+            em.close();
+        }
+    }
+}
+
 
     public List<Tipounidad> findTipounidadEntities() {
         return findTipounidadEntities(true, -1, -1);

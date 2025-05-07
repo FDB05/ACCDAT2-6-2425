@@ -23,7 +23,7 @@ import java.util.List;
  * @author Fernando A
  */
 @Entity
-@Table(name = "ESTADO")
+    @Table(name = "ESTADO")
 @NamedQueries({
     @NamedQuery(name = "Estado.findAll", query = "SELECT e FROM Estado e"),
     @NamedQuery(name = "Estado.findByTipoestado", query = "SELECT e FROM Estado e WHERE e.tipoestado = :tipoestado"),
